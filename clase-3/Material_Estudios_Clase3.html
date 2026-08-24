@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 3 · Competencias docentes y criterios de buena práctica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Nunito+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --marino:#122E4C;--marino-med:#1F4468;--tinta:#26313D;--gris:#5B6672;
+  --jade:#0E7C66;--jade-suave:#E3F0EC;--ambar:#E9B44C;--ambar-suave:#FBF2DC;
+  --fondo:#F5F8FB;--blanco:#FFFFFF;--linea:#D5DFEA;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:86px}
+body{font-family:'Nunito Sans',sans-serif;color:var(--tinta);background:var(--fondo);line-height:1.65}
+h1,h2,h3,.logo{font-family:'Space Grotesk',sans-serif}
+
+/* ── progreso + nav ── */
+#barra{position:fixed;top:0;left:0;height:4px;background:var(--jade);width:0%;z-index:100;transition:width .15s linear}
+nav{position:sticky;top:0;z-index:90;background:rgba(18,46,76,.97);backdrop-filter:blur(6px);box-shadow:0 2px 14px rgba(18,46,76,.25)}
+.nav-in{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:10px 22px;flex-wrap:wrap}
+.logo{color:#fff;font-weight:700;font-size:.95rem;margin-right:auto}
+.logo b{color:var(--ambar)}
+nav a{color:#CFE0F0;text-decoration:none;font-size:.82rem;font-weight:600;padding:5px 11px;border-radius:99px;transition:.2s}
+nav a:hover{background:rgba(255,255,255,.12);color:#fff}
+nav a.activo{background:var(--jade);color:#fff}
+
+/* ── hero ── */
+.hero{background:linear-gradient(135deg,var(--marino) 0%,var(--marino-med) 60%,#28567F 100%);color:#fff;padding:58px 22px 50px;text-align:center}
+.chips{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.chip{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:5px 15px;border-radius:99px;font-size:.8rem;font-weight:600}
+.chip.jade{background:var(--jade);border-color:var(--jade)}
+.hero h1{font-size:clamp(1.7rem,4.5vw,2.7rem);line-height:1.15;max-width:850px;margin:0 auto 14px}
+.hero h1 em{font-style:normal;color:var(--ambar)}
+.hero p{max-width:720px;margin:0 auto;font-size:1.02rem;color:#DCE7F2}
+
+main.contenedor{max-width:1080px;margin:0 auto;padding:10px 22px 40px}
+section{padding:34px 0;border-bottom:1px dashed var(--linea)}
+section:last-of-type{border-bottom:none}
+.kicker{display:inline-block;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--jade);font-weight:800;margin-bottom:8px}
+section h2{font-size:clamp(1.35rem,3vw,1.8rem);color:var(--marino);margin-bottom:10px;line-height:1.2}
+.intro{color:var(--gris);max-width:800px;margin-bottom:22px;font-size:.98rem}
+
+/* ── tarjetas genéricas ── */
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.card{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:20px;transition:.25s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(18,46,76,.12)}
+.card h3{color:var(--marino);font-size:1.02rem;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.num{min-width:30px;height:30px;border-radius:9px;background:var(--marino);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-size:.9rem;font-weight:700}
+.num.jade{background:var(--jade)}
+.card p{font-size:.9rem;color:var(--gris)}
+
+/* ── acordeón ── */
+.acc{background:var(--blanco);border:1px solid var(--linea);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.acc-btn{width:100%;text-align:left;background:none;border:none;padding:16px 18px;font-family:'Space Grotesk';font-size:1rem;font-weight:700;color:var(--marino);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.acc-btn .flecha{transition:.25s;color:var(--jade);font-size:1.1rem}
+.acc.abierto .flecha{transform:rotate(180deg)}
+.acc-cuerpo{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.acc.abierto .acc-cuerpo{max-height:520px}
+.acc-cont{padding:0 18px 18px;font-size:.92rem;color:var(--tinta)}
+.ejemplo{margin-top:10px;border-left:3px solid var(--jade);padding:10px 14px;background:var(--jade-suave);border-radius:0 8px 8px 0;font-size:.88rem}
+.ejemplo b{color:var(--jade)}
+
+/* ── A vs B ── */
+.vs-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:stretch}
+@media(max-width:760px){.vs-grid{grid-template-columns:1fr}}
+.vs{background:var(--blanco);border-radius:14px;padding:22px;border-top:6px solid var(--gris);cursor:pointer;transition:.25s}
+.vs.a{border-top-color:var(--jade)}
+.vs.b{border-top-color:#C0392B}
+.vs h3{color:var(--marino);margin-bottom:6px;font-size:1.05rem}
+.vs .tagline{font-size:.85rem;color:var(--gris);margin-bottom:12px}
+.btn-revelar{display:inline-block;background:var(--marino);color:#fff;border:none;border-radius:99px;padding:8px 18px;font-family:'Nunito Sans';font-weight:700;font-size:.83rem;cursor:pointer;transition:.2s}
+.btn-revelar:hover{background:var(--jade)}
+.analisis{display:none;margin-top:14px;font-size:.88rem;border-top:1px dashed var(--linea);padding-top:12px}
+.analisis.visible{display:block}
+.analisis li{margin:0 0 8px 18px;font-size:.87rem}
+.vs-centro{display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;color:var(--gris);font-size:1.3rem}
+
+/* ── rúbrica ── */
+.tabla-wrap{overflow-x:auto;background:var(--blanco);border:1px solid var(--linea);border-radius:14px}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th{background:var(--marino);color:#fff;text-align:left;padding:12px 14px;font-family:'Space Grotesk';font-size:.82rem}
+td{padding:12px 14px;border-top:1px solid var(--linea);vertical-align:top}
+tr:nth-child(even) td{background:#F8FAFD}
+.codigo{display:inline-block;background:var(--jade-suave);color:var(--jade);font-weight:800;font-family:'Space Grotesk';font-size:.78rem;padding:2px 9px;border-radius:6px;margin-right:6px}
+.formula{background:var(--ambar-suave);border-left:4px solid var(--ambar);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:.95rem}
+.formula b{color:var(--marino)}
+
+/* ── quiz ── */
+.q-block{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:20px;margin-bottom:14px}
+.q-block h3{color:var(--marino);font-size:.98rem;margin-bottom:12px}
+.opcion{display:block;width:100%;text-align:left;background:#F8FAFD;border:1.5px solid var(--linea);border-radius:10px;padding:11px 14px;margin-bottom:8px;font-family:'Nunito Sans';font-size:.9rem;cursor:pointer;transition:.2s;color:var(--tinta)}
+.opcion:hover{border-color:var(--jade);background:var(--jade-suave)}
+.opcion.correcta{border-color:var(--jade);background:var(--jade-suave);font-weight:700}
+.opcion.incorrecta{border-color:#C0392B;background:#FBEAE7}
+.feedback{display:none;margin-top:10px;font-size:.88rem;padding:11px 14px;border-radius:10px}
+.feedback.ok{display:block;background:var(--jade-suave);border-left:4px solid var(--jade)}
+.feedback.mal{display:block;background:var(--ambar-suave);border-left:4px solid var(--ambar)}
+
+/* ── cierre ── */
+.cierre{background:linear-gradient(135deg,var(--marino) 0%,#28567F 100%);color:#fff;border-radius:18px;padding:36px 30px;text-align:center;margin-top:30px}
+.cierre h2{color:#fff;margin-bottom:12px}
+.cierre p{max-width:680px;margin:0 auto 8px;color:#DCE7F2;font-size:.98rem}
+.cierre .firma{font-family:'Space Grotesk';color:var(--ambar);font-weight:700;margin-top:16px}
+.pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:22px;text-align:left}
+.paso{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:16px}
+.paso b{color:var(--ambar);display:block;margin-bottom:4px;font-family:'Space Grotesk'}
+
+footer{text-align:center;padding:26px;color:var(--gris);font-size:.82rem}
+@media print{nav,#barra{display:none}section{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<div id="barra"></div>
+
+<nav><div class="nav-in">
+  <span class="logo">Didáctica y TIC · <b>Clase 3</b></span>
+  <a href="#s1">La jornada</a><a href="#s2">Competencias</a><a href="#s3">Criterios</a><a href="#s4">8 preguntas</a><a href="#s5">A vs B</a><a href="#s6">Rúbrica</a><a href="#s7">Autoevaluación</a><a href="#s8">Próxima clase</a>
+</div></nav>
+
+<div class="hero">
+  <div class="chips"><span class="chip jade">Clase presencial · miércoles 26/08/2026</span><span class="chip">90 minutos</span><span class="chip">Unidad 1</span></div>
+  <h1>Competencias docentes y <em>criterios de buena práctica</em></h1>
+  <p>El material para acompañar y repasar la Clase 3: qué hace una maestra que integra TIC con sentido pedagógico, cómo reconocerlo y cómo evaluarlo.</p>
+</div>
+
+<main class="contenedor">
+
+<!-- ═══════════ 1 · LA JORNADA ═══════════ -->
+<section id="s1">
+  <span class="kicker">Mapa de la jornada</span>
+  <h2>Qué hicimos hoy, paso a paso</h2>
+  <p class="intro">Si estuviste en clase, esto te sirve para repasar y consolidar. Si falto algo o querés volver sobre un momento puntual, cada sección de este material corresponde a un tramo de la jornada.</p>
+  <div class="grid g3">
+    <div class="card"><h3><span class="num">1</span>Arranque con casos reales</h3><p>Do Now: dos escenas de sala con TIC. Voto de dedos en las preguntas bisagra: ¿esto es enseñanza con tecnología o solo entretenimiento digital?</p></div>
+    <div class="card"><h3><span class="num">2</span>Las 5 competencias</h3><p>Cómo se ve cada competencia docente dentro de un jardín: técnica, pedagógica, mediadora, crítica y ética.</p></div>
+    <div class="card"><h3><span class="num">3</span>Los 6+1 criterios</h3><p>Criterios observables de buena práctica con tecnología en Inicial, construidos y ejemplificados entre todos.</p></div>
+    <div class="card"><h3><span class="num">4</span>Demostración guiada</h3><p>Book Creator bajo la lupa: lo evaluamos juntos con las 8 preguntas clave, probando como probaría un niño.</p></div>
+    <div class="card"><h3><span class="num">5</span>Análisis A vs B</h3><p>Dos propuestas de integración frente a frente: identificamos qué las diferencia y por qué una enseña y otra no.</p></div>
+    <div class="card"><h3><span class="num">6</span>Rúbrica colaborativa</h3><p>Escribimos entre todos la rúbrica de referencia del taller en láminas A3. Ese instrumento vuelve en las próximas clases.</p></div>
+  </div>
+</section>
+
+<!-- ═══════════ 2 · COMPETENCIAS ═══════════ -->
+<section id="s2">
+  <span class="kicker">Marco conceptual</span>
+  <h2>Las 5 competencias docentes con TIC</h2>
+  <p class="intro">No son habilidades «informáticas»: son formas de actuar de una maestra que integra tecnología con intención pedagógica. Tocá cada tarjeta para verla en acción en una sala.</p>
+  <div class="acc">
+    <button class="acc-btn">🛠️ Técnica<span class="flecha">▾</span></button>
+    <div class="acc-cuerpo"><div class="acc-cont">Usar dispositivos, plataformas y apps con seguridad y confianza: conectar, proyectar, resolver un problema técnico sin bloquear la actividad.
+      <div class="ejemplo"><b>En sala:</b> cuando la tablet se cuelga en medio de la actividad, la maestra resuelve con calma —y de paso modela ante los niños cómo enfrentar un error.</div></div></div>
+  </div>
+  <div class="acc">
+    <button class="acc-btn">🎯 Pedagógica<span class="flecha">▾</span></button>
+    <div class="acc-cuerpo"><div class="acc-cont">Decidir cuándo, cómo y para qué integrar TIC según objetivos de aprendizaje claros. La tecnología entra porque sirve al proyecto, no porque esté disponible.
+      <div class="ejemplo"><b>En sala:</b> elige Book Creator para documentar la salida al patio porque quiere que los niños registren, narren y compartan hallazgos —no «porque hay tablets libres».</div></div></div>
+  </div>
+  <div class="acc">
+    <button class="acc-btn">🤝 Mediadora<span class="flecha">▾</span></button>
+    <div class="acc-cuerpo"><div class="acc-cont">Acompañar a los niños durante el uso: plantear desafíos, hacer preguntas, sostener el diálogo, ayudar a poner en palabras lo que descubren.
+      <div class="ejemplo"><b>En sala:</b> mientras usan la app, se sienta con ellos, pregunta «¿qué pasó cuando tocaste ahí?», nombra lo que hacen y conecta con lo trabajado antes.</div></div></div>
+  </div>
+  <div class="acc">
+    <button class="acc-btn">🔍 Crítica<span class="flecha">▾</span></button>
+    <div class="acc-cuerpo"><div class="acc-cont">Evaluar apps, información y prácticas digitales antes de llevarlas a la sala: ¿para qué sirve?, ¿qué datos pide?, ¿qué tipo de pensamiento propone?</div></div>
+  </div>
+  <div class="acc">
+    <button class="acc-btn">⚖️ Ética<span class="flecha">▾</span></button>
+    <div class="acc-cuerpo"><div class="acc-cont">Garantizar privacidad, seguridad e inclusión en todo entorno digital: cuidar imágenes de niños, permisos de apps, acceso equitativo.
+      <div class="ejemplo"><b>En sala:</b> revisa qué información solicita la app antes de instalarla y consulta a las familias cómo se usarán las fotos de los niños.</div></div></div>
+  </div>
+</section>
+
+<!-- ═══════════ 3 · CRITERIOS ═══════════ -->
+<section id="s3">
+  <span class="kicker">Buenas prácticas</span>
+  <h2>Los 6 criterios de buena práctica <span style="color:var(--jade)">(+1)</span></h2>
+  <p class="intro">Los criterios describen lo que <b>se ve</b> cuando la integración de TIC funciona en Inicial. Son observables: sirven para mirar una clase, evaluar una app o diseñar una secuencia.</p>
+  <div class="acc">
+    <button class="acc-btn"><span><span class="codigo">C1</span>Propósito pedagógico explícito</span><span class="flecha">▾</span></button>
+    <div class="acc-cuerpo"><div class="acc-cont">La tecnología está al servicio de un objetivo de aprendizaje formulado, no aparece como premio ni como relleno.
+      <div class="ejemplo"><b>Sí:</b> registrar insectos del patio para armar un libro digital grupal. <b>No:</b> entregar tablets «para entretener» mientras se ordena el salón.</div></div></div>
+  </div>
+  <div class="acc">
+    <button class="acc-btn"><span><span class="codigo">C2</span>Integración en el proyecto</span><span class="flecha">▾</span></button>
+    <div class="acc-cuerpo"><div class="acc-cont">El uso digital se articula con lo que la sala ya viene haciendo: continúa, profundiza o documenta el proyecto, sin vivir en una isla.</div></div>
+  </div>
+  <div class="acc">
+    <button class="acc-btn"><span><span class="codigo">C3</span>Mediación docente activa</span><span class="flecha">▾</span></button>
+    <div class="acc-cuerpo"><div class="acc-cont">Durante el uso hay conversación: preguntas, desafíos, puesta en común. La pantalla nunca reemplaza el vínculo ni el diálogo.
+      <div class="ejemplo"><b>Sí:</b> la maestra rota por mesas preguntando y nombrando descubrimientos. <b>No:</b> los niños miran pantallas en silencio 30 minutos.</div></div></div>
+  </div>
+  <div class="acc">
+    <button class="acc-btn"><span><span class="codigo">C4</span>Producción infantil</span><span class="flecha">▾</span></button>
+    <div class="acc-cuerpo"><div class="acc-cont">Los niños crean, registran o narran: la tecnología como herramienta de expresión, no solo de consumo de contenidos.</div></div>
+  </div>
+  <div class="acc">
+    <button class="acc-btn"><span><span class="codigo">C5</span>Participación e interacción</span><span class="flecha">▾</span></button>
+    <div class="acc-cuerpo"><div class="acc-cont">La actividad promueve intercambio entre niños (turnos, colaboración, juego compartido) más que uso individual y aislado.</div></div>
+  </div>
+  <div class="acc">
+    <button class="acc-btn"><span><span class="codigo">C6</span>Evaluación del proceso</span><span class="flecha">▾</span></button>
+    <div class="acc-cuerpo"><div class="acc-cont">La docente observa, registra y usa lo que ocurre con la tecnología para tomar decisiones: qué funcionó, quién necesita apoyo, qué sigue.</div></div>
+  </div>
+  <div class="acc">
+    <button class="acc-btn"><span><span class="codigo">+1</span>Accesibilidad y equidad (transversal)</span><span class="flecha">▾</span></button>
+    <div class="acc-cuerpo"><div class="acc-cont">Todos los anteriores deben cumplirse <b>para todos los niños</b>: rampas digitales, ajustes, alternativas de participación. Un criterio sin equidad no está cumplido.</div></div>
+  </div>
+</section>
+
+<!-- ═══════════ 4 · 8 PREGUNTAS ═══════════ -->
+<section id="s4">
+  <span class="kicker">Herramienta de trabajo</span>
+  <h2>Las 8 preguntas para evaluar apps</h2>
+  <p class="intro">Las usamos en la demostración guiada con Book Creator y van a volver en la Clase 4 como plantilla para evaluar apps por tu cuenta. Cada pregunta con un ejemplo de respuesta útil:</p>
+  <div class="grid g3">
+    <div class="card"><h3><span class="num jade">1</span>¿Pensamiento o repetición?</h3><p>Book Creator: los niños deciden qué registrar, qué foto sacar, qué decir → <b>pensamiento</b>.</p></div>
+    <div class="card"><h3><span class="num jade">2</span>¿Exploración abierta?</h3><p>Permite crear páginas libres, probar formatos, equivocarse y volver atrás sin penalización.</p></div>
+    <div class="card"><h3><span class="num jade">3</span>¿Feedback útil?</h3><p>Lo importante pasa por la mediación: la app guarda, la maestra devuelve. Ojo si la app solo premia con stickers.</p></div>
+    <div class="card"><h3><span class="num jade">4</span>¿Publicidad y compras?</h3><p>Versión educativa limpia: sin banners ni pop-ups. En Inicial, descarte automático si los tiene.</p></div>
+    <div class="card"><h3><span class="num jade">5</span>¿Qué datos pide?</h3><p>No requiere datos personales de niños. Igual se revisan permisos antes de instalar.</p></div>
+    <div class="card"><h3><span class="num jade">6</span>¿Rampas digitales?</h3><p>Pictogramas, grabación de voz, tamaños grandes: varios niños pueden participar por caminos distintos.</p></div>
+    <div class="card"><h3><span class="num jade">7</span>¿Guarda producciones?</h3><p>Los libros se exportan y comparten con familias: la producción no queda atrapada en la app.</p></div>
+    <div class="card"><h3><span class="num jade">8</span>¿Offline y español?</h3><p>Funciona sin wi-fi estable y su interfaz es simple e intuitiva para prelectores.</p></div>
+  </div>
+  <div class="formula" style="margin-top:18px">💡 <b>Método:</b> antes de decidir, jugá vos a la app como jugaría un niño de 4–5 años: tocá todo, equivocate. Tu experiencia directa es el primer instrumento de evaluación.</div>
+</section>
+
+<!-- ═══════════ 5 · A VS B ═══════════ -->
+<section id="s5">
+  <span class="kicker">Análisis de casos</span>
+  <h2>Propuesta A vs Propuesta B</h2>
+  <p class="intro">El caso que analizamos en clase. Tocá cada propuesta para ver el análisis completo con criterios y competencias.</p>
+  <div class="vs-grid">
+    <div class="vs a">
+      <h3>Propuesta A 🌿</h3>
+      <p class="tagline">Después de la salida al patio buscando insectos, los niños sacan fotos, graban lo que descubrieron y arman entre todos un libro digital con Book Creator para compartir con las familias.</p>
+      <button class="btn-revelar" onclick="toggleAnalisis(this)">Ver análisis ↓</button>
+      <div class="analisis">
+        <ul>
+          <li><b>Cumple C1:</b> propósito claro — documentar una experiencia real y comunicarla.</li>
+          <li><b>Cumple C2:</b> continúa el proyecto del jardín sobre insectos; la tecnología extiende la exploración.</li>
+          <li><b>Cumple C3 y C4:</b> mediación constante y producción infantil (fotos, voz propia, páginas).</li>
+          <li><b>Competencias visibles:</b> pedagógica (decisión fundamentada), mediadora (acompaña), crítica (eligió la herramienta).</li>
+          <li><b>Resultado:</b> la tablet registra y amplifica un aprendizaje que ya estaba ocurriendo.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="vs-centro">VS</div>
+    <div class="vs b">
+      <h3>Propuesta B 📱</h3>
+      <p class="tagline">Mientras la maestra termina otras tareas, los niños juegan individualmente con una app de colorear en las tablets del jardín, sin consigna previa ni puesta en común después.</p>
+      <button class="btn-revelar" onclick="toggleAnalisis(this)">Ver análisis ↓</button>
+      <div class="analisis">
+        <ul>
+          <li><b>Falla C1:</b> sin objetivo de aprendizaje; la app funciona como entretenimiento de espera.</li>
+          <li><b>Falla C3:</b> sin mediación: nadie pregunta, nombra ni conecta lo que hacen los niños.</li>
+          <li><b>Débil en C4/C5:</b> consumo individual de plantillas ya hechas; no crean nada propio ni interactúan entre ellos.</li>
+          <li><b>Ausencia de competencias:</b> sin decisión pedagógica previa ni evaluación posterior.</li>
+          <li><b>Conclusión:</b> misma tecnología, resultado opuesto. Lo que enseña no es la app: es la propuesta.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 6 · RÚBRICA ═══════════ -->
+<section id="s6">
+  <span class="kicker">Instrumento construido en clase</span>
+  <h2>Nuestra rúbrica colaborativa</h2>
+  <p class="intro">Entre todos escribimos la rúbrica de referencia del taller. Su formato fuerza lo observable: nada de «utiliza adecuadamente». Ejemplos de lo que redactamos en las láminas A3:</p>
+  <div class="formula">📐 <b>Fórmula:</b> «La docente hace <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> cuando <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>» + <b>evidencia visible en los niños</b>. Si no puedo verlo, no va en la rúbrica.</div>
+  <div class="tabla-wrap">
+    <table>
+      <tr><th style="width:24%">Dimensión</th><th>Descriptor observable</th><th style="width:38%">Evidencia en los niños</th></tr>
+      <tr><td><span class="codigo">C1</span>Propósito</td><td>Presenta la actividad nombrando qué van a aprender o descubrir.</td><td>Los niños pueden decir qué están buscando/haciendo y por qué.</td></tr>
+      <tr><td><span class="codigo">C3</span>Mediación</td><td>Hace preguntas abiertas durante el uso («¿qué pasó si…?»).</td><td>Narran sus acciones y descubrimientos con palabras propias.</td></tr>
+      <tr><td><span class="codigo">C4</span>Producción</td><td>Propone que registren o creen con la herramienta.</td><td>Hay producto propio: foto, audio, página, dibujo con intención.</td></tr>
+      <tr><td><span class="codigo">C5</span>Interacción</td><td>Organiza turnos, parejas o grupos alrededor del dispositivo.</td><td>Se pasan el dispositivo, comentan, negocian, ayudan.</td></tr>
+      <tr><td><span class="codigo">CP5</span>Ética</td><td>Revisa permisos y cuida imágenes/datos antes de usar.</td><td>(Para el adulto) Uso seguro y consentido; todos acceden igual.</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:14px;font-size:.9rem;color:var(--gris)">📄 La versión completa para imprimir está en Classroom (<b>Imprimible_Rubrica_Colaborativa.pdf</b>) junto con la tabla de códigos C1–C6 y CP1–CP5. Esta rúbrica vuelve en las próximas clases para valorar secuencias y evaluaciones.</p>
+</section>
+
+<!-- ═══════════ 7 · AUTOEVALUACIÓN ═══════════ -->
+<section id="s7">
+  <span class="kicker">Chequeo personal</span>
+  <h2>¿Cómo vienen siguiendo?</h2>
+  <p class="intro">Seis preguntas rápidas sobre lo trabajado. Sin nota: tocá una opción y leé la explicación.</p>
+
+  <div class="q-block"><h3>1 · Una app donde los niños solo tocan donde aparece el brillo para sumar estrellas falla sobre todo en…</h3>
+    <button class="opcion">La calidad de los dibujos</button>
+    <button class="opcion" data-ok="1">Pensamiento y exploración (criterios 1 y 2)</button>
+    <button class="opcion">La duración de la actividad</button>
+    <div class="feedback"></div></div>
+
+  <div class="q-block"><h3>2 · La competencia mediadora se hace visible cuando la docente…</h3>
+    <button class="opcion">Instala la app antes de la clase</button>
+    <button class="opcion">Explica el funcionamiento técnico del dispositivo</button>
+    <button class="opcion" data-ok="1">Pregunta y nombra lo que los niños descubren durante el uso</button>
+    <div class="feedback"></div></div>
+
+  <div class="q-block"><h3>3 · Revisar qué permisos pide una app antes de instalarla es expresión de la competencia…</h3>
+    <button class="opcion">Técnica</button>
+    <button class="opcion">Pedagógica</button>
+    <button class="opcion" data-ok="1">Ética</button>
+    <div class="feedback"></div></div>
+
+  <div class="q-block"><h3>4 · El problema central de la Propuesta B (colorear sin consigna ni mediación) es que…</h3>
+    <button class="opcion">La app era demasiado sencilla para la edad</button>
+    <button class="opcion" data-ok="1">No había propósito pedagógico ni mediación docente</button>
+    <button class="opcion">Faltaban tablets para todos los niños</button>
+    <div class="feedback"></div></div>
+
+  <div class="q-block"><h3>5 · Un descriptor bien escrito para nuestra rúbrica colaborativa es…</h3>
+    <button class="opcion">«Utiliza adecuadamente las tecnologías»</button>
+    <button class="opcion">«Tiene buena disposición hacia las TIC»</button>
+    <button class="opcion" data-ok="1">«Presenta la actividad nombrando qué van a aprender, y los niños pueden decirlo»</button>
+    <div class="feedback"></div></div>
+
+  <div class="q-block"><h3>6 · El feedback más valioso para un niño de inicial es el que…</h3>
+    <button class="opcion" data-ok="1">Le ayuda a entender por qué su acción funcionó o no</button>
+    <button class="opcion">Le da muchos stickers y sonidos alegres</button>
+    <button class="opcion">Evita que se equivoque alguna vez</button>
+    <div class="feedback"></div></div>
+</section>
+
+<!-- ═══════════ 8 · PUENTE ═══════════ -->
+<section id="s8">
+  <span class="kicker">Y ahora, ¿qué?</span>
+  <h2>Puente a la Clase 4</h2>
+  <div class="cierre">
+    <h2>📱 La próxima clase es virtual y asincrónica</h2>
+    <p>El <b>miércoles 02/09</b> se publica en Classroom el material de la Clase 4: recursos digitales, herramientas e inteligencia artificial en la Educación Inicial.</p>
+    <p>Tendrás toda la semana a tu ritmo. La misión: evaluar una app real con las 8 preguntas que ya dominás, y publicarlo en el foro antes del <b>martes 08/09</b>.</p>
+    <div class="pasos">
+      <div class="paso"><b>📅 Mié 02/09</b>Se publica el material interactivo y la Ficha N°4 en Classroom.</div>
+      <div class="paso"><b>🔎 Durante la semana</b>Recorrés el material (~30 min) y probás al menos dos apps de la lista sugerida.</div>
+      <div class="paso"><b>✍️ Martes 08/09</b>Cierre del foro con tu evaluación completa.</div>
+      <div class="paso"><b>🏫 Mié 09/09</b>Volvemos presencialmente: tus evaluaciones alimentan el diseño de secuencias didácticas.</div>
+    </div>
+    <p class="firma">Prof. Lic. Juan José García · Didáctica y TIC en la Educación Inicial · 2026</p>
+  </div>
+</section>
+
+</main>
+<footer>Instituto Superior Terciario Ntra. Sra. de Fátima · Profesorado de Educación Inicial · 3° año · Material de repaso de la Clase 3</footer>
+
+<script>
+// barra de progreso + nav activa
+const barra=document.getElementById('barra');
+const links=[...document.querySelectorAll('nav a')];
+const secciones=links.map(a=>document.querySelector(a.getAttribute('href')));
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  barra.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  let actual=0;
+  secciones.forEach((s,i)=>{if(s&&s.getBoundingClientRect().top<120)actual=i});
+  links.forEach((l,i)=>l.classList.toggle('activo',i===actual));
+},{passive:true});
+
+// acordeones
+document.querySelectorAll('.acc-btn').forEach(b=>b.addEventListener('click',()=>{
+  const item=b.parentElement, abierto=item.classList.contains('abierto');
+  item.closest('section').querySelectorAll('.acc').forEach(x=>x.classList.remove('abierto'));
+  if(!abierto)item.classList.add('abierto');
+}));
+
+// A vs B
+function toggleAnalisis(btn){
+  const an=btn.parentElement.querySelector('.analisis');
+  an.classList.toggle('visible');
+  btn.textContent=an.classList.contains('visible')?'Ocultar ↑':'Ver análisis ↓';
+}
+
+// quiz
+document.querySelectorAll('.q-block').forEach(q=>{
+  const ops=q.querySelectorAll('.opcion'),fb=q.querySelector('.feedback');
+  ops.forEach(op=>op.addEventListener('click',()=>{
+    if(q.dataset.hecho)return; q.dataset.hecho='1';
+    ops.forEach(o=>{if(o.dataset.ok)o.classList.add('correcta');else o.classList.add('incorrecta')});
+    fb.className='feedback '+(op.dataset.ok?'ok':'mal');
+    fb.textContent=op.dataset.ok?'✔ ¡Correcto! Revisá la sección correspondiente si querés profundizar.':'✘ Todavía no: la opción correcta quedó marcada en verde. Volvé a leer esa parte del material.';
+  }));
+});
+</script>
+</body>
+</html>

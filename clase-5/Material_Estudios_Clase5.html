@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 5 · Secuencias didácticas mediadas por TIC — Material interactivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   IDENTIDAD VISUAL «MARINO & JADE» · Clases presenciales (como C3)
+   Fondo celeste pálido · marino profundo primario · jade de logro
+   Tipos: Space Grotesk (títulos) + Nunito Sans (texto)
+   ══════════════════════════════════════════════════════════════════ */
+:root{
+  --fondo:#F5F8FB;
+  --papel:#FFFFFF;
+  --marino:#122E4C;
+  --marino-med:#1F4468;
+  --celeste:#E4EDF6;
+  --celeste-med:#C9DAEA;
+  --tinta:#26313D;
+  --gris:#5B6672;
+  --linea:#D5DFEA;
+  --jade:#0E7C66;
+  --jade-suave:#E3F0EC;
+  --coral:#D95B43;
+  --coral-suave:#FAE5DE;
+  --ambar:#E9B44C;
+  --ambar-suave:#FBF2DC;
+  --serif-display:'Space Grotesk','Trebuchet MS',Verdana,sans-serif;
+  --sans:'Nunito Sans','Segoe UI',system-ui,-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--tinta);background:var(--fondo);line-height:1.65;font-size:16.5px}
+#barra{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--marino-med),var(--ambar));z-index:2000}
+
+header.top{position:sticky;top:0;z-index:1000;background:rgba(18,46,76,.97);backdrop-filter:blur(8px)}
+.top-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 22px;flex-wrap:wrap}
+.marca{display:flex;align-items:center;gap:11px;color:var(--fondo)}
+.logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--marino-med),var(--ambar));display:flex;align-items:center;justify-content:center;font-family:var(--serif-display);font-weight:700;color:#fff;font-size:17px;flex:none}
+.marca b{font-family:var(--serif-display);font-size:15.5px;line-height:1.15;display:block}
+.marca small{display:block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ambar);font-weight:800}
+nav.secciones{display:flex;gap:2px;flex-wrap:wrap}
+nav.secciones a{color:#BFD4E8;text-decoration:none;font-size:13.5px;font-weight:700;padding:5px 11px;border-radius:999px;transition:.2s}
+nav.secciones a:hover{background:rgba(245,248,251,.14);color:#fff}
+nav.secciones a.activo{background:var(--ambar);color:var(--marino)}
+main{max-width:860px;margin:0 auto;padding:0 20px}
+
+.hero{padding:52px 0 26px}
+.hero .chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--celeste);color:var(--marino-med);font-size:13px;font-weight:800;padding:6px 14px;border-radius:999px}
+.chip.ambar{background:var(--ambar-suave);color:#7A5A16}
+.hero h1{font-family:var(--serif-display);font-size:clamp(28px,5vw,42px);line-height:1.12;color:var(--marino);margin-bottom:14px}
+.hero h1 em{font-style:normal;color:var(--coral)}
+.hero .bajada{font-size:18px;color:var(--gris);max-width:660px}
+
+section{padding:34px 0 10px;border-top:1px solid var(--linea);scroll-margin-top:70px}
+section:first-of-type{border-top:none}
+.kicker{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.kicker .num{width:34px;height:34px;border-radius:50%;background:var(--marino-med);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif-display);font-weight:700;font-size:16px;flex:none}
+.kicker span.etq{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--coral);font-weight:800}
+h2{font-family:var(--serif-display);font-size:clamp(22px,3.6vw,30px);color:var(--marino);margin-bottom:16px;line-height:1.2}
+p+p{margin-top:10px}
+b,strong{color:var(--marino)}
+
+.card{background:var(--papel);border:1px solid var(--linea);border-radius:16px;padding:20px 22px;margin:14px 0;box-shadow:0 1px 3px rgba(38,49,61,.05)}
+.card.destacada{border-left:5px solid var(--jade);background:linear-gradient(180deg,#FFFFFF,var(--jade-suave))}
+.callout{background:var(--ambar-suave);border-left:5px solid var(--ambar);border-radius:12px;padding:15px 18px;margin:14px 0}
+.callout.coral{background:var(--coral-suave);border-left-color:var(--coral)}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:14px 0}
+.mini{background:var(--papel);border:1px solid var(--linea);border-radius:14px;padding:16px 18px}
+.mini h4{font-family:var(--serif-display);color:var(--marino);font-size:16.5px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.mini ul{padding-left:18px}.mini li{margin:5px 0}
+
+/* Tres momentos clickeables */
+.momentos-barra{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0}
+.momento-pill{cursor:pointer;border:1.5px solid var(--linea);background:var(--papel);border-radius:999px;padding:9px 18px;font-family:var(--serif-display);font-weight:600;font-size:15px;color:var(--tinta);transition:.2s}
+.momento-pill:hover{border-color:var(--marino-med)}
+#defMomento{min-height:110px;background:var(--papel);border:1px dashed var(--marino-med);border-radius:14px;padding:16px 20px;font-size:16.5px}
+
+/* Errores: revelar antídoto */
+.err-card{background:var(--papel);border:1px solid var(--linea);border-left:5px solid var(--coral);border-radius:14px;padding:16px 18px;margin:12px 0}
+.err-card h4{font-family:var(--serif-display);color:var(--marino);font-size:17px;margin-bottom:6px}
+.btn-antidoto{border:none;background:var(--celeste);color:var(--marino-med);font-family:var(--sans);font-weight:800;font-size:14px;border-radius:999px;padding:8px 16px;cursor:pointer;margin-top:10px;transition:.2s}
+.btn-antidoto:hover{background:var(--celeste-med)}
+.antidoto{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.antidoto>div{margin-top:10px;background:var(--jade-suave);border-radius:10px;padding:12px 14px;font-size:15px;border-left:4px solid var(--jade)}
+
+/* Caso insectos por pasos */
+.paso-caso{background:var(--papel);border:1px solid var(--linea);border-radius:14px;margin:12px 0;overflow:hidden}
+.paso-caso>button{width:100%;text-align:left;border:none;background:none;padding:15px 18px;font-family:var(--serif-display);font-size:17px;font-weight:600;color:var(--marino);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.paso-caso>button::after{content:'+';font-size:22px;color:var(--coral);flex:none}
+.paso-caso.abierto>button::after{content:'−'}
+.paso-cuerpo{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.paso-caso.abierto .paso-cuerpo{max-height:600px}
+.paso-cuerpo>div{padding:0 18px 16px;font-size:15.5px}
+.tag-tic{display:inline-block;background:var(--celeste);color:var(--marino-med);font-size:12.5px;font-weight:800;border-radius:999px;padding:3px 10px;margin:2px 4px 2px 0}
+
+/* Quiz */
+.q-block{background:var(--papel);border:1px solid var(--linea);border-radius:14px;padding:16px 18px;margin:12px 0}
+.q-block h4{font-family:var(--sans);font-size:16px;margin-bottom:10px}
+.opciones{display:flex;flex-direction:column;gap:8px}
+.opcion{display:flex;gap:10px;align-items:flex-start;background:var(--fondo);border:1px solid var(--linea);border-radius:10px;padding:10px 12px;cursor:pointer;font-size:15px;transition:.15s}
+.opcion:hover{border-color:var(--marino-med)}
+.opcion input{margin-top:3px;accent-color:var(--marino-med)}
+.q-feedback{display:none;margin-top:10px;border-radius:10px;padding:11px 14px;font-size:15px}
+.q-feedback.bien{display:block;background:var(--jade-suave)}
+.q-feedback.mal{display:block;background:var(--coral-suave)}
+.btn-marino{display:inline-block;border:none;background:var(--marino-med);color:#fff;font-family:var(--serif-display);font-weight:700;font-size:17px;border-radius:999px;padding:13px 30px;cursor:pointer;margin:16px 0;transition:.2s}
+.btn-marino:hover{background:var(--marino)}
+#resultadoQuiz{display:none;background:var(--papel);border:2px solid var(--jade);border-radius:16px;padding:20px 22px;text-align:center}
+#resultadoTitulo{font-family:var(--serif-display);font-size:24px;color:var(--marino);margin-bottom:8px}
+#resultadoTexto{color:var(--gris)}
+
+footer.fin{margin:46px 0 60px;background:var(--marino);color:#BFD4E8;border-radius:18px;padding:26px 28px}
+footer.fin h3{color:#fff;font-family:var(--serif-display);margin-top:0}
+.aviso-html{background:rgba(233,180,76,.15);border:1px solid var(--ambar);border-radius:10px;padding:10px 14px;margin-top:14px;font-size:14px}
+@media(max-width:640px){body{font-size:15.5px}}
+</style>
+</head>
+<body>
+<div id="barra"></div>
+
+<header class="top"><div class="top-inner">
+  <div class="marca"><div class="logo">5</div><div><small>Clase 5 · Material interactivo</small><b>Secuencias didácticas<br>mediadas por TIC</b></div></div>
+  <nav class="secciones">
+    <a href="#s1">Momentos</a><a href="#s2">Coherencia</a><a href="#s3">Errores</a><a href="#s4">Caso completo</a><a href="#s5">Tu plantilla</a><a href="#s6">Autoevaluación</a><a href="#s7">Puente</a>
+  </nav>
+</div></header>
+
+<main>
+
+<div class="hero">
+  <div class="chips"><span class="chip">📖 Repaso después de la Clase 5</span><span class="chip ambar">🧩 Incluye autoevaluación</span><span class="chip">⏱ ≈ 15 min</span></div>
+  <h1>De actividades sueltas a <em>secuencias con sentido</em></h1>
+  <p class="bajada">Lo que practicamos el miércoles en el taller, ahora en versión interactiva: los tres momentos, el hilo invisible de la coherencia, los errores clásicos y el caso completo de los insectos del patio.</p>
+</div>
+
+<section id="s1">
+  <div class="kicker"><div class="num">1</div><span class="etq">La estructura</span></div>
+  <h2>La secuencia tiene tres momentos</h2>
+  <p>Tocá cada momento para ver qué hace la docente, qué hacen los niños y dónde puede entrar la TIC.</p>
+  <div class="momentos-barra">
+    <button class="momento-pill" onclick="mostrarMomento(this,'aper')">🌅 Apertura</button>
+    <button class="momento-pill" onclick="mostrarMomento(this,'des')">🔍 Desarrollo</button>
+    <button class="momento-pill" onclick="mostrarMomento(this,'cie')">🏁 Cierre</button>
+  </div>
+  <div id="defMomento"><em>Elegí un momento arriba 👆</em></div>
+  <div class="card destacada"><p><b>Idea fuerza:</b> una secuencia NO es «una lista de actividades»: comparten un <b>propósito común</b>, tienen una <b>lógica interna</b> y una <b>evaluación conectada</b>. Y las TIC pueden entrar en cualquier momento — no existe la «hora de la computadora» como clase aparte.</p></div>
+</section>
+
+<section id="s2">
+  <div class="kicker"><div class="num">2</div><span class="etq">El hilo invisible</span></div>
+  <h2>Coherencia didáctica: objetivo ↔ actividades ↔ recursos ↔ evaluación</h2>
+  <p>Cuatro elementos colgados del mismo hilo. Si uno no sabe del resto, la secuencia se corta.</p>
+  <div class="grid2">
+    <div class="mini"><h4>🎯 Objetivo</h4>Observable y alcanzable: dice qué van a poder hacer o comprender los niños, no qué hará la docente.</div>
+    <div class="mini"><h4>🧩 Actividades</h4>Cada una sirve AL objetivo. Ninguna está «porque queda linda» ni «porque siempre se hace así».</div>
+    <div class="mini"><h4>📱 Recursos</h4>Entran donde aportan al objetivo, con uso concreto previsto. El recurso se elige DESPUÉS del objetivo, nunca antes.</div>
+    <div class="mini"><h4>📊 Evaluación</h4>Mira el mismo objetivo que abrieron: la evidencia que recojo responde a lo que me propuse.</div>
+  </div>
+  <div class="callout"><b>Prueba de fuego:</b> tapá el objetivo de tu planificación y mostrale las actividades a otro/a. ¿Puede adivinar cuál era? Si podría ser cualquiera… falta coherencia.</div>
+</section>
+
+<section id="s3">
+  <div class="kicker"><div class="num">3</div><span class="etq">Autodiagnóstico</span></div>
+  <h2>Cuatro errores frecuentes (y su antídoto)</h2>
+  <div class="err-card"><h4>✨ Activismo brillante</h4><p>Secuencias repletas de propuestas vistosas donde cada actividad vive por separado: hay movimiento y color, pero no se llega a ningún aprendizaje.</p>
+    <button class="btn-antidoto" onclick="revelar(this)">Ver antídoto 💊</button>
+    <div class="antidoto"><div><b>Antídoto:</b> antes de sumar una actividad, preguntate «¿qué aporta ESTO al objetivo?». Si la respuesta es «quedar bien», fuera. Menos actividades, mejor hiladas.</div></div></div>
+  <div class="err-card"><h4>📲 TIC pegote</h4><p>La tablet aparece porque «hay que usarla», sin función didáctica: un video que nadie mira hasta el final, una app que reemplaza lo que ya salía bien sin pantalla.</p>
+    <button class="btn-antidoto" onclick="revelar(this)">Ver antídoto 💊</button>
+    <div class="antidoto"><div><b>Antídoto:</b> definir PRIMERO el objetivo y DESPUÉS decidir si algún recurso digital lo sirve mejor que uno analógico. Si no lo sirve mejor, no entra. Sin culpa.</div></div></div>
+  <div class="err-card"><h4>📉 Evaluación desconectada</h4><p>Se planifica un objetivo ambicioso y después se evalúa otra cosa (o nada): la evidencia no responde a lo que se propuso la docente.</p>
+    <button class="btn-antidoto" onclick="revelar(this)">Ver antídoto 💊</button>
+    <div class="antidoto"><div><b>Antídoto:</b> escribir la evidencia observable EN EL MOMENTO de definir el objetivo: «esto se va a VER cuando…». Si no podés completar esa frase, el objetivo todavía no es observable.</div></div></div>
+  <div class="err-card"><h4>🧩 Momentos sueltos</h4><p>Apertura, desarrollo y cierre existen nominalmente pero no se sostienen entre sí: la apertura promete algo que el desarrollo no da, y el cierre no retoma nada.</p>
+    <button class="btn-antidoto" onclick="revelar(this)">Ver antídoto 💊</button>
+    <div class="antidoto"><div><b>Antídoto:</b> leer tu secuencia preguntándote «¿cada momento RETOMA el anterior?». La apertura anticipa, el desarrollo trabaja eso anticipado, el cierra vuelve sobre lo trabajado.</div></div></div>
+</section>
+
+<section id="s4">
+  <div class="kicker"><div class="num">4</div><span class="etq">Análisis guiado</span></div>
+  <h2>Una secuencia completa: los insectos del patio</h2>
+  <p>El caso que modelamos en clase, momento por momento. Abrí cada etapa y mirá DÓNDE entra cada recurso y POR QUÉ.</p>
+  <div class="paso-caso"><button onclick="togglePaso(this)">🌅 Apertura · «¿Quién vive en nuestro patio?»</button><div class="paso-cuerpo"><div>
+    <p><b>Qué hace la docente:</b> lanza la pregunta indagatoria y muestra fotos ampliadas de bichos del patio real.<br><b>Qué hacen los niños:</b> observan, nombran, predicen («¿dónde vivirán? ¿qué comerán?»), registran primeras hipótesis.</p>
+    <p><span class="tag-tic">📷 Fotos en proyector/tablet</span></p>
+    <p><b>Por qué ahí:</b> la imagen ampliada ACTIVA la curiosidad y los saberes previos: entra en apertura porque inicia la indagación, no porque «tocaba tecnología».</p>
+  </div></div></div>
+  <div class="paso-caso"><button onclick="togglePaso(this)">🔍 Desarrollo · «Investigadores de bichos»</button><div class="paso-cuerpo"><div>
+    <p><b>Qué hace la docente:</b> organiza la salida al patio con lupas, acompaña la búsqueda y propone registrar hallazgos.<br><b>Qué hacen los niños:</b> exploran en pequeños grupos, comparan insectos, sacan fotos y graban audio con sus descubrimientos en un libro digital.</p>
+    <p><span class="tag-tic">📱 Registro en Book Creator</span></p>
+    <p><b>Por qué ahí:</b> la tablet sostiene el OBJETIVO (observar y comunicar) sin protagonizar: documenta lo que los niños hacen, no los reemplaza.</p>
+  </div></div></div>
+  <div class="paso-caso"><button onclick="togglePaso(this)">🏁 Cierre · «Nuestro libro para las familias»</button><div class="paso-cuerpo"><div>
+    <p><b>Qué hace la docente:</b> arma con el grupo el libro final y lo comparte con las familias; retoma las hipótesis de la apertura para contrastarlas.<br><b>Qué hacen los niños:</b> seleccionan fotos, dictan textos, presentan el libro y responden «lo que pensábamos vs. lo que descubrimos».</p>
+    <p><span class="tag-tic">📤 Libro digital enviado a familias</span></p>
+    <p><b>Por qué ahí:</b> el cierre le da PROPÓSITO COMUNICATIVO a todo el recorrido: la misma tablet, tres usos distintos, siempre al servicio del objetivo.</p>
+  </div></div></div>
+</section>
+
+<section id="s5">
+  <div class="kicker"><div class="num">5</div><span class="etq">Para tus prácticas</span></div>
+  <h2>Tu plantilla de diseño, siempre con vos</h2>
+  <p>La plantilla que completaron en el taller sigue disponible en el tema de la Clase 5 (<b>Imprimible_Plantilla_Secuencia.pdf</b>). Recordá sus casilleros clave:</p>
+  <div class="grid2">
+    <div class="mini"><h4>1 · Objetivo observable</h4>«Los niños van a poder…». Si no termina en acción o comprensión verificable, reescribilo.</div>
+    <div class="mini"><h4>2 · Tres momentos</h4>Apertura / desarrollo / cierre, con qué hace la docente y qué hacen los niños en cada uno.</div>
+    <div class="mini"><h4>3 · Recurso y uso concreto</h4>Si entra una TIC: cuál, en QUÉ momento y con qué uso específico. Nada de «tablet sí, tablet no».</div>
+    <div class="mini"><h4>4 · Evidencia esperada</h4>Qué se verá en los niños si funcionó. Conectada SIEMPRE con el criterio de evaluación (rúbrica C3).</div>
+  </div>
+  <div class="card destacada"><p><b>Y el feedback entre pares también viaja contigo:</b> «2 estrellas y 1 deseo», señalando SIEMPRE dónde se ve lo que señalizás. Los indicadores observables son el mejor regalo que le podés hacer a otro/a docente (y a vos mismo/a releyendo tu propio diseño). 📄 La hoja completa está subida al tema de la Clase 5.</p></div>
+</section>
+
+<section id="s6">
+  <div class="kicker"><div class="num">6</div><span class="etq">Chequeo final</span></div>
+  <h2>Autoevaluación</h2>
+  <p>Seis preguntas rápidas con corrección automática. Ideal antes de la Clase 6.</p>
+  <div id="quizContainer"></div>
+  <button class="btn-marino" onclick="corregirQuiz()">Corregir mi autoevaluación ✓</button>
+  <div id="resultadoQuiz"><div id="resultadoTitulo"></div><div id="resultadoTexto"></div></div>
+</section>
+
+<section id="s7">
+  <div class="kicker"><div class="num">7</div><span class="etq">Lo que viene</span></div>
+  <h2>Puente a la Clase 6 · virtual y asincrónica</h2>
+  <div class="card">
+    <p>📅 <b>Publicación:</b> miércoles 16/09 · <b>cierre de actividades:</b> martes 22/09 · <b>no hay clase presencial esa semana.</b></p>
+    <p style="margin-top:8px">🤖 <b>Tema:</b> pensamiento computacional con y sin tecnologías digitales (ScratchJr, Bee-Bot, Code.org y desafíos desenchufados).</p>
+    <p style="margin-top:8px">🧭 <b>Misión:</b> explorar UNA herramienta jugando como niño y diseñar una actividad de PC con la plantilla descargable, para publicarla en el foro. Nos vemos presencialmente el <b>miércoles 23/09</b> para compartirlas y refinarlas.</p>
+    <p style="margin-top:8px">🔗 <b>Ojo al detalle:</b> cada actividad de PC que vas a diseñar es… ¡exactamente eso! Una mini-secuencia con objetivo, momentos, rol docente y evidencia. Lo de hoy te sirve directo.</p>
+  </div>
+</section>
+
+<footer class="fin">
+  <h3>Un último recordatorio 📥</h3>
+  <p>Si estás viendo este archivo desde Drive, <b>descargalo y abrilo en tu navegador</b>: la vista previa de Drive no ejecuta JavaScript y los botones quedan muertos. En tu dispositivo funciona todo.</p>
+  <p style="margin-top:10px;font-size:14.5px;opacity:.85">Didáctica y TIC en la Educación Inicial · Inst. Superior Terciario Fátima Soldati · 2026 · Unidad 2</p>
+</footer>
+
+</main>
+
+<script>
+/* ═══ MOTOR · IDENTIDAD MARINO & JADE · Clase 5 ═══ */
+
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('barra').style.width=pct+'%';
+});
+
+const links=[...document.querySelectorAll('nav.secciones a')];
+const secciones=links.map(a=>document.querySelector(a.getAttribute('href')));
+window.addEventListener('scroll',()=>{
+  let idx=secciones.length-1;
+  secciones.forEach((s,i)=>{ if(s.getBoundingClientRect().top<140)idx=i; });
+  links.forEach((l,i)=>l.classList.toggle('activo',i===idx));
+},{passive:true});
+
+/* Tres momentos */
+const MOMENTOS={
+  aper:'<b>🌅 Apertura.</b> <em>Docente:</em> activa saberes previos, plantea el desafío o pregunta indagatoria, organiza la tarea. <em>Niños:</em> predicen, hipotetizan, conectan con lo que ya saben. <em>Tic posibles:</em> fotos o video breve que provocan curiosidad, un audio misterioso, un juego corto de activación.',
+  des:'<b>🔍 Desarrollo.</b> <em>Docente:</em> acompaña, pregunta, ajusta apoyos, registra. <em>Niños:</em> exploran, producen, prueban, colaboran: aquí ocurre el trabajo central sobre el objetivo. <em>Tic posibles:</em> registro documental (fotos, audios), creación multimedia, búsquedas guiadas, robots y juegos con reglas claras.',
+  cie:'<b>🏁 Cierre.</b> <em>Docente:</em> sistematiza, contrasta con las ideas iniciales, da propósito comunicativo a lo producido. <em>Niños:</em> explicitan aprendizajes, comparten creaciones, se miran el propio proceso. <em>Tic posibles:</em> presentación del producto a familias, galería digital del grupo, encuesta de salida lúdica.'
+};
+function mostrarMomento(btn,key){
+  document.getElementById('defMomento').innerHTML=MOMENTOS[key];
+  document.querySelectorAll('.momento-pill').forEach(b=>b.style.background='var(--papel)');
+  btn.style.background='var(--celeste)';
+}
+
+/* Antídotos */
+function revelar(btn){
+  const card=btn.parentElement;
+  const ant=card.querySelector('.antidoto');
+  if(ant.style.maxHeight&&ant.style.maxHeight!=='0px'){ant.style.maxHeight='0';btn.textContent='Ver antídoto 💊';return;}
+  ant.style.maxHeight='260px';
+  btn.textContent='Ocultar antídoto ▲';
+}
+
+/* Caso insectos */
+function togglePaso(btn){
+  const item=btn.parentElement;
+  item.classList.toggle('abierto');
+}
+
+/* Quiz */
+const QUIZ=[
+  {q:'¿Qué convierte un conjunto de actividades en una SECUENCIA didáctica?',
+   ops:['Que incluyan tecnología','Que compartan un propósito común, tengan lógica interna y una evaluación conectada','Que duren varias semanas'],
+   c:1,f:'Tres marcas: propósito común, lógica interna (los momentos se sostienen entre sí) y evaluación ligada al objetivo inicial. La tecnología es opcional: hay secuencias excelentes sin ninguna app.'},
+  {q:'La «prueba de fuego» de la coherencia didáctica consiste en…',
+   ops:['Tapar el objetivo y ver si las actividades podrían corresponder a cualquier objetivo','Cronometrar cada actividad para ver si dura lo planeado','Preguntarles a los niños si la clase les gustó'],
+   c:0,f:'Si tapás el objetivo y las actividades podrían ser de cualquier otro, falta coherencia: cada actividad debería «delatar» el objetivo al que sirve.'},
+  {q:'En el caso de los insectos, las fotos ampliadas entran en la APERTURA porque…',
+   ops:['Son el premio por buena conducta','Activan la curiosidad y los saberes previos que inicia la indagación','Así la docente gana tiempo para organizar el patio'],
+   c:1,f:'En apertura, el recurso provoca: activa hipótesis y preguntas. El mismo recurso en otro momento tendría otra función (en desarrollo documentó con Book Creator; en cierre comunicó a familias).'},
+  {q:'El error MÁS frecuente al integrar TIC en una secuencia es…',
+   ops:['Elegir el recurso antes que el objetivo («activismo brillante» / TIC pegote)','No tener suficientes dispositivos para todos','Usar aplicaciones gratuitas'],
+   c:0,f:'Empezar por la app y buscarle después el objetivo invierte el orden correcto. Primero el aprendizaje; después, si algún recurso digital lo sirve MEJOR que uno analógico, entra.'},
+  {q:'El formato de feedback entre pares que usamos en el taller fue…',
+   ops:['«2 estrellas y 1 deseo», siempre señalando DÓNDE se ve lo que se señala','Un puntaje del 1 al 10 con comentario general','Solo felicitaciones para no desmotivar'],
+   c:0,f:'Dos fortalezas concretas y un deseo accionable, anclados en evidencia observable («la apertura anticipa porque…»). Esa regla —se ve o se supone— es la misma que vas a usar en el foro de la Clase 6.'},
+  {q:'La Clase 6 será…',
+   ops:['Presencial, sobre robótica avanzada','Virtual y asincrónica sobre pensamiento computacional: publica el miércoles 16/09 y cierra el martes 22/09','Una semana sin clases'],
+   c:1,f:'Clase 6 asincrónica: material interactivo + Ficha N°6 + explorar UNA herramienta + diseñar una actividad de PC para el foro. Volvemos presencialmente el miércoles 23/09.'}
+];
+const qc=document.getElementById('quizContainer');
+QUIZ.forEach((item,qi)=>{
+  const block=document.createElement('div');block.className='q-block';
+  block.innerHTML=`<h4>${qi+1}. ${item.q}</h4><div class="opciones">${
+    item.ops.map((op,oi)=>`<label class="opcion"><input type="radio" name="q${qi}" value="${oi}"><span>${op}</span></label>`).join('')
+  }</div><div class="q-feedback" id="fb${qi}"></div>`;
+  qc.appendChild(block);
+});
+function corregirQuiz(){
+  let ok=0;
+  QUIZ.forEach((item,qi)=>{
+    const fb=document.getElementById('fb'+qi);
+    const elegida=document.querySelector(`input[name="q${qi}"]:checked`);
+    fb.className='q-feedback';
+    if(!elegida){fb.classList.add('mal');fb.textContent='⚠ No respondiste esta pregunta.';return;}
+    if(parseInt(elegida.value)===item.c){ok++;fb.classList.add('bien');fb.innerHTML='✔ ¡Correcto! '+item.f;}
+    else{fb.classList.add('mal');fb.innerHTML='✘ Todavía no. '+item.f;}
+  });
+  const res=document.getElementById('resultadoQuiz');
+  const titulo=document.getElementById('resultadoTitulo');
+  const texto=document.getElementById('resultadoTexto');
+  res.style.display='block';
+  if(ok>=5){titulo.textContent=`${ok}/6 · Diseño con coherencia 🎯`;texto.textContent='Tenés clara la arquitectura completa. Ahora llevá esta lógica a la Clase 6: cada actividad de pensamiento computacional que diseñes es una mini-secuencia como las de hoy.';}
+  else if(ok>=3){titulo.textContent=`${ok}/6 · Casi, casi 🍃`;texto.textContent='Buena base. Repasá las secciones donde fallaste (las explicaciones de arriba te dicen exactamente dónde mirar) y volvé a intentar cuando quieras.';}
+  else{titulo.textContent=`${ok}/6 · Vale repasar 🔁`;texto.textContent='Tranquilo/a: releé las secciones 1, 2 y 3 con calma — son el corazón conceptual — y reintentalo. También podés volver a la Ficha N°5 descargada del tema de la clase.';}
+  res.scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 6 · Pensamiento computacional — Material de estudio interactivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   IDENTIDAD VISUAL «JADE & CORAL» · exclusiva Clase 6 (virtual)
+   Fondo marfil · jade profundo primario · coral de acento
+   Tipos: Space Grotesk (títulos) + Nunito Sans (texto)
+   ══════════════════════════════════════════════════════════════════ */
+:root{
+  --marfil:#FAF6EE;
+  --papel:#FFFDF8;
+  --jade:#0E7C66;
+  --jade-osc:#0A5748;
+  --jade-suave:#DDEEE9;
+  --coral:#E4573D;
+  --coral-suave:#FBE4DD;
+  --ambar:#E9B44C;
+  --ambar-suave:#F8EDD4;
+  --tinta:#22333B;
+  --gris:#68767B;
+  --linea:#E2DACB;
+  --serif-display:'Space Grotesk','Trebuchet MS',Verdana,sans-serif;
+  --sans:'Nunito Sans','Segoe UI',system-ui,-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--tinta);background:var(--marfil);line-height:1.65;font-size:16.5px}
+#barra{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--jade),var(--ambar));z-index:2000}
+
+header.top{position:sticky;top:0;z-index:1000;background:rgba(10,87,72,.97);backdrop-filter:blur(8px)}
+.top-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 22px;flex-wrap:wrap}
+.marca{display:flex;align-items:center;gap:11px;color:var(--marfil)}
+.logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--jade),var(--ambar));display:flex;align-items:center;justify-content:center;font-family:var(--serif-display);font-weight:700;color:#fff;font-size:17px;flex:none}
+.marca b{font-family:var(--serif-display);font-size:15.5px;line-height:1.15;display:block}
+.marca small{display:block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ambar);font-weight:800}
+nav.secciones{display:flex;gap:2px;flex-wrap:wrap}
+nav.secciones a{color:#CFE6DE;text-decoration:none;font-size:13.5px;font-weight:700;padding:5px 11px;border-radius:999px;transition:.2s}
+nav.secciones a:hover{background:rgba(250,246,238,.14);color:#fff}
+nav.secciones a.activo{background:var(--ambar);color:var(--tinta)}
+main{max-width:860px;margin:0 auto;padding:0 20px}
+
+.hero{padding:52px 0 26px;text-align:left}
+.hero .chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--jade-suave);color:var(--jade-osc);font-size:13px;font-weight:800;padding:6px 14px;border-radius:999px}
+.chip.ambar{background:var(--ambar-suave);color:#7A5A16}
+.hero h1{font-family:var(--serif-display);font-size:clamp(28px,5vw,42px);line-height:1.12;color:var(--jade-osc);margin-bottom:14px}
+.hero h1 em{font-style:normal;color:var(--coral)}
+.hero .bajada{font-size:18px;color:var(--gris);max-width:640px}
+
+section{padding:34px 0 10px;border-top:1px solid var(--linea);scroll-margin-top:70px}
+section:first-of-type{border-top:none}
+.kicker{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.kicker .num{width:34px;height:34px;border-radius:50%;background:var(--jade);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif-display);font-weight:700;font-size:16px;flex:none}
+.kicker span.etq{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--coral);font-weight:800}
+h2{font-family:var(--serif-display);font-size:clamp(22px,3.6vw,30px);color:var(--jade-osc);margin-bottom:16px;line-height:1.2}
+h3{font-family:var(--serif-display);font-size:19px;color:var(--jade-osc);margin:18px 0 8px}
+p+p{margin-top:10px}
+b,strong{color:var(--jade-osc)}
+
+.card{background:var(--papel);border:1px solid var(--linea);border-radius:16px;padding:20px 22px;margin:14px 0;box-shadow:0 1px 3px rgba(34,51,59,.05)}
+.card.destacada{border-left:5px solid var(--jade);background:linear-gradient(180deg,#FFFFFF, var(--jade-suave))}
+.callout{background:var(--ambar-suave);border-left:5px solid var(--ambar);border-radius:12px;padding:15px 18px;margin:14px 0}
+.callout.coral{background:var(--coral-suave);border-left-color:var(--coral)}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:14px 0}
+.mini{background:var(--papel);border:1px solid var(--linea);border-radius:14px;padding:16px 18px}
+.mini h4{font-family:var(--serif-display);color:var(--jade-osc);font-size:16.5px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.mini ul{padding-left:18px}
+.mini li{margin:5px 0}
+.si{border-top:4px solid var(--jade)} .no{border-top:4px solid var(--coral)}
+
+/* Pilares clickeables */
+.pilares-barra{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0}
+.pilar-pill{cursor:pointer;border:1.5px solid var(--linea);background:var(--papel);border-radius:999px;padding:9px 18px;font-family:var(--serif-display);font-weight:600;font-size:15px;color:var(--tinta);transition:.2s}
+.pilar-pill:hover{border-color:var(--jade)}
+#defPilar{min-height:96px;background:var(--papel);border:1px dashed var(--jade);border-radius:14px;padding:16px 20px;font-size:16.5px}
+
+/* Mito o realidad */
+.mito-card{background:var(--papel);border:1px solid var(--linea);border-radius:14px;padding:16px 18px;margin:12px 0}
+.mito-card .frase{font-weight:700;color:var(--tinta);margin-bottom:12px}
+.botones-mr{display:flex;gap:10px}
+.btn-mr{flex:1;border:none;border-radius:10px;padding:10px 12px;font-family:var(--sans);font-weight:800;font-size:14.5px;cursor:pointer;transition:.2s}
+.mito-btn{background:var(--coral-suave);color:#A0331E}.real-btn{background:var(--jade-suave);color:var(--jade-osc)}
+.btn-mr:hover{filter:brightness(.95)}
+.btn-mr.elegida{outline:3px solid var(--ambar)}
+.mito-veredicto{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.mito-veredicto>div{margin-top:12px;background:var(--ambar-suave);border-radius:10px;padding:12px 14px;font-size:15px}
+.mito-card.resuelta{border-color:var(--jade)}
+.mito-card.resuelta.incorrecta{border-color:var(--coral)}
+
+/* Acordeón herramientas */
+.herr-item{background:var(--papel);border:1px solid var(--linea);border-radius:14px;margin:10px 0;overflow:hidden}
+.herr-item>button{width:100%;text-align:left;border:none;background:none;padding:15px 18px;font-family:var(--serif-display);font-size:17px;font-weight:600;color:var(--jade-osc);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.herr-item>button::after{content:'+';font-size:22px;color:var(--coral);flex:none}
+.herr-item.abierto>button::after{content:'−'}
+.herr-cuerpo{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.herr-item.abierto .herr-cuerpo{max-height:520px}
+.herr-cuerpo>div{padding:0 18px 16px;font-size:15.5px}
+.tag-pilar{display:inline-block;background:var(--jade-suave);color:var(--jade-osc);font-size:12.5px;font-weight:800;border-radius:999px;padding:3px 10px;margin:2px 4px 2px 0}
+
+/* Indicadores */
+.ind-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0}
+.ind{background:var(--papel);border:1px solid var(--linea);border-radius:14px;padding:14px 16px;text-align:left}
+.ind b.tit{display:block;font-family:var(--serif-display);color:var(--jade-osc);font-size:16px;margin-bottom:5px}
+.ind small{color:var(--gris)}
+
+/* Misión */
+.paso{display:flex;gap:14px;margin:12px 0;align-items:flex-start}
+.paso .n{flex:none;width:32px;height:32px;border-radius:50%;background:var(--coral);color:#fff;font-family:var(--serif-display);font-weight:700;display:flex;align-items:center;justify-content:center}
+.paso p{flex:1}
+
+/* Quiz */
+.q-block{background:var(--papel);border:1px solid var(--linea);border-radius:14px;padding:16px 18px;margin:12px 0}
+.q-block h4{font-family:var(--sans);font-size:16px;margin-bottom:10px}
+.opciones{display:flex;flex-direction:column;gap:8px}
+.opcion{display:flex;gap:10px;align-items:flex-start;background:var(--marfil);border:1px solid var(--linea);border-radius:10px;padding:10px 12px;cursor:pointer;font-size:15px;transition:.15s}
+.opcion:hover{border-color:var(--jade)}
+.opcion input{margin-top:3px;accent-color:var(--jade)}
+.q-feedback{display:none;margin-top:10px;border-radius:10px;padding:11px 14px;font-size:15px}
+.q-feedback.bien{display:block;background:var(--jade-suave)}
+.q-feedback.mal{display:block;background:var(--coral-suave)}
+.btn-jade{display:inline-block;border:none;background:var(--jade);color:#fff;font-family:var(--serif-display);font-weight:700;font-size:17px;border-radius:999px;padding:13px 30px;cursor:pointer;margin:16px 0;transition:.2s}
+.btn-jade:hover{background:var(--jade-osc)}
+#resultadoQuiz{display:none;background:var(--papel);border:2px solid var(--jade);border-radius:16px;padding:20px 22px;text-align:center}
+#resultadoTitulo{font-family:var(--serif-display);font-size:24px;color:var(--jade-osc);margin-bottom:8px}
+#resultadoTexto{color:var(--gris)}
+
+footer.fin{margin:46px 0 60px;background:var(--jade-osc);color:#CFE6DE;border-radius:18px;padding:26px 28px}
+footer.fin h3{color:#fff;margin-top:0}
+footer.fin a{color:var(--ambar)}
+.aviso-html{background:rgba(233,180,76,.15);border:1px solid var(--ambar);border-radius:10px;padding:10px 14px;margin-top:14px;font-size:14px}
+@media(max-width:640px){body{font-size:15.5px}.botones-mr{flex-direction:column}}
+</style>
+</head>
+<body>
+<div id="barra"></div>
+
+<header class="top"><div class="top-inner">
+  <div class="marca"><div class="logo">6</div><div><small>Clase 6 · Virtual y asincrónica</small><b>Pensamiento computacional<br>con y sin tecnologías digitales</b></div></div>
+  <nav class="secciones">
+    <a href="#s1">Qué es</a><a href="#s2">Mitos</a><a href="#s3">Pilares</a><a href="#s4">Con/sin pantallas</a><a href="#s5">Herramientas</a><a href="#s6">Observar</a><a href="#s7">Tu misión</a><a href="#s8">Autoevaluación</a>
+  </nav>
+</div></header>
+
+<main>
+
+<div class="hero">
+  <div class="chips"><span class="chip">⏱ ≈ 30 min de recorrido</span><span class="chip ambar">📅 Del mié 16/09 al mar 22/09</span><span class="chip">🤖 Unidad 3</span></div>
+  <h1>Pensar como quien <em>diseña soluciones</em>: pensamiento computacional en la sala</h1>
+  <p class="bajada">Esta semana no hay encuentro presencial: el recorrido lo hacés acá, a tu ritmo. Al final, vas a poder diseñar una actividad de pensamiento computacional para sala de 4 o 5 años — con o sin pantallas — y compartirla en el foro.</p>
+</div>
+
+<section id="s1">
+  <div class="kicker"><div class="num">1</div><span class="etq">El concepto</span></div>
+  <h2>Qué es —y qué no es— el pensamiento computacional</h2>
+  <div class="card destacada">
+    <p><b>Idea central:</b> el pensamiento computacional (PC) es un conjunto de <b>estrategias para resolver problemas</b>: dividirlos en partes, reconocer patrones, quedarse con lo esencial y ordenar pasos hacia una solución. Puede usarse <b>con o sin computadora</b>.</p>
+  </div>
+  <div class="grid2">
+    <div class="mini si"><h4>✅ El PC sí es…</h4><ul>
+      <li>Una forma de <b>pensar y resolver</b> problemas del DC (ciencias, matemática, vida cotidiana).</li>
+      <li><b>Lenguaje del comando:</b> dar y seguir instrucciones precisas y ordenadas.</li>
+      <li><b>Anticipar, probar, errar y ajustar:</b> el error como información.</li>
+      <li>Algo que puede vivirse con tarjetas, juegos de piso, robots o apps.</li>
+    </ul></div>
+    <div class="mini no"><h4>🚫 El PC no es…</h4><ul>
+      <li>«Niños sentados frente a una pantalla aprendiendo código».</li>
+      <li>Una <b>materia nueva</b> con contenidos separados del resto.</li>
+      <li>Un requisito tecnológico: <b>no hace falta tablet ni robot</b> para empezar.</li>
+      <li>Ejecutar pasos sin comprender: copiar la acción sin decidirla.</li>
+    </ul></div>
+  </div>
+  <p>Por eso en el nivel inicial el PC entra como <b>enfoque transversal</b>: aparece cuando los niños ordenan rutinas, resuelven un laberinto, reparten materiales siguiendo reglas o le explican a un compañero cómo llegar al patio.</p>
+</section>
+
+<section id="s2">
+  <div class="kicker"><div class="num">2</div><span class="etq">Activá lo que sabés</span></div>
+  <h2>Mito o realidad</h2>
+  <p>Cuatro afirmaciones que circulan sobre PC en el nivel. Animáte antes de abrir el veredicto: cada uno trae su explicación.</p>
+  <div id="mitosContainer"></div>
+</section>
+
+<section id="s3">
+  <div class="kicker"><div class="num">3</div><span class="etq">El corazón conceptual</span></div>
+  <h2>Los cuatro pilares del pensamiento computacional</h2>
+  <p>Tocá cada pilar para ver su definición y un ejemplo real de sala de 4 o 5 años.</p>
+  <div class="pilares-barra">
+    <button class="pilar-pill" onclick="mostrarPilar(this,'descomp')">🧩 Descomposición</button>
+    <button class="pilar-pill" onclick="mostrarPilar(this,'patrones')">🔁 Patrones</button>
+    <button class="pilar-pill" onclick="mostrarPilar(this,'abstracc')">🎯 Abstracción</button>
+    <button class="pilar-pill" onclick="mostrarPilar(this,'algor')">➡️ Algoritmo</button>
+  </div>
+  <div id="defPilar"><em>Elegí un pilar arriba 👆</em></div>
+  <div class="callout"><b>Clave para diseñar:</b> una actividad de PC no necesita activar los cuatro pilares a la vez. Elegí <b>uno o dos prioritarios</b> y declaralos en tu plantilla: después, en el foro, tus compañeros van a verificar si realmente se ven.</div>
+</section>
+
+<section id="s4">
+  <div class="kicker"><div class="num">4</div><span class="etq">Decisiones de diseño</span></div>
+  <h2>Con y sin tecnologías digitales: tres modalidades</h2>
+  <div class="ind-grid">
+    <div class="ind"><b class="tit">🔌 Desenchufada</b><p>Sin dispositivos: tarjetas-flecha, laberintos de piso, «robot humano», recetas por pasos.<br><small><b>Cuándo:</b> primer contacto, grupos grandes, foco en el lenguaje del comando. Es la puerta de entrada habitual en el nivel.</small></p></div>
+    <div class="ind"><b class="tit">💡 Enchufada</b><p>App o robot programable: ScratchJr, Bee-Bot/Blue-Bot, Code.org.<br><small><b>Cuándo:</b> cuando ya hay juego simbólico y lenguaje del comando instalados; en rotaciones pequeñas y con propósito claro.</small></p></div>
+    <div class="ind"><b class="tit">🔀 Mixta</b><p>Se diseña desenchufado y se ejecuta enchufado (armar la secuencia con tarjetas → reproducirla en el robot), o al revés.<br><small><b>Cuándo:</b> para transferir lo aprendido entre soportes. Suele ser la más potente pedagógicamente.</small></p></div>
+  </div>
+  <div class="card destacada"><p><b>Idea fuerza:</b> la pregunta no es «¿uso tecnología o no?» sino <b>¿para qué aprendizaje?</b> La modalidad se elige después del objetivo, nunca antes. Es la misma lógica de coherencia de la Clase 5: el recurso entra donde aporta, sin protagonizar.</p></div>
+</section>
+
+<section id="s5">
+  <div class="kicker"><div class="num">5</div><span class="etq">El menú de herramientas</span></div>
+  <h2>Herramientas y propuestas para el nivel</h2>
+  <p>Vas a explorar <b>UNA</b> de estas opciones esta semana. Abrí cada acordeón y mirá cuál te resulta más cercana a tu sala.</p>
+
+  <div class="herr-item"><button onclick="toggleHerr(this)">🐝 Bee-Bot / Blue-Bot · el robot de piso</button><div class="herr-cuerpo"><div>
+    <p>Robot con forma de abeja que se programa con <b>botones físicos</b> (avanzar, retroceder, girar) y memoriza una secuencia de hasta 40 comandos. Blue-Bot suma conexión Bluetooth y memoria transparente.</p>
+    <p><span class="tag-pilar">Algoritmo</span><span class="tag-pilar">Anticipación</span></p>
+    <p><b>Qué hace el niño:</b> arma la ruta en el piso (alfombra temática, grilla dibujada con cinta), predice, ejecuta y ajusta cuando no llega.<br><b>Edad sugerida:</b> 4–5 años. <b>Condición:</b> desafíos con sentido (llegar al nido, visitar las estaciones), no rutas arbitrarias.</p>
+  </div></div></div>
+
+  <div class="herr-item"><button onclick="toggleHerr(this)">🐱 ScratchJr · crear historias programadas</button><div class="herr-cuerpo"><div>
+    <p>App gratuita de programación por <b>bloques pictográficos</b>: los personajes se mueven, suenan, hablan y aparecen según la secuencia que el niño arma. <b>No requiere leer</b>, ideal para 5 años.</p>
+    <p><span class="tag-pilar">Algoritmo</span><span class="tag-pilar">Abstracción</span></p>
+    <p><b>Qué hace el niño:</b> crea escenas propias (el cuento trabajado, la excursión) y las programa.<br><b>Condición:</b> exploración libre previa ANTES del proyecto; funciona offline una vez instalada; tablets o dispositivos con Android/iOS.</p>
+  </div></div></div>
+
+  <div class="herr-item"><button onclick="toggleHerr(this)">🧭 Code.org · cursos guiados con laberintos</button><div class="herr-cuerpo"><div>
+    <p>Plataforma gratuita con cursos progresivos; tiene trayectos <b>pre-lectores</b> con laberintos de flechas e íconos (personajes conocidos). Cada desafío valida solo y muestra el siguiente.</p>
+    <p><span class="tag-pilar">Patrones</span><span class="tag-pilar">Algoritmo</span></p>
+    <p><b>Qué hace el niño:</b> resuelve desafíos breves con devolución inmediata.<br><b>Condición:</b> requiere internet; conviene en momentos cortos y rotativos, porque su lógica es más dirigida que la creación libre de ScratchJr.</p>
+  </div></div></div>
+
+  <div class="herr-item"><button onclick="toggleHerr(this)">🎲 Desafíos desenchufados · PC sin dispositivos</button><div class="herr-cuerpo"><div>
+    <p>Propuestas <b>sin ninguna pantalla</b>: «robot humano» (un niño programa, otro ejecuta), tarjetas de flechas para llegar al tesoro, laberinto en el piso con cinta o aros, «programá a tu compañero» para lavarse las manos.</p>
+    <p><span class="tag-pilar">Todos los pilares</span><span class="tag-pilar">Cero costo</span></p>
+    <p><b>Qué hace el niño:</b> vive el ciclo completo anticipar→ejecutar→errar→ajustar con su cuerpo y con materiales de la sala.<br><b>Condición:</b> consignas claras y roles explícitos (quien programa / quien ejecuta / quien observa).</p>
+  </div></div></div>
+
+  <div class="callout coral"><b>Ojo con el mito del «más moderno es mejor»:</b> una actividad desenchufada bien planteada enseña más PC que una app mal mediada. La herramienta no hace al pensamiento: lo hace el diseño.</div>
+</section>
+
+<section id="s6">
+  <div class="kicker"><div class="num">6</div><span class="etq">Mirada evaluadora</span></div>
+  <h2>Qué observar en los niños mientras juegan</h2>
+  <p>Cuatro indicadores <b>observables</b> (¡se ven o no se ven!, nada de «parece que entendieron»). Son los que pide tu plantilla en la sección de evidencia.</p>
+  <div class="ind-grid">
+    <div class="ind"><b class="tit">🎯 Precisión</b>cada paso logra lo previsto: el robot llega, la secuencia funciona completa.<br><small><i>Se ve cuando…</i> la ruta ejecutada coincide con la planeada.</small></div>
+    <div class="ind"><b class="tit">🔮 Anticipación</b>piensan antes de ejecutar: prueban mentalmente, predicen («¿qué pasa si giro acá?»).<br><small><i>Se ve cuando…</i> dudan, comparan opciones o verbalizan el plan antes de actuar.</small></div>
+    <div class="ind"><b class="tit">🔧 Gestión del error</b>el fallo informa: detectan dónde falló, ajustan y vuelven a intentar sin abandonar.<br><small><i>Se ve cuando…</i> dicen «falló acá, falta un paso» en vez de tirar la toalla o pedir la solución.</small></div>
+    <div class="ind"><b class="tit">🤝 Colaboración</b>negocian pasos, se pasan turnos, construyen la solución juntos y explican decisiones.<br><small><i>Se ve cuando…</i> discuten la próxima flecha en lugar de empujarse el dispositivo.</small></div>
+  </div>
+</section>
+
+<section id="s7">
+  <div class="kicker"><div class="num">7</div><span class="etq">Semana del 16 al 22/09</span></div>
+  <h2>Tu misión de la semana</h2>
+  <div class="paso"><div class="n">1</div><p><b>Recorré este material interactivo</b> (≈30 min) y <b>leé la Ficha N°6 completa</b> (≈12 min). Podés hacerlo en una sentada o por partes.</p></div>
+  <div class="paso"><div class="n">2</div><p><b>Explorá UNA herramienta:</b> ScratchJr, la app de Bee-Bot/Blue-Bot o un desafío inicial de Code.org. Si preferís, probá un desafío desenchufado con la guía de la sección 5. Jugá como jugaría un niño de 4–5 años (≈30–45 min).</p></div>
+  <div class="paso"><div class="n">3</div><p><b>Diseñá una actividad de PC</b> para sala de 4 o 5 años usando la <b>Plantilla_Actividad_PC.pdf</b>: desafío para los niños, pilar(es) principal(es), secuencia de TU actividad docente, anticipación y error, tu rol, evidencia observable.</p></div>
+  <div class="paso"><div class="n">4</div><p><b>Publicá en el foro</b> con la estructura indicada y <b>respondé a un compañero/a:</b> ¿el desafío es adecuado para la edad?, ¿se ve el pilar declarado? <em>(Cierre del foro: martes 22/09.)</em></p></div>
+  <div class="paso"><div class="n">5</div><p><b>Nos vemos presencialmente el miércoles 23/09:</b> compartimos y refinamos las propuestas entre todos. Traé tu plantilla impresa o en el dispositivo.</p></div>
+</section>
+
+<section id="s8">
+  <div class="kicker"><div class="num">8</div><span class="etq">Chequeo final</span></div>
+  <h2>Autoevaluación final</h2>
+  <p>Seis preguntas con corrección automática. Si sacás 5 o más, estás listo/a para diseñar. Si no, el material sigue disponible para repasar.</p>
+  <div id="quizContainer"></div>
+  <button class="btn-jade" onclick="corregirQuiz()">Corregir mi autoevaluación ✓</button>
+  <div id="resultadoQuiz"><div id="resultadoTitulo"></div><div id="resultadoTexto"></div></div>
+</section>
+
+<footer class="fin">
+  <h3>Antes de irte 🌱</h3>
+  <p>Lo que practicaste esta semana conecta todo el bloque: la <b>coherencia</b> de la Clase 5 (objetivo → momentos → rol → evidencia) aplicada a un contenido nuevo. En el <b>encuentro presencial del miércoles 23/09</b> las propuestas se comparten, reciben «2 estrellas y 1 deseo» y se refinan en vivo para armar el banco colectivo de actividades de PC del curso.</p>
+  <p style="margin-top:10px">¿Trabaste en algo? Dejá tu consulta en el <b>hilo fijo del foro</b>: la respondemos durante toda la semana.</p>
+  <div class="aviso-html">📥 <b>Recordatorio:</b> si estás viendo este archivo desde Drive, descargalo y abrilo en tu navegador — la vista previa de Drive no ejecuta JavaScript y los botones no funcionan ahí.</div>
+</footer>
+
+</main>
+
+<script>
+/* ═══ MOTOR · IDENTIDAD JADE & CORAL · Clase 6 ═══ */
+
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('barra').style.width=pct+'%';
+});
+
+const links=[...document.querySelectorAll('nav.secciones a')];
+const secciones=links.map(a=>document.querySelector(a.getAttribute('href')));
+window.addEventListener('scroll',()=>{
+  let idx=secciones.length-1;
+  secciones.forEach((s,i)=>{ if(s.getBoundingClientRect().top<140)idx=i; });
+  links.forEach((l,i)=>l.classList.toggle('activo',i===idx));
+},{passive:true});
+
+/* Mito o realidad */
+const MITOS=[
+  {f:'«Pensamiento computacional significa enseñar a programar computadoras a chicos muy chiquitos.»',
+   mito:true,x:'MITO. El PC son estrategias de resolución de problemas (descomponer, hallar patrones, abstraer, ordenar pasos) que existen con o sin computadora. En Inicial suele empezar SIN pantallas: el código es solo una de sus expresiones posibles.'},
+  {f:'«Las actividades desenchufadas son un paliativo mientras no hay tablets: la versión “verdadera” del PC es con dispositivos.»',
+   mito:true,x:'MITO. Las desenchufadas son una puerta pedagógica legítima y potente: hacen visible el lenguaje del comando antes de delegarlo en la máquina, funcionan con grupo completo y sin recursos tecnológicos. No son el plan B: suelen ser el mejor plan A.'},
+  {f:'«Cuando el robot no llega a destino, la actividad fracasó.»',
+   mito:true,x:'MITO. El error es la información CENTRAL del pensamiento computacional: anticipar, ejecutar, detectar el fallo, ajustar y reintentar es exactamente el ciclo que queremos provocar. Una secuencia que sale perfecta a la primera casi no deja aprender.'},
+  {f:'«Un niño de 5 años puede usar ScratchJr aunque todavía no sepa leer.»',
+   mito:false,x:'REALIDAD. Sus bloques son pictogramas: no requieren lectura convencional. Lo que sí requiere es exploración libre previa y consignas claras de la docente. Por eso funciona tan bien en sala de 5 (y con acompañamiento, también en sala de 4).'}
+];
+const mc=document.getElementById('mitosContainer');
+MITOS.forEach((m)=>{
+  const card=document.createElement('div');card.className='mito-card';
+  card.innerHTML=`<p class="frase">${m.f}</p>
+    <div class="botones-mr">
+      <button class="btn-mr mito-btn" data-v="mito">🚫 Mito</button>
+      <button class="btn-mr real-btn" data-v="real">✅ Realidad</button>
+    </div>
+    <div class="mito-veredicto"><div>${m.x}</div></div>`;
+  card.querySelectorAll('.btn-mr').forEach(b=>{
+    b.onclick=()=>{
+      if(card.classList.contains('resuelta'))return;
+      const eligioMito=b.dataset.v==='mito';
+      const acerto=(eligioMito===m.mito);
+      if(acerto){card.classList.add('resuelta')}else{card.classList.add('resuelta','incorrecta')}
+      b.classList.add('elegida');
+      card.querySelector('.mito-veredicto').style.maxHeight='260px';
+    };
+  });
+  mc.appendChild(card);
+});
+
+/* Pilares */
+const PILARES={
+  descomp:'<b>🧩 Descomposición.</b> Dividir el problema en partes más pequeñas y manejables. <em>En sala:</em> «ordenamos el rincón por zonas: primero los bloques, después los muñecos, al final los libros». O armar el mural del proyecto parte por parte.',
+  patrones:'<b>🔁 Patrones.</b> Reconocer regularidades y repeticiones para predecir qué sigue. <em>En sala:</em> collages con secuencias repetidas (flor-piedra-flor-piedra), ritmos con palmas, rutinas diarias con pictogramas que siempre se repiten en el mismo orden.',
+  abstracc:'<b>🎯 Abstracción.</b> Quedarse con lo esencial y dejar de lado lo accesorio. <em>En sala:</em> dibujar el mapa del jardín con SOLO lo necesario para llegar a la sala de música (el pasillo y las puertas; no los arbustos).',
+  algor:'<b>➡️ Algoritmo.</b> Construir una secuencia ordenada de pasos que lleva al objetivo. <em>En sala:</em> la receta de cocina paso a paso, las flechas que guían al robot hasta el nido, el afiche de «cómo nos lavamos las manos».'
+};
+function mostrarPilar(btn,key){
+  document.getElementById('defPilar').innerHTML=PILARES[key];
+  document.querySelectorAll('.pilar-pill').forEach(b=>b.style.background='var(--papel)');
+  btn.style.background='var(--jade-suave)';
+}
+
+/* Acordeón herramientas */
+function toggleHerr(btn){
+  const item=btn.parentElement;
+  const abierto=item.classList.contains('abierto');
+  document.querySelectorAll('.herr-item.abierto').forEach(i=>i.classList.remove('abierto'));
+  if(!abierto)item.classList.add('abierto');
+}
+
+/* Quiz */
+const QUIZ=[
+  {q:'En el Nivel Inicial, el pensamiento computacional consiste principalmente en…',
+   ops:['Enseñar a los niños a operar computadoras cuanto antes','Resolver problemas con estrategias como descomponer, buscar patrones, abstraer y ordenar pasos','Una materia nueva con horario y contenidos propios'],
+   c:1,f:'Es un enfoque transversal de resolución de problemas, no una materia ni un entrenamiento informático. Las pantallas son opcionales: puede trabajarse totalmente desenchufado.'},
+  {q:'«Los niños arman con tarjetas-flecha la ruta hasta el tesoro y luego la ejecutan caminando por el laberinto del piso.» Sin ningún dispositivo, esta actividad es…',
+   ops:['Desenchufada','Enchufada','Mixta'],
+   c:0,f:'Desenchufada: todo el ciclo anticipar→ejecutar→ajustar ocurre con el cuerpo y materiales de la sala. Sería mixta si después reproducieran la misma ruta con Bee-Bot o en ScratchJr.'},
+  {q:'Un niño programa en Bee-Bot «avanzar, avanzar, avanzar, girar a la izquierda». El pilar que más se ejercita al ARMAR esa serie ordenada de comandos es…',
+   ops:['Patrones','Abstracción','Algoritmo'],
+   c:2,f:'Algoritmo: pasos ordenados hacia un objetivo. Los patrones aparecerían si la secuencia tuviera un bloque repetido para descubrir; la abstracción, si tuviera que decidir qué información importa y cuál no.'},
+  {q:'Tras ejecutar su secuencia, un niño nota que el robot no llegó a la torre y dice: «ah, falló acá, le falta un paso». Esto muestra sobre todo…',
+   ops:['Que la actividad resultó demasiado difícil para él','Gestión del error: usa el fallo como información y ajusta','Que necesita ayuda adulta inmediata'],
+   c:1,f:'Es exactamente el ciclo que buscamos: detectar DÓNDE falló y ajustar. La actividad «fracasó» solo si el error no se usa; aquí se convirtió en aprendizaje observable.'},
+  {q:'Para tu publicación semanal, la estructura mínima del posteo en el foro incluye…',
+   ops:['Actividad + sala + modalidad · desafío y pilar(es) de PC · plantilla completada · respuesta a un compañero/a','Un video mostrando la herramienta elegida','Solo el nombre de la actividad y la app usada'],
+   c:0,f:'Así lo pide la plantilla: ① actividad + sala + modalidad, ② desafío y pilares, ③ la plantilla completada (adjunta o transcrita) y ④ tu devolución a un compañero/a: ¿el desafío es adecuado para la edad?, ¿se ve el pilar declarado?'},
+  {q:'La ventana de actividades de esta clase cierra el…',
+   ops:['Domingo 20/09','Martes 22/09, y las propuestas se retoman presencialmente el miércoles 23/09','No tiene cierre: es opcional'],
+   c:1,f:'El foro cierra el martes 22/09 a última hora, porque el miércoles 23/09 compartimos y refinamos las propuestas en el taller presencial (con «2 estrellas y 1 deseo»).'}
+];
+const qc=document.getElementById('quizContainer');
+QUIZ.forEach((item,qi)=>{
+  const block=document.createElement('div');block.className='q-block';
+  block.innerHTML=`<h4>${qi+1}. ${item.q}</h4><div class="opciones">${
+    item.ops.map((op,oi)=>`<label class="opcion"><input type="radio" name="q${qi}" value="${oi}"><span>${op}</span></label>`).join('')
+  }</div><div class="q-feedback" id="fb${qi}"></div>`;
+  qc.appendChild(block);
+});
+function corregirQuiz(){
+  let ok=0;
+  QUIZ.forEach((item,qi)=>{
+    const fb=document.getElementById('fb'+qi);
+    const elegida=document.querySelector(`input[name="q${qi}"]:checked`);
+    fb.className='q-feedback';
+    if(!elegida){fb.classList.add('mal');fb.textContent='⚠ No respondiste esta pregunta.';return;}
+    if(parseInt(elegida.value)===item.c){ok++;fb.classList.add('bien');fb.innerHTML='✔ ¡Correcto! '+item.f;}
+    else{fb.classList.add('mal');fb.innerHTML='✘ Todavía no. '+item.f;}
+  });
+  const res=document.getElementById('resultadoQuiz');
+  const titulo=document.getElementById('resultadoTitulo');
+  const texto=document.getElementById('resultadoTexto');
+  res.style.display='block';
+  if(ok>=5){titulo.textContent=`${ok}/6 · Listo para diseñar 🤖`;texto.textContent='Tenés claros los conceptos y los pilares. Ahora sí: explorá tu herramienta, completá la plantilla y sumá tu propuesta al foro. Nos vemos el miércoles 23/09 con todo listo.';}
+  else if(ok>=3){titulo.textContent=`${ok}/6 · Casi, casi 🍃`;texto.textContent='Buena base, pero conviene repasar las secciones donde fallaste (mirá las explicaciones de arriba). Podés reintentar la autoevaluación cuando quieras.';}
+  else{titulo.textContent=`${ok}/6 · Volvé a empezar 🔁`;texto.textContent='Tranquilo/a: es material nuevo. Volvé a recorrer las secciones 1, 3 y 4 con calma y reintentá. Si algo sigue sin cerrar, dejalo escrito en el hilo fijo del foro.';}
+  res.scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+</body>
+</html>

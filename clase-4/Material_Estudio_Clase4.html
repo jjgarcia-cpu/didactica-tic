@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 4 · Recursos, herramientas e IA — Material de estudio interactivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   IDENTIDAD VISUAL «JADE & CORAL» · exclusiva Clase 4
+   Fondo marfil · jade profundo primario · coral de acento
+   Tipos: Space Grotesk (títulos) + Nunito Sans (texto)
+   ══════════════════════════════════════════════════════════════════ */
+:root{
+  --marfil:#FAF6EE;
+  --papel:#FFFDF8;
+  --jade:#0E7C66;         /* primario */
+  --jade-osc:#0A5748;
+  --jade-suave:#DDEEE9;
+  --coral:#E4573D;        /* acento */
+  --coral-suave:#FBE4DD;
+  --ambar:#E9B44C;
+  --ambar-suave:#F8EDD4;
+  --tinta:#22333B;
+  --gris:#68767B;
+  --linea:#E2DACB;
+  --serif-display:'Space Grotesk','Trebuchet MS',Verdana,sans-serif;
+  --sans:'Nunito Sans','Segoe UI',system-ui,-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--tinta);background:var(--marfil);line-height:1.65;font-size:16.5px}
+
+#barra{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--jade),var(--ambar));z-index:2000}
+
+/* ===== HEADER ===== */
+header.top{position:sticky;top:0;z-index:1000;background:rgba(10,87,72,.97);backdrop-filter:blur(8px)}
+.top-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 22px;flex-wrap:wrap}
+.marca{display:flex;align-items:center;gap:11px;color:var(--marfil)}
+.logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--jade),var(--ambar));display:flex;align-items:center;justify-content:center;font-family:var(--serif-display);font-weight:700;color:#fff;font-size:17px;flex:none}
+.marca b{font-family:var(--serif-display);font-size:15.5px;line-height:1.15;display:block}
+.marca small{display:block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ambar);font-weight:800}
+nav.secciones{display:flex;gap:2px;flex-wrap:wrap}
+nav.secciones a{color:#CFE6DE;text-decoration:none;font-size:13.5px;font-weight:700;padding:5px 11px;border-radius:999px;transition:.2s}
+nav.secciones a:hover{background:rgba(250,246,238,.14);color:#fff}
+nav.secciones a.activo{background:var(--ambar);color:var(--tinta)}
+
+main{max-width:860px;margin:0 auto;padding:0 20px}
+
+/* ===== HERO ===== */
+.hero{padding:52px 0 26px;text-align:left}
+.hero .chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--jade-suave);color:var(--jade-osc);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:800}
+.chip.coral{background:var(--coral-suave);color:#A33821}
+.chip.ambar{background:var(--ambar-suave);color:#7A5A17}
+h1.display{font-family:var(--serif-display);font-size:clamp(30px,5vw,46px);line-height:1.08;color:var(--jade-osc);margin-bottom:14px}
+h1.display em{font-style:normal;color:var(--coral)}
+.hero p.bajada{font-size:19px;color:var(--gris);max-width:640px;margin-bottom:24px}
+.hero p.bajada b{color:var(--tinta)}
+
+/* ===== SECCIONES ===== */
+section{padding:34px 0 10px;scroll-margin-top:86px}
+.sec-head{display:flex;align-items:center;gap:13px;margin-bottom:6px}
+.sec-num{font-family:var(--serif-display);font-weight:700;font-size:15px;color:#fff;background:var(--jade);width:37px;height:37px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:none}
+.sec-head h2{font-family:var(--serif-display);font-size:clamp(22px,3.2vw,29px);color:var(--jade-osc);line-height:1.15}
+.minutos{margin-left:auto;font-size:12.5px;font-weight:800;color:var(--gris);white-space:nowrap}
+.intro-sec{color:var(--gris);font-size:16px;margin-bottom:16px;max-width:720px}
+
+.card-blanca{background:var(--papel);border:1px solid var(--linea);border-radius:16px;padding:24px 26px;margin:14px 0;box-shadow:0 1px 3px rgba(34,51,59,.05)}
+
+/* ===== TIPOLOGÍA DE RECURSOS ===== */
+.tipos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:13px;margin-top:14px}
+.tipo{background:var(--papel);border:1px solid var(--linea);border-radius:14px;padding:18px;cursor:pointer;transition:.22s;position:relative;overflow:hidden}
+.tipo::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--jade);opacity:.85}
+.tipo:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(10,87,72,.13)}
+.t-icono{font-size:26px;margin-bottom:8px;display:block}
+.tipo h3{font-family:var(--serif-display);font-size:16.5px;color:var(--jade-osc);margin-bottom:5px}
+.tipo p{font-size:14px;color:var(--gris);line-height:1.5}
+.t-ejs{max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:13.5px;color:var(--tinta);background:var(--jade-suave);border-radius:9px;margin-top:9px}
+.tipo.abierta .t-ejs{max-height:130px}
+.t-ejs div{padding:9px 12px}
+.t-ejs b{color:var(--jade-osc)}
+.pista-tap{text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--jade);margin-top:9px}
+
+/* ===== COMPETENCIAS RECAP ===== */
+.comp-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.comp-pill{border:1.5px solid var(--jade);color:var(--jade-osc);border-radius:12px;padding:10px 15px;cursor:pointer;font-weight:800;font-size:14.5px;background:var(--papel);transition:.2s;text-align:left}
+.comp-pill:hover{background:var(--jade-suave)}
+.comp-def{margin-top:12px;background:var(--papel);border:1px dashed var(--jade);border-radius:12px;padding:15px 18px;font-size:15.5px;min-height:74px;color:var(--gris)}
+.comp-def b{color:var(--jade-osc)}
+
+/* ===== IA ===== */
+.definicion-ia{background:linear-gradient(135deg,var(--jade-osc),var(--jade));color:var(--marfil);border-radius:18px;padding:28px 30px;margin:14px 0;position:relative;overflow:hidden}
+.definicion-ia::after{content:"🤖";position:absolute;right:22px;bottom:-8px;font-size:88px;opacity:.16}
+.definicion-ia h3{font-family:var(--serif-display);font-size:20px;margin-bottom:8px;color:var(--ambar)}
+.definicion-ia p{font-size:16.5px;line-height:1.6;max-width:92%}
+.formas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:14px}
+.forma{background:var(--papel);border:1px solid var(--linea);border-left:4px solid var(--ambar);border-radius:12px;padding:15px 16px}
+.forma h4{font-family:var(--serif-display);font-size:15px;color:var(--jade-osc);margin-bottom:4px}
+.forma p{font-size:13.8px;color:var(--gris);line-height:1.5}
+
+/* ===== OPORTUNIDADES VS RIESGOS ===== */
+.balance{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+@media(max-width:700px){.balance{grid-template-columns:1fr}}
+.col-bal{border-radius:16px;padding:20px 22px}
+.col-bal.ok{background:var(--jade-suave);border:1px solid #BCD9CF}
+.col-bal.warn{background:var(--coral-suave);border:1px solid #F0C4B7}
+.col-bal h3{font-family:var(--serif-display);font-size:18px;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+.col-bal.ok h3{color:var(--jade-osc)} .col-bal.warn h3{color:#A33821}
+.col-bal ul{list-style:none}
+.col-bal li{font-size:14.6px;line-height:1.55;margin-bottom:9px;padding-left:26px;position:relative}
+.col-bal.ok li::before{content:"✔";position:absolute;left:0;color:var(--jade);font-weight:900}
+.col-bal.warn li::before{content:"⚠";position:absolute;left:0;color:var(--coral);font-weight:900}
+.clave-reflexion{background:var(--ambar-suave);border-left:4px solid var(--ambar);border-radius:0 12px 12px 0;padding:16px 20px;margin-top:14px;font-size:15.5px}
+.clave-reflexion b{color:#7A5A17}
+
+/* ===== MITO O REALIDAD ===== */
+.mitologio{display:flex;flex-direction:column;gap:11px;margin-top:14px}
+.mito-card{background:var(--papel);border:1px solid var(--linea);border-radius:14px;padding:17px 20px;cursor:pointer;transition:.2s;border-left:5px solid var(--gris)}
+.mito-card:hover{transform:translateX(4px)}
+.mito-card p.frase{font-weight:800;font-size:15.5px;color:var(--tinta)}
+.mito-veredicto{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.mito-veredicto div{padding-top:10px;font-size:14.6px;line-height:1.55;color:var(--tinta)}
+.mito-veredicto b.mit{color:var(--coral)}
+.mito-veredicto b.rea{color:var(--jade)}
+.mito-card.resuelta{border-left-color:var(--jade)}
+.mito-card.resuelta.incorrecta{border-left-color:var(--coral)}
+.botones-mr{display:flex;gap:8px;margin-top:10px}
+.btn-mr{border:none;border-radius:9px;padding:7px 16px;font-family:var(--sans);font-weight:800;font-size:13.5px;cursor:pointer;transition:.15s}
+.btn-mr.mito-btn{background:var(--coral-suave);color:#A33821}
+.btn-mr.real-btn{background:var(--jade-suave);color:var(--jade-osc)}
+.btn-mr:hover{filter:brightness(.94)}
+.btn-mr.elegida{outline:2.5px solid var(--tinta);outline-offset:-2.5px}
+
+/* ===== 8 CRITERIOS ACORDEÓN ===== */
+.criterios-lista{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+.crit-item{background:var(--papel);border:1px solid var(--linea);border-radius:13px;overflow:hidden}
+.crit-q{display:flex;align-items:center;gap:13px;padding:14px 18px;cursor:pointer;font-weight:800;font-size:15.5px;color:var(--tinta);background:none;border:none;width:100%;text-align:left;font-family:var(--sans)}
+.crit-q:hover{background:#FBF8F1}
+.crit-n{font-family:var(--serif-display);background:var(--jade);color:#fff;width:28px;height:28px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:none}
+.flecha{margin-left:auto;color:var(--jade);font-size:19px;transition:transform .25s}
+.crit-item.abierto .flecha{transform:rotate(180deg)}
+.crit-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.crit-item.abierto .crit-a{max-height:260px}
+.crit-a div{padding:0 18px 15px 59px;font-size:14.6px;color:var(--gris);line-height:1.55}
+.crit-a b{color:var(--tinta)}
+.sino{display:inline-block;margin-top:6px;font-size:13px;font-weight:800;border-radius:7px;padding:3px 9px}
+.sino.si{background:var(--jade-suave);color:var(--jade-osc)}
+.sino.no{background:var(--coral-suave);color:#A33821}
+
+/* ===== MISIÓN ===== */
+.pasos{counter-reset:paso;margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.paso{background:var(--papel);border:1px solid var(--linea);border-radius:13px;padding:15px 18px 15px 62px;position:relative;font-size:15.3px;line-height:1.55}
+.paso::before{counter-increment:paso;content:counter(paso);position:absolute;left:16px;top:14px;width:31px;height:31px;border-radius:10px;background:var(--coral);color:#fff;font-family:var(--serif-display);font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center}
+.paso b{color:var(--jade-osc)}
+.apps-tabla{width:100%;border-collapse:collapse;margin-top:16px;background:var(--papel);border-radius:14px;overflow:hidden;border:1px solid var(--linea)}
+.apps-tabla th{background:var(--jade);color:#fff;font-family:var(--serif-display);font-size:14px;padding:11px 15px;text-align:left}
+.apps-tabla td{padding:11px 15px;font-size:14.4px;border-top:1px solid var(--linea);vertical-align:top;line-height:1.5}
+.apps-tabla td.area{font-weight:800;color:var(--jade-osc);width:27%;background:#FBF8F1}
+.aviso-plazo{display:flex;gap:12px;align-items:flex-start;background:var(--ambar-suave);border:1.5px solid var(--ambar);border-radius:14px;padding:16px 19px;margin-top:16px}
+.aviso-plazo .icono{font-size:24px}
+.aviso-plazo p{font-size:14.8px}
+.aviso-plazo b{color:#7A5A17}
+
+/* ===== AUTOEVALUACIÓN ===== */
+.quiz{display:flex;flex-direction:column;gap:16px;margin-top:14px}
+.q-block{background:var(--papel);border:1px solid var(--linea);border-radius:14px;padding:18px 20px}
+.q-block h4{font-family:var(--serif-display);font-size:15.8px;color:var(--tinta);margin-bottom:10px;line-height:1.4}
+.opciones{display:flex;flex-direction:column;gap:7px}
+.opcion{display:flex;gap:10px;align-items:flex-start;padding:9px 13px;border:1.4px solid var(--linea);border-radius:11px;cursor:pointer;font-size:14.6px;transition:.15s;line-height:1.45}
+.opcion:hover{border-color:var(--jade);background:var(--jade-suave)}
+.opcion input{margin-top:3px;accent-color:var(--jade)}
+.q-feedback{margin-top:10px;font-size:14.2px;line-height:1.5;border-radius:10px;padding:10px 14px;display:none}
+.q-feedback.bien{display:block;background:var(--jade-suave);color:var(--jade-osc)}
+.q-feedback.mal{display:block;background:var(--coral-suave);color:#A33821}
+#resultadoQuiz{display:none;margin-top:20px;text-align:center;background:linear-gradient(135deg,var(--jade-osc),var(--jade));color:var(--marfil);border-radius:18px;padding:26px}
+#resultadoQuiz h3{font-family:var(--serif-display);font-size:24px;color:var(--ambar);margin-bottom:6px}
+#resultadoQuiz p{max-width:520px;margin:0 auto}
+.btn-principal{display:inline-flex;align-items:center;gap:9px;background:var(--coral);color:#fff;border:none;border-radius:13px;padding:14px 26px;font-family:var(--serif-display);font-weight:700;font-size:17px;cursor:pointer;margin-top:18px;transition:.2s}
+.btn-principal:hover{background:#C7472F;transform:translateY(-2px);box-shadow:0 8px 20px rgba(228,87,61,.3)}
+.centro{text-align:center}
+
+/* ===== GLOSARIO ===== */
+.glosario{columns:2;column-gap:22px;margin-top:14px}
+@media(max-width:640px){.glosario{columns:1}}
+.term{break-inside:avoid;margin-bottom:12px}
+.term b{color:var(--jade-osc);font-family:var(--serif-display);font-size:14.6px}
+.term p{font-size:13.8px;color:var(--gris);line-height:1.5}
+
+/* ===== CIERRE ===== */
+.cierre{margin:36px 0 70px;background:var(--jade-osc);border-radius:20px;padding:32px 34px;color:var(--marfil)}
+.cierre h2{font-family:var(--serif-display);font-size:25px;color:var(--ambar);margin-bottom:12px}
+.cierre p{margin-bottom:10px;max-width:640px}
+.cierre .firma{margin-top:18px;font-size:14px;color:#BFDDD3}
+.cierre .firma b{color:var(--marfil)}
+
+footer.pie{border-top:1px solid var(--linea);padding:20px 22px 40px;text-align:center;font-size:13px;color:var(--gris)}
+footer.pie b{color:var(--jade-osc)}
+</style>
+</head>
+<body>
+<div id="barra"></div>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="marca">
+      <div class="logo">4</div>
+      <div><b>Recursos, herramientas e IA</b><small>Clase 4 · Virtual asincrónica</small></div>
+    </div>
+    <nav class="secciones">
+      <a href="#mapa">Mapa de recursos</a>
+      <a href="#competencias">Competencias</a>
+      <a href="#ia">¿Qué es la IA?</a>
+      <a href="#mitos">Mito o realidad</a>
+      <a href="#criterios">8 criterios</a>
+      <a href="#mision">Tu misión</a>
+      <a href="#autoevaluacion">Autoevaluación</a>
+    </nav>
+  </div>
+</header>
+
+<main class="contenedor">
+
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero"><div style="max-width:1080px;margin:0 auto;padding:0 22px">
+  <div class="chips">
+    <span class="chip">📱 A ritmo propio</span>
+    <span class="chip ambar">⏱ ≈ 30 minutos</span>
+    <span class="chip coral">🗓 Del miércoles 02/09 al martes 08/09</span>
+  </div>
+  <h1 class="display">El jardín que elige: <em>recursos, herramientas e inteligencia artificial</em></h1>
+  <p class="bajada">Hoy no venís a clase: la clase viene a vos. Vas a explorar qué tipos de recursos digitales existen para el Nivel Inicial, entender cómo funciona la IA dentro de las apps «educativas», y prepararte para <b>evaluar una app real</b> con los criterios que construimos en la Clase 3.</p>
+  <div class="card-blanca" style="border-left:5px solid var(--jade)">
+    <b style="font-family:var(--serif-display);font-size:16.5px;color:var(--jade-osc)">Cómo recorrer este material</b>
+    <p style="font-size:15px;color:var(--gris);margin-top:6px">Leé las secciones en orden y tocá todo lo que parezca interactivo (tarjetas, botones, afirmaciones). Al final hay una autoevaluación con puntaje: si sale bien, ya estás listo/a para tu misión semanal. Podés hacerlo de una sentada o por partes; el progreso lo llevás vos.</p>
+  </div>
+</div>
+
+</div><!-- ═══════════ 1 · MAPA DE RECURSOS ═══════════ -->
+<section id="mapa">
+  <div class="sec-head"><div class="sec-num">1</div><h2>El mapa de recursos del nivel inicial</h2><span class="minutos">≈ 6 min</span></div>
+  <p class="intro-sec">«App educativa» es una etiqueta demasiado grande. En Inicial conviene pensar en <b>familias de recursos según su propósito didáctico</b>. Tocá cada tarjeta para ver ejemplos.</p>
+  <div class="tipos-grid">
+    <div class="tipo" onclick="this.classList.toggle('abierta')">
+      <span class="t-icono">🎨</span><h3>Exploración libre</h3>
+      <p>Los niños manipulan, dibujan y crean sin restricciones ni «ganar/perder».</p>
+      <div class="t-ejs"><div><b>Ejemplos:</b> Toca Boca · Drawing Pad · LEGO Duplo World</div></div>
+      <p class="pista-tap">tocá para ver ejemplos</p>
+    </div>
+    <div class="tipo" onclick="this.classList.toggle('abierta')">
+      <span class="t-icono">🧩</span><h3>Juegos didácticos</h3>
+      <p>Desafíos con propósito educativo: matemática, lengua, lógica, atención.</p>
+      <div class="t-ejs"><div><b>Ejemplos:</b> Khan Academy Kids · Kokoro Kids · Todo Math</div></div>
+      <p class="pista-tap">tocá para ver ejemplos</p>
+    </div>
+    <div class="tipo" onclick="this.classList.toggle('abierta')">
+      <span class="t-icono">📚</span><h3>Herramientas de creación</h3>
+      <p>Los niños producen: libros, historias, videos, grabaciones con su voz.</p>
+      <div class="t-ejs"><div><b>Ejemplos:</b> Book Creator · Draw and Tell · ChatterPix</div></div>
+      <p class="pista-tap">tocá para ver ejemplos</p>
+    </div>
+    <div class="tipo" onclick="this.classList.toggle('abierta')">
+      <span class="t-icono">🤝</span><h3>Colaborativas</h3>
+      <p>Sostienen el trabajo grupal y la comunicación con familias.</p>
+      <div class="t-ejs"><div><b>Ejemplos:</b> Padlet · Google Docs · Classroom (con mediación docente)</div></div>
+      <p class="pista-tap">tocá para ver ejemplos</p>
+    </div>
+    <div class="tipo" onclick="this.classList.toggle('abierta')">
+      <span class="t-icono">🤖</span><h3>Con inteligencia artificial</h3>
+      <p>Adaptan dificultad, generan contenido o dan respuestas automáticas.</p>
+      <div class="t-ejs"><div><b>Ejemplos:</b> apps adaptativas · síntesis de voz · generadores de imágenes (siempre con filtro docente)</div></div>
+      <p class="pista-tap">tocá para ver ejemplos</p>
+    </div>
+    <div class="tipo" onclick="this.classList.toggle('abierta')">
+      <span class="t-icono">📷</span><h3>Documentación pedagógica</h3>
+      <p>Registran procesos de aprendizaje: fotos, audios, portafolios digitales.</p>
+      <div class="t-ejs"><div><b>Ejemplos:</b> cámara de la tablet · Google Fotos por sala · portafolio digital</div></div>
+      <p class="pista-tap">tocá para ver ejemplos</p>
+    </div>
+  </div>
+  <div class="clave-reflexion" style="margin-top:16px"><b>Idea fuerza:</b> un buen jardín no usa «una sola app buena»: combina familias de recursos según el proyecto de la sala. La pregunta no es ¿cuál es la mejor app?, sino ¿para qué aprendizaje necesito un recurso digital?</div>
+</section>
+
+<!-- ═══════════ 2 · COMPETENCIAS ═══════════ -->
+<section id="competencias">
+  <div class="sec-head"><div class="sec-num">2</div><h2>Recordatorio exprés: las 5 competencias docentes</h2><span class="minutos">≈ 3 min</span></div>
+  <p class="intro-sec">Lo trabajamos en la Clase 3: sin estas competencias, ningún recurso del mapa anterior «funciona solo». Tocá cada una y refrescala.</p>
+  <div class="comp-row">
+    <button class="comp-pill" onclick="mostrarComp(this,'técnica')">🔧 Técnica</button>
+    <button class="comp-pill" onclick="mostrarComp(this,'pedagógica')">🎯 Pedagógica</button>
+    <button class="comp-pill" onclick="mostrarComp(this,'mediadora')">🗣 Mediadora</button>
+    <button class="comp-pill" onclick="mostrarComp(this,'crítica')">🔍 Crítica</button>
+    <button class="comp-pill" onclick="mostrarComp(this,'ética')">⚖️ Ética</button>
+  </div>
+  <div class="comp-def" id="defComp">👆 Tocá una competencia para ver su definición y su ejemplo en sala.</div>
+</section>
+
+<!-- ═══════════ 3 · QUÉ ES LA IA ═══════════ -->
+<section id="ia">
+  <div class="sec-head"><div class="sec-num">3</div><h2>¿Qué es la inteligencia artificial?</h2><span class="minutos">≈ 6 min</span></div>
+  <p class="intro-sec">La IA está en el celular de las familias, en los asistentes de voz, en muchas apps infantiles… muchas veces sin que lo notemos. Antes de decidir si usarla en el jardín, hay que entender qué hace.</p>
+  <div class="definicion-ia">
+    <h3>Una definición para docentes</h3>
+    <p>La IA es un conjunto de técnicas que permiten a las máquinas <b>aprender patrones a partir de grandes cantidades de datos</b> y realizar tareas que normalmente requieren inteligencia humana: reconocer voces e imágenes, predecir, clasificar, generar contenidos o adaptar respuestas. No «piensa»: <b>reconoce patrones</b>. Y esos patrones dependen de los datos con los que fue entrenada.</p>
+  </div>
+  <h3 style="font-family:var(--serif-display);color:var(--jade-osc);font-size:17.5px;margin-top:20px">¿Cómo aparece dentro de una app infantil?</h3>
+  <div class="formas-grid">
+    <div class="forma"><h4>🎚 Personalización</h4><p>La app detecta el desempeño del niño y ajusta la dificultad. Ej.: sube el nivel si acierta siempre, simplifica si se frustra.</p></div>
+    <div class="forma"><h4>💬 Feedback automático</h4><p>Responde instantáneamente a cada acción: sonidos de acierto/error, sugerencias, pistas. Ojo: útil ≠ pedagógico.</p></div>
+    <div class="forma"><h4>🖌 Generación de contenido</h4><p>Crea imágenes, textos o ejercicios nuevos a pedido. Potente en manos del docente; delicado frente a los niños.</p></div>
+    <div class="forma"><h4>📊 Análisis de progreso</h4><p>Registra datos de uso y muestra avances al adulto. Pregunta clave: ¿dónde van esos datos y quién los ve?</p></div>
+    <div class="forma"><h4>🔊 Voz e imagen</h4><p>Reconoce voz, lee textos en voz alta, identifica objetos en fotos: base de muchas rampas digitales de accesibilidad.</p></div>
+    <div class="forma"><h4>🎭 Recomendaciones</h4><p>Sugiere contenidos «que te pueden gustar». En niños de 4 años, esto puede crear burbujas sin criterio propio.</p></div>
+  </div>
+</section>
+
+<!-- ═══════════ 4 · OPORTUNIDADES VS RIESGOS ═══════════ -->
+<section id="balance">
+  <div class="sec-head"><div class="sec-num">4</div><h2>Oportunidades y riesgos en Inicial</h2><span class="minutos">≈ 5 min</span></div>
+  <p class="intro-sec">La misma app puede ser una gran herramienta o un problema, según cómo, cuánto y con qué intención se use. Mirá los dos platillos de la balanza:</p>
+  <div class="balance">
+    <div class="col-bal ok">
+      <h3>🌱 Oportunidades</h3>
+      <ul>
+        <li><b>Ritmos propios:</b> cada niño avanza a su velocidad, con más repeticiones o más desafíos.</li>
+        <li><b>Datos para la docente:</b> información sobre el avance grupal que complementa la observación directa.</li>
+        <li><b>Accesibilidad real:</b> lectura en voz alta, comandos de voz, pictogramas: rampas digitales antes impensadas.</li>
+        <li><b>Experiencias imposibles sin tecnología:</b> «viajar» al fondo del mar o ver de cerca un insecto ampliado 50 veces.</li>
+        <li><b>Motivación extra</b> cuando la propuesta es breve, mediada y conectada con el proyecto de sala.</li>
+      </ul>
+    </div>
+    <div class="col-bal warn">
+      <h3>⚠️ Riesgos</h3>
+      <ul>
+        <li><b>Sesgo algorítmico:</b> si los datos de entrenamiento tienen sesgos (de género, culturales), la IA los reproduce.</li>
+        <li><b>Privacidad de datos:</b> muchas apps recopilan información sensible de niños. Revisar permisos SIEMPRE.</li>
+        <li><b>Reemplazo del vínculo:</b> ninguna IA sostiene el diálogo, la mirada ni el afecto de una maestra.</li>
+        <li><b>Caja negra:</b> casi nunca sabemos exactamente cómo decide el algoritmo: falta transparencia.</li>
+        <li><b>Pensamiento mágico:</b> presentar la IA como «que piensa» confunde a los niños sobre qué es una máquina.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="clave-reflexion"><b>Clave para la reflexión:</b> la IA es una herramienta, no una solución mágica. Una app adaptativa en manos de una docente reflexiva puede personalizar aprendizajes; la misma app usada de forma acrítica puede reemplazar interacciones valiosas y reproducir desigualdades.</div>
+</section>
+
+<!-- ═══════════ 5 · MITO O REALIDAD ═══════════ -->
+<section id="mitos">
+  <div class="sec-head"><div class="sec-num">5</div><h2>Mito o realidad</h2><span class="minutos">≈ 4 min</span></div>
+  <p class="intro-sec">Cuatro frases que escuchás en la sala de profesores. Leé cada una, decidí si es mito o realidad y tocá tu respuesta para ver el porqué.</p>
+  <div class="mitologio" id="mitosContainer"></div>
+</section>
+
+<!-- ═══════════ 6 · LOS 8 CRITERIOS ═══════════ -->
+<section id="criterios">
+  <div class="sec-head"><div class="sec-num">6</div><h2>Las 8 preguntas para evaluar una app</h2><span class="minutos">≈ 4 min</span></div>
+  <p class="intro-sec">La misma lógica de la demo de la Clase 3, ahora desplegada. Son tu plantilla de trabajo para la misión semanal. Desplegá cada pregunta y mirá el ejemplo sí/no.</p>
+  <div class="criterios-lista">
+    <div class="crit-item"><button class="crit-q" onclick="toggleCrit(this)"><span class="crit-n">1</span>¿Propone pensamiento o solo repetición?<span class="flecha">▾</span></button><div class="crit-a"><div>Un buen recurso desafía a pensar, crear, resolver. Si el patrón dominante es «tocar donde hay que tocar» hasta llenar la barra de estrellas, es consumo disfrazado de juego.<br><span class="sino si">SÍ ✔</span> armar secuencias con bloques · <span class="sino no">NO ✘</span> arrastrar la figura igual 15 veces</div></div></div>
+    <div class="crit-item"><button class="crit-q" onclick="toggleCrit(this)"><span class="crit-n">2</span>¿Permite exploración abierta?<span class="flecha">▾</span></button><div class="crit-a"><div>Inicial necesita espacio para descubrir, equivocarse y probar. Las apps 100 % lineales no dejan margen a la curiosidad.<br><span class="sino si">SÍ ✔</span> lienzo libre con texturas y sonidos · <span class="sino no">NO ✘</span> única pantalla correcta posible</div></div></div>
+    <div class="crit-item"><button class="crit-q" onclick="toggleCrit(this)"><span class="crit-n">3</span>¿Da feedback útil?<span class="flecha">▾</span></button><div class="crit-a"><div>¿Qué pasa cuando el niño actúa? ¿Entiende por qué estuvo bien o mal, o solo recibe confeti y fanfarrias?<br><span class="sino si">SÍ ✔</span> «probemos otra vez, mirá este detalle» · <span class="sino no">NO ✘</span> buzz de error + estrella perdida</div></div></div>
+    <div class="crit-item"><button class="crit-q" onclick="toggleCrit(this)"><span class="crit-n">4</span>¿Está libre de publicidad y compras?<span class="flecha">▾</span></button><div class="crit-a"><div>En Inicial NO se negocia. Banners, pop-ups o «desbloqueá el nivel completo $XXX» quedan descartados de entrada.<br><span class="sino si">SÍ ✔</span> versión escolar limpia y cerrada · <span class="sino no">NO ✘</span> versión gratis con avisos cada 2 pantallas</div></div></div>
+    <div class="crit-item"><button class="crit-q" onclick="toggleCrit(this)"><span class="crit-n">5</span>¿Qué datos solicita?<span class="flecha">▾</span></button><div class="crit-a"><div>Ni ubicación, ni fotos de contacto, ni números de teléfono de familias. Revisá permisos y política de privacidad antes de instalar.<br><span class="sino si">SÍ ✔</span> funciona sin registro · <span class="sino no">NO ✘</span> pide cuenta con email y foto del niño</div></div></div>
+    <div class="crit-item"><button class="crit-q" onclick="toggleCrit(this)"><span class="crit-n">6</span>¿Tiene rampas digitales?<span class="flecha">▾</span></button><div class="crit-a"><div>Audio, tamaños ajustables, pictogramas, respuesta por toque o arrastre: ¿podría usarla un niño con discapacidad visual, auditiva o motriz?<br><span class="sino si">SÍ ✔</span> narra las instrucciones en voz alta · <span class="sino no">NO ✘</span> exige precisión milimétrica y lectura fluida</div></div></div>
+    <div class="crit-item"><button class="crit-q" onclick="toggleCrit(this)"><span class="crit-n">7</span>¿Guarda y comparte producciones?<span class="flecha">▾</span></button><div class="crit-a"><div>Si lo creado queda atrapado en la app, se pierde la posibilidad de exhibirlo, compartirlo con familias y seguirlo trabajando.<br><span class="sino si">SÍ ✔</span> exporta el libro digital en PDF/video · <span class="sino no">NO ✘</span> todo muere dentro de la galería interna</div></div></div>
+    <div class="crit-item"><button class="crit-q" onclick="toggleCrit(this)"><span class="crit-n">8</span>¿Funciona offline y en español?<span class="flecha">▾</span></button><div class="crit-a"><div>No todos los jardines tienen wi-fi estable, y los niños de 4–5 años no leen instrucciones en inglés.<br><span class="sino si">SÍ ✔</span> modo sin conexión + audio en español · <span class="sino no">NO ✘</span> requiere internet constante y menús en otro idioma</div></div></div>
+  </div>
+</section>
+
+<!-- ═══════════ 7 · TU MISIÓN ═══════════ -->
+<section id="mision">
+  <div class="sec-head"><div class="sec-num">7</div><h2>Tu misión esta semana</h2><span class="minutos">≈ 40–60 min a lo largo de la semana</span></div>
+  <p class="intro-sec">Con este material recorrido y la Ficha N°4 leída, estás listo/a para la actividad que alimenta la Clase 5 presencial.</p>
+  <div class="pasos">
+    <div class="paso"><b>Probá al menos dos apps</b> de la tabla de abajo, jugando como jugaría un niño de 4–5 años: tocá todo, equivocate, buscá qué pasa.</div>
+    <div class="paso"><b>Elegí UNA</b> y evaluá con la plantilla de los 8 criterios (descargable en Classroom). Respondé cada pregunta en 2–3 líneas con evidencia concreta de lo que viste.</div>
+    <div class="paso"><b>Publicá tu evaluación en el foro</b> con la estructura indicada y respondé al menos a un compañero/a.</div>
+    <div class="paso"><b>Dejá pensando la Clase 5</b> (miércoles 09/09): ¿para qué propósito del DC usarías esa app? ¿Cuál sería tu rol mientras los niños la usan?</div>
+  </div>
+
+  <table class="apps-tabla">
+    <tr><th style="width:27%">Área curricular</th><th>Apps sugeridas</th></tr>
+    <tr><td class="area">📖 Lectoescritura y lenguaje</td><td>Kokoro Kids · Leo con Grin · Khan Academy Kids</td></tr>
+    <tr><td class="area">🔢 Matemática</td><td>Todo Math · Numberland · Khan Academy Kids</td></tr>
+    <tr><td class="area">🎨 Arte y expresión</td><td>Book Creator · Draw and Tell · Drawing Pad</td></tr>
+    <tr><td class="area">🌍 Exploración del medio</td><td>Google Earth · iNaturalist · Toca Boca (juego simbólico)</td></tr>
+  </table>
+
+  <div class="aviso-plazo"><span class="icono">⏳</span><p><b>Fechas:</b> el material y la consigna quedaron publicados el <b>miércoles 02/09</b>. El foro cierra el <b>martes 08/09 a última hora</b>. Estas evaluaciones son el insumo directo de la Clase 5 presencial del <b>miércoles 09/09</b>: las vamos a usar para diseñar secuencias didácticas.</p></div>
+  <div class="aviso-plazo" style="background:var(--jade-suave);border-color:var(--jade)"><span class="icono">💬</span><p><b>Consultas:</b> publicalas en el mismo foro (hay un hilo fijo de dudas) o escribinos por Classroom. Cuanto antes preguntes, antes te respondemos: durante la semana el seguimiento es activo, no estás solo/a.</p></div>
+</section>
+
+<!-- ═══════════ 8 · AUTOEVALUACIÓN ═══════════ -->
+<section id="autoevaluacion">
+  <div class="sec-head"><div class="sec-num">8</div><h2>Autoevaluación final</h2><span class="minutos">≈ 4 min</span></div>
+  <p class="intro-sec">Seis preguntas para saber si estás listo/a para evaluar apps con criterio. Elegí una opción por pregunta y tocá «Corregir» al final. Sin nota: es para vos.</p>
+  <div class="quiz" id="quizContainer"></div>
+  <div id="resultadoQuiz">
+    <h3 id="resultadoTitulo"></h3>
+    <p id="resultadoTexto"></p>
+  </div>
+  <div class="centro"><button class="btn-principal" onclick="corregirQuiz()">✓ Corregir autoevaluación</button></div>
+</section>
+
+<!-- ═══════════ CIERRE ═══════════ -->
+<div class="cierre">
+  <h2>Antes de irte</h2>
+  <p>Ya tenés el mapa de recursos, entendés qué hace (y qué no hace) una IA, y tenés las 8 preguntas afiladas. Lo que sigue es <b>probar apps de verdad</b>: ahí aparece la diferencia entre leer sobre criterios y evaluar con criterios.</p>
+  <p>La semana que viene, presencial, esas evaluaciones se transforman en material colectivo para diseñar secuencias didácticas mediadas por TIC. Tu aporte individual alimenta el diseño de toda la comisión.</p>
+  <p class="firma"><b>Lic. Juan José García</b> · Didáctica y TIC en la Educación Inicial · Profesorado de Educación Inicial · Inst. Superior Terciario Fátima Soldati</p>
+</div>
+
+</main>
+
+<footer class="pie">
+  <b>Didáctica y TIC en la Educación Inicial · Clase 4</b> · Recursos, herramientas e IA<br>
+  Material asincrónico publicado el miércoles 02/09/2026 · Actividades hasta el martes 08/09/2026 · Referencias: Marco Pedagógico para la Educación Digital Nivel Inicial (GCBA) · DC Inicial 4 y 5 – Actualización (GCBA) · Lineamientos PIED (GCBA)
+</footer>
+
+<script>
+/* ═══ MOTOR · IDENTIDAD JADE & CORAL ═══ */
+
+/* Barra de progreso */
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('barra').style.width=pct+'%';
+});
+
+/* Nav activa */
+const links=[...document.querySelectorAll('nav.secciones a')];
+const secciones=links.map(a=>document.querySelector(a.getAttribute('href')));
+window.addEventListener('scroll',()=>{
+  let idx=secciones.length-1;
+  secciones.forEach((s,i)=>{ if(s.getBoundingClientRect().top<140)idx=i; });
+  links.forEach((l,i)=>l.classList.toggle('activo',i===idx));
+},{passive:true});
+
+/* Competencias recap */
+const COMPS={
+  'técnica':'<b>Técnica.</b> Usar dispositivos, apps y plataformas con seguridad y confianza. <em>En sala:</em> configurar tabletas, resolver problemas de conexión, elegir la app adecuada antes de empezar.',
+  'pedagógica':'<b>Pedagógica.</b> Decidir cuándo, cómo y para qué integrar TIC en relación con objetivos de aprendizaje. <em>En sala:</em> elegir fotografiar en vez de grabar video si el objetivo es la observación científica.',
+  'mediadora':'<b>Mediadora.</b> Acompañar la exploración de los niños resolviendo dudas y planteando desafíos. <em>En sala:</em> turnos con temporizador, preguntas abiertas mientras usan la app («¿por qué agrupaste estos así?»).',
+  'crítica':'<b>Crítica.</b> Evaluar aplicaciones, información y prácticas digitales con sentido reflexivo. <em>En sala:</em> probar la app antes de presentarla: revisar publicidad, datos, tipo de actividad que propone.',
+  'ética':'<b>Ética.</b> Garantizar privacidad, seguridad y espacios inclusivos. <em>En sala:</em> pedir consentimiento informado a las familias antes de subir fotos del proyecto.'
+};
+function mostrarComp(btn,key){
+  document.getElementById('defComp').innerHTML=COMPS[key];
+  document.querySelectorAll('.comp-pill').forEach(b=>b.style.background='var(--papel)');
+  btn.style.background='var(--jade-suave)';
+}
+
+/* Mito o realidad */
+const MITOS=[
+  {f:'«La IA adapta las actividades al ritmo de cada niño, entonces reemplaza la planificación de la docente.»',
+   mito:true,x:'MITO. La personalización automatiza un tramo de la secuencia, pero la decisión didáctica —qué enseñar, por qué, cómo mediar, cómo evaluar— sigue siendo enteramente docente. Ningún algoritmo conoce a tus niños.'},
+  {f:'«Muchas apps infantiles usan IA aunque no digan “inteligencia artificial” en ninguna parte.»',
+   mito:false,x:'REALIDAD. Reconocimiento de voz, adaptación de dificultad, recomendaciones de contenido: eso YA es IA funcionando, con o sin etiqueta. Por eso importa saber detectarla más allá del marketing.'},
+  {f:'«Si una app es gratuita y tiene buenas reseñas, es segura para usar con niños de 4 años.»',
+   mito:true,x:'MITO. Las reseñas miden satisfacción de usuarios, no adecuación pedagógica ni protección de datos. Una app gratuita puede financiarce con publicidad o recolección de datos: hay que revisar permisos y política de privacidad siempre.'},
+  {f:'«La IA puede aportar accesibilidad real: leer textos en voz alta o reconocer la voz del niño.»',
+   mito:false,x:'REALIDAD. Síntesis de voz, reconocimiento vocal y ajustes automáticos son rampas digitales potentes para niños con discapacidad visual, auditiva o motriz. Es de las aplicaciones más valiosas de la IA en el nivel — siempre mediadas por el docente.'}
+];
+const mc=document.getElementById('mitosContainer');
+let mitosOk=0;
+MITOS.forEach((m,i)=>{
+  const card=document.createElement('div');card.className='mito-card';
+  card.innerHTML=`<p class="frase">${m.f}</p>
+    <div class="botones-mr">
+      <button class="btn-mr mito-btn" data-v="mito">🚫 Mito</button>
+      <button class="btn-mr real-btn" data-v="real">✅ Realidad</button>
+    </div>
+    <div class="mito-veredicto"><div>${m.x}</div></div>`;
+  card.querySelectorAll('.btn-mr').forEach(b=>{
+    b.onclick=()=>{
+      if(card.classList.contains('resuelta'))return;
+      const eligioMito=b.dataset.v==='mito';
+      const acerto=(eligioMito===m.mito);
+      if(acerto){mitosOk++;card.classList.add('resuelta')}else{card.classList.add('resuelta','incorrecta')}
+      b.classList.add('elegida');
+      card.querySelector('.mito-veredicto').style.maxHeight='220px';
+    };
+  });
+  mc.appendChild(card);
+});
+
+/* Acordeón criterios */
+function toggleCrit(btn){
+  const item=btn.parentElement;
+  const abierto=item.classList.contains('abierto');
+  document.querySelectorAll('.crit-item.abierto').forEach(i=>i.classList.remove('abierto'));
+  if(!abierto)item.classList.add('abierto');
+}
+
+/* Quiz */
+const QUIZ=[
+  {q:'Una app sube la dificultad cuando el niño acierta mucho. Eso es un ejemplo de…',
+   ops:['Feedback automático','Personalización mediante IA','Generación de contenido'],
+   c:1,f:'Es personalización: la IA ajusta la experiencia según el desempeño detectado. El feedback automático sería la respuesta instantánea a UNA acción; generar contenido es crear material nuevo.'},
+  {q:'Según el enfoque del nivel, la mayor ventaja pedagógica de la IA en Inicial suele ser…',
+   ops:['Que entretiene más que otras apps','Que permite accesibilidad y ritmos propios con mediación docente','Que reduce la cantidad de adultos necesarios en la sala'],
+   c:1,f:'Accesibilidad (lectura en voz alta, reconocimiento de voz) y respeto de ritmos individuales, SIEMPRE con mediación. La tecnología nunca «reemplaza adultos» en el nivel: ese razonamiento va contra todo el marco pedagógico.'},
+  {q:'Vas a instalar una app nueva en las tablets de la sala. Antes de hacerlo, lo primero es…',
+   ops:['Ver si tiene lindos gráficos y buena puntuación en la tienda','Probarla tú misma revisando los 8 criterios, incluidos publicidad y datos','Pedirle a un niño que la pruebe y contarte qué tal'],
+   c:1,f:'Tu experiencia es el primer criterio: probala vos ANTES, con los 8 criterios (pensamiento, exploración, feedback, publicidad, datos, rampas, guardado, offline/español). Y jamás el primer usuario es un niño.'},
+  {q:'«Los algoritmos pueden reproducir sesgos presentes en sus datos de entrenamiento.» Esta afirmación es…',
+   ops:['Verdadera: por eso la mirada crítica docente es insustituible','Falsa: los algoritmos son neutrales porque trabajan con números','Verdadera solo en apps de redes sociales, no en las educativas'],
+   c:0,f:'Los sesgos entran por los datos y se transmiten a las decisiones de la app (qué imágenes muestra, qué nombres usa, qué conductas premia). La mirada crítica docente es el filtro que ninguna app trae incorporado.'},
+  {q:'Para la tarea de esta semana, la estructura mínima de tu posteo en el foro incluye…',
+   ops:['Nombre de la app + área + respuesta a las 8 preguntas + conclusión (¿la usaría? ¿en qué condiciones?)','Un pantallazo de la app y dos líneas de opinión general','Un ranking de todas las apps que probaste'],
+   c:0,f:'App + área, las 8 preguntas con evidencia (2–3 líneas cada una) y conclusión fundamentada: ¿la usarías? ¿para qué propósito del DC? ¿bajo qué condiciones? Después respondés a un compañero/a.'},
+  {q:'El plazo para publicar tu evaluación en el foro es…',
+   ops:['Hasta el domingo 06/09','Hasta el martes 08/09 a última hora','No tiene plazo, es opcional'],
+   c:1,f:'El foro cierra el martes 08/09 a última hora, porque el miércoles 09/09 (Clase 5 presencial) trabajamos con TODAS las evaluaciones para diseñar secuencias didácticas.'}
+];
+const qc=document.getElementById('quizContainer');
+QUIZ.forEach((item,qi)=>{
+  const block=document.createElement('div');block.className='q-block';
+  block.innerHTML=`<h4>${qi+1}. ${item.q}</h4><div class="opciones">${
+    item.ops.map((op,oi)=>`<label class="opcion"><input type="radio" name="q${qi}" value="${oi}"><span>${op}</span></label>`).join('')
+  }</div><div class="q-feedback" id="fb${qi}"></div>`;
+  qc.appendChild(block);
+});
+function corregirQuiz(){
+  let ok=0;
+  QUIZ.forEach((item,qi)=>{
+    const fb=document.getElementById('fb'+qi);
+    const elegida=document.querySelector(`input[name="q${qi}"]:checked`);
+    fb.className='q-feedback';
+    if(!elegida){fb.classList.add('mal');fb.textContent='⚠ No respondiste esta pregunta.';return;}
+    if(parseInt(elegida.value)===item.c){ok++;fb.classList.add('bien');fb.innerHTML='✔ ¡Correcto! '+item.f;}
+    else{fb.classList.add('mal');fb.innerHTML='✘ Todavía no. '+item.f;}
+  });
+  const res=document.getElementById('resultadoQuiz');
+  const titulo=document.getElementById('resultadoTitulo');
+  const texto=document.getElementById('resultadoTexto');
+  res.style.display='block';
+  if(ok>=5){titulo.textContent=`${ok}/6 · Listo para evaluar 🌿`;texto.textContent='Tenés claros los conceptos y los criterios. Ahora sí: probá las apps, completá la plantilla y sumá tu evaluación al foro. Nos vemos el miércoles 09/09 con todo listo.';}
+  else if(ok>=3){titulo.textContent=`${ok}/6 · Casi, casi 🍃`;texto.textContent='Buena base, pero conviene repasar las secciones donde fallaste (mirá las explicaciones de arriba). El material sigue disponible y podés volver a intentar la autoevaluación.';}
+  else{titulo.textContent=`${ok}/6 · Volvé a empezar 🔁`;texto.textContent='Tranquilo/a: es material nuevo. Volvé a recorrer las secciones 3, 4 y 6 con calma y reintentá. Si algo sigue sin cerrar, dejalo escrito en el hilo de consultas del foro.';}
+  res.scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+</body>
+</html>
