@@ -6,7 +6,7 @@ Materiales interactivos de la materia **Didáctica y Tecnologías de la Informac
 
 Los materiales se sirven vía **GitHub Pages**:
 
-> **https://merluza89.github.io/didactica-tic/**
+> **https://jjgarcia-cpu.github.io/didactica-tic/**
 
 La página principal (`index.html`) lista los materiales por clase.
 
