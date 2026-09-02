@@ -15,13 +15,13 @@ La página principal (`index.html`) lista los materiales por clase.
 ```
 didactica-tic/
 ├── index.html                          # Landing con links a todo
-├── clase-3/                            # Competencias (26/08 · presencial)
+├── clase-3/                            # Competencias (02/09 · presencial)
 │   └── Material_Estudios_Clase3.html
-├── clase-4/                            # Recursos e IA (02–08/09 · virtual)
+├── clase-4/                            # Recursos e IA (09–15/09 · virtual)
 │   └── Material_Estudio_Clase4.html
-├── clase-5/                            # Secuencias TIC (09/09 · presencial)
+├── clase-5/                            # Secuencias TIC (16/09 · presencial)
 │   └── Material_Estudios_Clase5.html
-└── clase-6/                            # Pensamiento computacional (16–22/09 · virtual)
+└── clase-6/                            # Pensamiento computacional (23–29/09 · virtual)
     └── Material_Estudio_Clase6.html
 ```
 
