@@ -357,7 +357,7 @@ footer{text-align:center;padding:26px;color:var(--gris);font-size:.82rem}
 <script>
 // barra de progreso + nav activa
 const barra=document.getElementById('barra');
-const links=[...document.querySelectorAll('nav a')];
+const links=[...document.querySelectorAll('nav a')].filter(a=>a.getAttribute('href').startsWith('#'));
 const secciones=links.map(a=>document.querySelector(a.getAttribute('href')));
 addEventListener('scroll',()=>{
   const h=document.documentElement;

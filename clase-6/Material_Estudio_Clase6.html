@@ -296,7 +296,8 @@ window.addEventListener('scroll',()=>{
   document.getElementById('barra').style.width=pct+'%';
 });
 
-const links=[...document.querySelectorAll('nav.secciones a')];
+/* Nav activa — solo enlaces de sección (anclas #), ignora el botón de volver al menú */
+const links=[...document.querySelectorAll('nav.secciones a')].filter(a=>a.getAttribute('href').startsWith('#'));
 const secciones=links.map(a=>document.querySelector(a.getAttribute('href')));
 window.addEventListener('scroll',()=>{
   let idx=secciones.length-1;
