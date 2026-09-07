@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 2 · El Marco Pedagógico y el Diseño Curricular — Material de estudio interactivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --crema:#F7F1E5;--crema-2:#EFE6D3;--papel:#FDFAF3;
+  --terracota:#C4633E;--terracota-suave:#F3E0D6;
+  --dorado:#D9A441;--dorado-suave:#F0DFB8;
+  --oliva:#7D8655;--oliva-suave:#E3E6CF;
+  --menta:#9DB89A;
+  --marino:#22334D;--marino-2:#18263C;--tinta:#2A3547;--gris:#6B7280;
+  --serif:'Playfair Display',Georgia,'Times New Roman',serif;
+  --sans:'Source Sans 3','Segoe UI',system-ui,-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--tinta);background:var(--crema);line-height:1.6}
+#lectura{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--terracota),var(--dorado));z-index:2000}
+header.top{position:sticky;top:0;z-index:1000;background:rgba(24,38,60,.94);backdrop-filter:blur(8px)}
+.top-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 24px}
+.marca{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--crema)}
+.marca svg{width:34px;height:28px}
+.marca b{font-family:var(--serif);font-size:19px;line-height:1.15;display:block}
+.marca small{display:block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dorado);font-weight:700}
+nav.secciones{display:flex;gap:2px;flex-wrap:wrap}
+nav.secciones a{color:#C9D2E0;text-decoration:none;font-size:15px;font-weight:600;padding:6px 11px;border-radius:999px;transition:.2s}
+nav.secciones a:hover{background:rgba(247,241,229,.14);color:#fff}
+nav.secciones a.activa{background:var(--dorado);color:var(--marino-2)}
+nav.secciones a.volver{background:var(--dorado);color:var(--marino-2);font-weight:800;margin-left:6px}
+nav.secciones a.volver:hover{background:var(--terracota);color:#fff}
+.hero{background:linear-gradient(155deg,var(--marino) 0%,var(--marino-2) 75%);color:var(--crema);padding:70px 24px 76px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto -10% -60% -10%;height:70%;background:radial-gradient(ellipse at center,rgba(217,164,65,.16),transparent 65%)}
+.hero .kicker{color:var(--dorado);letter-spacing:.24em;text-transform:uppercase;font-weight:700;font-size:14.5px}
+.hero h1{font-family:var(--serif);font-weight:800;font-size:clamp(41px,6.6vw,74.5px);line-height:1.07;margin:14px 0 8px}
+.hero h1 em{font-style:italic;color:var(--dorado)}
+.hero .sub{color:#C9D2E0;font-size:clamp(18px,2.2vw,23px);max-width:60ch;margin:0 auto}
+main{max-width:1100px;margin:0 auto;padding:0 24px}
+section.bloque{padding:58px 0 20px;scroll-margin-top:80px}
+.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:6px}
+.sec-num{flex:none;width:48px;height:48px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:800;font-size:29px;color:#fff;background:var(--terracota)}
+.sec-head h2{font-family:var(--serif);font-size:clamp(27.5px,3.8vw,43px);color:var(--marino);line-height:1.12}
+.sec-intro{color:var(--gris);font-size:18px;margin-bottom:24px;padding-left:64px;max-width:75ch}
+.tarjeta{background:var(--papel);border:1px solid var(--crema-2);border-left:5px solid var(--terracota);border-radius:14px;padding:20px 24px;box-shadow:0 2px 10px rgba(34,51,77,.05);margin-bottom:16px}
+.tarjeta.oliva{border-left-color:var(--oliva)}.tarjeta.dorado{border-left-color:var(--dorado)}.tarjeta.marino{border-left-color:var(--marino)}
+.tarjeta h3{font-family:var(--serif);font-size:clamp(20.5px,2.4vw,26.5px);color:var(--marino);margin-bottom:6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.destacado{font-family:var(--serif);font-style:italic;font-size:clamp(20.5px,2.5vw,27.5px);line-height:1.45;color:var(--terracota);text-align:center;padding:8px 16px}
+.mini{font-size:15.5px;color:var(--gris)}
+.lista{list-style:none;color:var(--tinta);font-size:17px}
+.lista li{position:relative;padding-left:26px;margin-bottom:8px}
+.lista li::before{content:"→";position:absolute;left:0;color:var(--dorado);font-weight:800}
+details.acordeon{background:var(--papel);border:1px solid var(--crema-2);border-radius:13px;margin-bottom:10px;overflow:hidden;transition:.25s}
+details.acordeon[open]{box-shadow:0 4px 16px rgba(34,51,77,.09)}
+details.acordeon summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:14px;padding:16px 20px;font-weight:700;color:var(--marino);font-size:clamp(17.5px,1.9vw,20.5px)}
+details.acordeon summary::-webkit-details-marker{display:none}
+details.acordeon summary .chev{margin-left:auto;flex:none;width:26px;height:26px;border-radius:50%;background:var(--dorado-suave);color:#7A5A14;display:flex;align-items:center;justify-content:center;font-size:15.5px;transition:transform .3s}
+details.acordeon[open] summary .chev{transform:rotate(180deg)}
+details.acordeon .cuerpo{padding:0 20px 18px;font-size:17.5px;border-top:1px dashed var(--crema-2);padding-top:14px}
+details.acordeon .cuerpo p+p{margin-top:8px}
+.quiz-caja{background:#fff;border:1.5px solid var(--crema-2);border-radius:15px;padding:20px 24px;margin-bottom:14px}
+.quiz-caja .pregunta{font-weight:700;color:var(--marino);font-size:clamp(17.5px,1.9vw,20.5px);margin-bottom:12px}
+.quiz-ops{display:flex;flex-direction:column;gap:8px}
+.quiz-op{text-align:left;border:2px solid var(--crema-2);background:var(--papel);border-radius:11px;padding:11px 16px;cursor:pointer;font-family:var(--sans);font-size:17.5px;color:var(--tinta);transition:.2s}
+.quiz-op:hover:not(:disabled){border-color:var(--dorado);transform:translateX(4px)}
+.quiz-op:disabled{cursor:default;opacity:.75}
+.quiz-op.elegida-bien{border-color:var(--oliva);background:#EDF2E6;opacity:1;font-weight:600}
+.quiz-op.elegida-mal{border-color:var(--terracota);background:#F9E9E1;opacity:1}
+.quiz-op.revelada{border-color:var(--oliva);background:#EDF2E6}
+.feedback{display:none;margin-top:12px;border-radius:11px;padding:12px 16px;font-size:16px}
+.feedback.ver{display:block;animation:aparecer .3s ease}
+.feedback.ok{background:#EDF2E6;border:1.5px solid var(--oliva)}
+.feedback.mal{background:#F9E9E1;border:1.5px solid var(--terracota)}
+@keyframes aparecer{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.mr-btns{display:flex;gap:10px;margin-top:10px}
+.mr-btn{flex:1;border:2px solid var(--crema-2);background:var(--papel);border-radius:999px;padding:9px;font-weight:700;font-size:17px;cursor:pointer;font-family:var(--sans);transition:.2s}
+.mr-btn:hover:not(:disabled){border-color:var(--dorado)}
+.mr-btn:disabled{cursor:default;opacity:.7}
+.mr-btn.si-bien,.mr-btn.no-mal-elec{border-color:var(--oliva)!important;background:#EDF2E6!important;opacity:1}
+.mr-btn.si-mal-elec,.mr-btn.no-bien{border-color:var(--terracota)!important;background:#F9E9E1!important;opacity:1}
+table.comp{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(34,51,77,.07);margin:14px 0}
+table.comp th{background:var(--marino);color:var(--crema);text-align:left;padding:10px 14px;font-size:15.5px}
+table.comp td{padding:10px 14px;font-size:16px;line-height:1.45;border-top:1px solid var(--crema-2);vertical-align:top}
+table.comp td:first-child{font-weight:700;color:var(--terracota);white-space:nowrap}
+table.comp tr:nth-child(even) td{background:#FBF7EE}
+.btn-principal{display:inline-block;border:none;background:var(--terracota);color:#fff;font-family:var(--sans);font-weight:700;font-size:18px;padding:12px 26px;border-radius:999px;cursor:pointer;transition:.2s;margin-top:14px}
+.btn-principal:hover{background:#A94F2E;transform:translateY(-2px);box-shadow:0 8px 20px rgba(196,99,62,.35)}
+.perfil-item{background:#fff;border:1.5px solid var(--crema-2);border-radius:13px;padding:14px 18px;margin-bottom:10px}
+.perfil-txt{font-size:17px;font-weight:600;color:var(--marino);margin-bottom:8px}
+.likert{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.likert label{flex:1;min-width:64px;text-align:center;border:2px solid var(--crema-2);background:var(--papel);border-radius:999px;padding:7px 6px;cursor:pointer;font-size:14.5px;color:var(--tinta);transition:.15s}
+.likert label:hover{border-color:var(--dorado)}
+.likert label:has(input:checked){border-color:var(--terracota);background:var(--terracota-suave);font-weight:700}
+.likert input{accent-color:var(--terracota)}
+.likert-mini{flex-basis:100%;font-size:13px;color:var(--gris);font-style:italic}
+#perfilResultado{display:none;margin-top:16px;border-radius:14px;padding:20px 24px;background:linear-gradient(140deg,var(--marino),var(--marino-2));color:var(--crema)}
+#perfilResultado.ver{display:block;animation:aparecer .4s ease}
+#perfilResultado h4{font-family:var(--serif);font-size:25px;color:var(--dorado);margin-bottom:6px}
+.eje-line{margin-top:14px}
+.eje-nom{display:flex;justify-content:space-between;gap:10px;font-weight:700;color:#fff;font-size:15.5px}
+.eje-track{height:10px;background:rgba(255,255,255,.16);border-radius:999px;margin-top:6px;overflow:hidden}
+.eje-fill{height:100%;background:linear-gradient(90deg,var(--terracota),var(--dorado));border-radius:999px;transition:width .5s ease}
+#scoreFinal{display:none;text-align:center;background:linear-gradient(140deg,var(--marino),var(--marino-2));color:var(--crema);border-radius:16px;padding:26px;margin-top:18px}
+#scoreFinal.ver{display:block;animation:aparecer .4s ease}
+#scoreFinal .puntaje{font-family:var(--serif);font-size:53px;font-weight:800;color:var(--dorado)}
+#glosarioBusca{width:100%;max-width:420px;display:block;margin:0 auto 18px;border:2px solid var(--crema-2);border-radius:999px;padding:11px 20px;font-family:var(--sans);font-size:17.5px;background:#fff}
+#glosarioBusca:focus{outline:none;border-color:var(--dorado)}
+.glos-item{background:#fff;border:1.5px solid var(--crema-2);border-radius:12px;padding:13px 18px;margin-bottom:9px}
+.glos-item dt{font-family:var(--serif);font-weight:700;color:var(--marino);font-size:18.5px}
+.glos-item dd{font-size:16px;margin-top:3px}
+.glos-item.oculto{display:none}
+.dos-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.col-si,.col-no{border-radius:16px;padding:20px 24px}
+.col-si{background:#EDF2E6;border:1.5px solid var(--oliva)}
+.col-no{background:#F6E3DA;border:1.5px solid var(--terracota)}
+.col-si h3{font-family:var(--serif);color:#4C5A2E;font-size:24px;margin-bottom:10px}
+.col-no h3{font-family:var(--serif);color:#96482A;font-size:24px;margin-bottom:10px}
+.col-si li,.col-no li{list-style:none;position:relative;padding-left:24px;font-size:17.5px;margin-bottom:7px}
+.col-si li::before{content:"✓";position:absolute;left:0;color:var(--oliva);font-weight:700}
+.col-no li::before{content:"✕";position:absolute;left:0;color:var(--terracota);font-weight:700}
+.cierre-band{background:linear-gradient(150deg,var(--marino),var(--marino-2));color:var(--crema);border-radius:20px;padding:38px 34px;margin-top:24px}
+.cierre-band h3{font-family:var(--serif);font-size:clamp(23px,2.9vw,32.5px);margin-bottom:10px;color:var(--crema)}
+.cierre-band .consigna{font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.4vw,26.5px);color:var(--dorado)}
+.refs{font-size:15.5px;color:#C9D2E0;line-height:1.8}
+footer{background:var(--marino-2);color:#8FA0B8;text-align:center;padding:32px 24px;font-size:15.5px;margin-top:60px}
+footer b{color:var(--crema)}
+#arriba{position:fixed;bottom:22px;right:22px;width:46px;height:46px;border-radius:50%;border:none;background:var(--terracota);color:#fff;font-size:23px;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;z-index:1500;box-shadow:0 6px 18px rgba(196,99,62,.4)}
+#arriba.ver{opacity:1;pointer-events:auto}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:860px){
+  .top-inner{flex-direction:column;align-items:flex-start}
+  nav.secciones{width:100%}
+  .grid2,.grid3,.dos-col{grid-template-columns:1fr}
+  .sec-intro{padding-left:0}
+}
+</style>
+</head>
+<body>
+
+<div id="lectura"></div>
+
+<header class="top">
+  <div class="top-inner">
+    <a class="marca" href="#inicio">
+      <svg viewBox="0 0 220 170" fill="none"><polygon points="110,18 190,140 30,140" fill="rgba(217,164,65,.15)" stroke="#D9A441" stroke-width="8"/><line x1="128" y1="66" x2="216" y2="34" stroke="#C4633E" stroke-width="10"/><line x1="132" y1="79" x2="220" y2="79" stroke="#D9A441" stroke-width="10"/><line x1="128" y1="92" x2="216" y2="124" stroke="#7D8655" stroke-width="10"/></svg>
+      <span><small>Material de estudio · Clase 2</small><b>El Marco Pedagógico y el Diseño Curricular</b></span>
+    </a>
+    <nav class="secciones" id="navSecs">
+  <a href="#marco">Marco</a>
+  <a href="#ejes">Ejes DC</a>
+  <a href="#sentido">Sentido</a>
+  <a href="#escenarios">Escenarios</a>
+  <a href="#autoevaluacion">Autoevaluación</a>
+  <a href="#glosario">Glosario</a>
+  <a href="../index.html" class="volver">← Volver al menú</a>
+</nav>
+  </div>
+</header>
+
+<div class="hero" id="inicio">
+  <svg viewBox="0 0 340 170" role="img" aria-label="El marco pedagógico: libro del diseño curricular, engranaje y tres pilares" style="width:min(360px,80vw);margin:0 auto 22px;display:block;border-radius:22px;box-shadow:0 14px 34px rgba(10,18,32,.45)">
+    <rect x="4" y="4" width="332" height="162" rx="22" fill="#FDFAF3" stroke="#D9A441" stroke-width="3"/>
+    <g transform="translate(214,64)">
+      <circle r="16" fill="#D9A441"/>
+      <circle r="23" fill="none" stroke="#D9A441" stroke-width="7" stroke-dasharray="6.5 5.5"/>
+      <circle r="6" fill="#22334D"/>
+    </g>
+    <g>
+      <path d="M58,108 Q104,96 150,108 L150,140 Q104,128 58,140 Z" fill="#FDFAF3" stroke="#D9A441" stroke-width="2"/>
+      <path d="M150,108 Q196,96 242,108 L242,140 Q196,128 150,140 Z" fill="#FDFAF3" stroke="#D9A441" stroke-width="2"/>
+      <path d="M150,104 L150,144" stroke="#22334D" stroke-width="5"/>
+      <line x1="70" y1="114" x2="138" y2="112" stroke="#C4633E" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="70" y1="122" x2="126" y2="120" stroke="#7D8655" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="70" y1="130" x2="118" y2="128" stroke="#9DB89A" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="162" y1="112" x2="230" y2="114" stroke="#C4633E" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="174" y1="120" x2="230" y2="122" stroke="#7D8655" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="182" y1="128" x2="230" y2="130" stroke="#9DB89A" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M42,132 L49,150" stroke="#7D8655" stroke-width="4" stroke-linecap="round"/>
+      <path d="M250,136 L258,152" stroke="#7D8655" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <g>
+      <circle cx="70" cy="46" r="13" fill="#E3E6CF"/>
+      <ellipse cx="70" cy="44" rx="8" ry="5" fill="#FDFAF3"/>
+      <path d="M62,48 q3,3 6,0 q3,-3 6,0" stroke="#7D8655" stroke-width="2" fill="none"/>
+      <line x1="70" y1="41" x2="70" y2="47" stroke="#7D8655" stroke-width="2"/>
+    </g>
+    <g>
+      <circle cx="150" cy="46" r="13" fill="#F0DFB8"/>
+      <path d="M143,50 l4,-9 4,9 z" fill="#D9A441"/>
+      <path d="M145,50 h10" stroke="#D9A441" stroke-width="2.5"/>
+      <path d="M147,54 h6" stroke="#D9A441" stroke-width="2.5"/>
+    </g>
+    <g>
+      <circle cx="230" cy="46" r="13" fill="#F3E0D6"/>
+      <path d="M225,42 a5,5 0 1,0 6,8 l3,-5 z" fill="#C4633E"/>
+      <circle cx="238" cy="40" r="2.5" fill="#C4633E"/>
+    </g>
+    <g transform="translate(314,40)">
+      <path d="M0,-9 Q0,0 9,0 Q0,0 0,9 Q0,0 -9,0 Q0,0 0,-9 Z" fill="#D9A441"/>
+    </g>
+    <g transform="translate(28,40)">
+      <path d="M0,-8 Q0,0 8,0 Q0,0 0,8 Q0,0 -8,0 Q0,0 0,-8 Z" fill="#C4633E"/>
+    </g>
+    <g transform="rotate(-30 300 118)">
+      <rect x="290" y="96" width="12" height="44" rx="5" fill="#C4633E"/>
+      <polygon points="290,96 302,96 296,82" fill="#D9A441"/>
+      <rect x="287" y="138" width="18" height="7" rx="3" fill="#22334D"/>
+    </g>
+  </svg>
+  <p class="kicker">Didáctica y Tecnologías de la Información y la Comunicación en la Educación Inicial · Profesorado de Educación Inicial · 3° Año</p>
+  <h1>La Educación Digital<br>y el <em>Diseño Curricular</em></h1>
+  <p class="sub">La Clase 2 (asincrónica, 20/08) en un solo recorrido: el Marco Pedagógico del GCBA, los ejes del DC, usos con sentido y escenarios para el jardín.<br>Con quizzes autocorregidos.</p>
+</div>
+
+<main>
+
+<!-- 1 · MARCO -->
+<section class="bloque" id="marco">
+  <div class="sec-head reveal"><span class="sec-num">1</span><h2>El Marco Pedagógico para la Educación Digital</h2></div>
+  <p class="sec-intro reveal">El documento del GCBA orienta la integración de las tecnologías digitales en todos los niveles: la tecnología se integra <strong>con sentido pedagógico</strong> — no como adorno, sino como parte del proyecto educativo. Tres pilares lo sostienen:</p>
+  <div class="grid3 reveal"><div class="tarjeta"><h3>🌍 Enfoque culturalista</h3><p>La tecnología es práctica social y cultural: enseñar con tecnología es también enseñar sobre ella (usos, efectos, límites).</p></div><div class="tarjeta"><h3>🔗 Integración curricular</h3><p>Las TIC no son un área aparte: atraviesan todas las áreas y enriquecen explorar, producir y comunicar.</p></div><div class="tarjeta"><h3>🧭 Ciudadanía digital</h3><p>Formar usuarios críticos, creativos y responsables: privacidad, uso seguro, evaluación de la información y producción ética.</p></div></div>
+  <p class="sec-intro reveal" style="margin-top:26px"><strong>Entrená la mirada:</strong> leé cada situación del jardín y elegí qué pilar del Marco la sostiene.</p>
+  <div class="quiz-caja reveal" data-corr="1">
+  <p class="pregunta">1 · En la sala de 5, al trabajar el cuerpo humano, el grupo busca en tabletas imágenes seleccionadas por la docente para mirar el corazón y los pulmones.</p>
+  <div class="quiz-ops"><button class="quiz-op">🌍 Enfoque culturalista</button><button class="quiz-op">🔗 Integración curricular</button><button class="quiz-op">🧭 Ciudadanía digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> La búsqueda no es un área aparte: se integra al proyecto de Ciencias para enriquecer la exploración.</div>
+  <div class="feedback mal"><strong>✘ No es ese pilar.</strong> La búsqueda no es un área aparte: se integra al proyecto de Ciencias para enriquecer la exploración.</div>
+  </div><div class="quiz-caja reveal" data-corr="2">
+  <p class="pregunta">2 · La docente conversa con los niños sobre qué fotos pueden compartir con las familias y cuáles no, y por qué se cuida la información personal.</p>
+  <div class="quiz-ops"><button class="quiz-op">🌍 Enfoque culturalista</button><button class="quiz-op">🔗 Integración curricular</button><button class="quiz-op">🧭 Ciudadanía digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> Se trabaja la privacidad y el cuidado de la información: es Ciudadanía Digital.</div>
+  <div class="feedback mal"><strong>✘ No es ese pilar.</strong> Se trabaja la privacidad y el cuidado de la información: es Ciudadanía Digital.</div>
+  </div><div class="quiz-caja reveal" data-corr="0">
+  <p class="pregunta">3 · Durante la secuencia de cuentos, los niños graban sus propias versiones y escuchan las de sus compañeros, discutiendo cómo la tecnología cambia la manera de narrar.</p>
+  <div class="quiz-ops"><button class="quiz-op">🌍 Enfoque culturalista</button><button class="quiz-op">🔗 Integración curricular</button><button class="quiz-op">🧭 Ciudadanía digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> No solo se usa la tecnología: se reflexiona sobre cómo cambia la práctica cultural de narrar. Es el enfoque culturalista.</div>
+  <div class="feedback mal"><strong>✘ No es ese pilar.</strong> No solo se usa la tecnología: se reflexiona sobre cómo cambia la práctica cultural de narrar. Es el enfoque culturalista.</div>
+  </div><div class="quiz-caja reveal" data-corr="1">
+  <p class="pregunta">4 · En Matemática, la sala de 4 usa una app de conteo vinculada al juego de la verdulería del rincón, dentro de la secuencia de la sala.</p>
+  <div class="quiz-ops"><button class="quiz-op">🌍 Enfoque culturalista</button><button class="quiz-op">🔗 Integración curricular</button><button class="quiz-op">🧭 Ciudadanía digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> La app se integra al contenido matemático del proyecto: Integración curricular.</div>
+  <div class="feedback mal"><strong>✘ No es ese pilar.</strong> La app se integra al contenido matemático del proyecto: Integración curricular.</div>
+  </div><div class="quiz-caja reveal" data-corr="2">
+  <p class="pregunta">5 · La docente trabaja con los niños la consigna: «si algo no parece verdad, preguntamos a un adulto». Discuten sobre lo que ven en pantallas.</p>
+  <div class="quiz-ops"><button class="quiz-op">🌍 Enfoque culturalista</button><button class="quiz-op">🔗 Integración curricular</button><button class="quiz-op">🧭 Ciudadanía digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> Evaluar la información y desconfiar de lo falso es un aprendizaje de Ciudadanía Digital.</div>
+  <div class="feedback mal"><strong>✘ No es ese pilar.</strong> Evaluar la información y desconfiar de lo falso es un aprendizaje de Ciudadanía Digital.</div>
+  </div><div class="quiz-caja reveal" data-corr="0">
+  <p class="pregunta">6 · La sala produce un video de títeres y, antes, la docente pregunta: «¿qué les gustaría que el público sienta con nuestro video?».</p>
+  <div class="quiz-ops"><button class="quiz-op">🌍 Enfoque culturalista</button><button class="quiz-op">🔗 Integración curricular</button><button class="quiz-op">🧭 Ciudadanía digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> Se piensa en la producción como práctica cultural con intención comunicativa: quién mira, qué efecto buscamos.</div>
+  <div class="feedback mal"><strong>✘ No es ese pilar.</strong> Se piensa en la producción como práctica cultural con intención comunicativa: quién mira, qué efecto buscamos.</div>
+  </div><div class="quiz-caja reveal" data-corr="1">
+  <p class="pregunta">7 · El rincón de lectura tiene una tablet con audiolibros que complementa los libros de papel del proyecto de Lengua.</p>
+  <div class="quiz-ops"><button class="quiz-op">🌍 Enfoque culturalista</button><button class="quiz-op">🔗 Integración curricular</button><button class="quiz-op">🧭 Ciudadanía digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> El recurso digital se integra a la propuesta de Lengua: no compite con el libro, lo amplía.</div>
+  <div class="feedback mal"><strong>✘ No es ese pilar.</strong> El recurso digital se integra a la propuesta de Lengua: no compite con el libro, lo amplía.</div>
+  </div><div class="quiz-caja reveal" data-corr="2">
+  <p class="pregunta">8 · Antes de compartir dibujos en el grupo de WhatsApp del jardín, los niños deciden juntos qué imágenes subir y cómo tratar los dibujos de los demás con respeto.</p>
+  <div class="quiz-ops"><button class="quiz-op">🌍 Enfoque culturalista</button><button class="quiz-op">🔗 Integración curricular</button><button class="quiz-op">🧭 Ciudadanía digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> Se reflexiona sobre la interacción respetuosa en entornos digitales: Ciudadanía Digital.</div>
+  <div class="feedback mal"><strong>✘ No es ese pilar.</strong> Se reflexiona sobre la interacción respetuosa en entornos digitales: Ciudadanía Digital.</div>
+  </div><div class="quiz-caja reveal" data-corr="0">
+  <p class="pregunta">9 · La docente propone a los niños comparar cómo se dibujaba antes (lápiz y papel) y cómo se dibuja ahora en una tablet, conversando sobre qué cambia en la producción.</p>
+  <div class="quiz-ops"><button class="quiz-op">🌍 Enfoque culturalista</button><button class="quiz-op">🔗 Integración curricular</button><button class="quiz-op">🧭 Ciudadanía digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> Se indaga la tecnología como práctica cultural que transforma las formas de hacer: enfoque culturalista.</div>
+  <div class="feedback mal"><strong>✘ No es ese pilar.</strong> Se indaga la tecnología como práctica cultural que transforma las formas de hacer: enfoque culturalista.</div>
+  </div>
+</section>
+<!-- 2 · EJES DC -->
+<section class="bloque" id="ejes">
+  <div class="sec-head reveal"><span class="sec-num" style="background:var(--marino)">2</span><h2>El DC actualizado: la Educación Digital en 4 y 5 años</h2></div>
+  <p class="sec-intro reveal">La actualización del Diseño Curricular incorpora la Educación Digital como <strong>eje transversal</strong>, con contenidos propios para cada sección, organizados en tres ejes:</p>
+  <div class="grid3 reveal"><div class="tarjeta"><h3>💻 TIC</h3><p><strong>Tecnologías de la Información y la Comunicación.</strong> Dispositivos, apps y producción de contenidos digitales.</p></div><div class="tarjeta"><h3>🧩 Pensamiento</h3><p><strong>Pensamiento Computacional.</strong> Algoritmos, pasos, patrones y resolución de problemas.</p></div><div class="tarjeta"><h3>🛡️ Ciudadanía</h3><p><strong>Ciudadanía Digital.</strong> Uso seguro, respeto en línea y confiabilidad de la información.</p></div></div>
+  <p class="sec-intro reveal" style="margin-top:26px"><strong>Clasificá el contenido:</strong> cada propuesta pertenece a uno de los tres ejes del DC.</p>
+  <div class="quiz-caja reveal" data-corr="1">
+  <p class="pregunta">1 · «Elaborar una receta de cocina paso a paso y seguirla para lograr el plato.» <span class="mini">(Sala de 4 y 5)</span></p>
+  <div class="quiz-ops"><button class="quiz-op">💻 TIC</button><button class="quiz-op">🧩 Pensamiento Computacional</button><button class="quiz-op">🛡️ Ciudadanía Digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> Seguir y elaborar instrucciones ordenadas para lograr un objetivo es una secuencia de instrucciones (algoritmo).</div>
+  <div class="feedback mal"><strong>✘ No es ese eje.</strong> Seguir y elaborar instrucciones ordenadas para lograr un objetivo es una secuencia de instrucciones (algoritmo).</div></div><div class="quiz-caja reveal" data-corr="0">
+  <p class="pregunta">2 · «Usar una app de dibujo para ilustrar el proyecto de animales de la sala.» <span class="mini">(Sala de 4 y 5)</span></p>
+  <div class="quiz-ops"><button class="quiz-op">💻 TIC</button><button class="quiz-op">🧩 Pensamiento Computacional</button><button class="quiz-op">🛡️ Ciudadanía Digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> Usar aplicaciones con propósito educativo es contenido del eje TIC.</div>
+  <div class="feedback mal"><strong>✘ No es ese eje.</strong> Usar aplicaciones con propósito educativo es contenido del eje TIC.</div></div><div class="quiz-caja reveal" data-corr="2">
+  <p class="pregunta">3 · «Conversar sobre qué información personal no se comparte en internet y a quién pedir ayuda.» <span class="mini">(Sala de 4 y 5)</span></p>
+  <div class="quiz-ops"><button class="quiz-op">💻 TIC</button><button class="quiz-op">🧩 Pensamiento Computacional</button><button class="quiz-op">🛡️ Ciudadanía Digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> El cuidado de la privacidad y pedir ayuda a un adulto es Ciudadanía Digital.</div>
+  <div class="feedback mal"><strong>✘ No es ese eje.</strong> El cuidado de la privacidad y pedir ayuda a un adulto es Ciudadanía Digital.</div></div><div class="quiz-caja reveal" data-corr="1">
+  <p class="pregunta">4 · «Crear patrones con bloques de colores y después con sonidos de percusión.» <span class="mini">(Sala de 4 y 5)</span></p>
+  <div class="quiz-ops"><button class="quiz-op">💻 TIC</button><button class="quiz-op">🧩 Pensamiento Computacional</button><button class="quiz-op">🛡️ Ciudadanía Digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> Identificar y crear patrones en actividades plásticas y musicales es Pensamiento Computacional.</div>
+  <div class="feedback mal"><strong>✘ No es ese eje.</strong> Identificar y crear patrones en actividades plásticas y musicales es Pensamiento Computacional.</div></div><div class="quiz-caja reveal" data-corr="0">
+  <p class="pregunta">5 · «Fotografiar el patio y armar una presentación con las fotos del paseo.» <span class="mini">(Sala de 4 y 5)</span></p>
+  <div class="quiz-ops"><button class="quiz-op">💻 TIC</button><button class="quiz-op">🧩 Pensamiento Computacional</button><button class="quiz-op">🛡️ Ciudadanía Digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> Producir contenidos digitales simples (fotos, presentaciones) es contenido del eje TIC.</div>
+  <div class="feedback mal"><strong>✘ No es ese eje.</strong> Producir contenidos digitales simples (fotos, presentaciones) es contenido del eje TIC.</div></div><div class="quiz-caja reveal" data-corr="2">
+  <p class="pregunta">6 · «Discutir si todo lo que aparece en pantalla es verdad y probar qué dice un adulto.» <span class="mini">(Sala de 4 y 5)</span></p>
+  <div class="quiz-ops"><button class="quiz-op">💻 TIC</button><button class="quiz-op">🧩 Pensamiento Computacional</button><button class="quiz-op">🛡️ Ciudadanía Digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> Preguntar y verificar la información es un aprendizaje de Ciudadanía Digital.</div>
+  <div class="feedback mal"><strong>✘ No es ese eje.</strong> Preguntar y verificar la información es un aprendizaje de Ciudadanía Digital.</div></div><div class="quiz-caja reveal" data-corr="1">
+  <p class="pregunta">7 · «Armar un circuito de movimiento donde los niños dan instrucciones para llegar a una meta.» <span class="mini">(Sala de 4 y 5)</span></p>
+  <div class="quiz-ops"><button class="quiz-op">💻 TIC</button><button class="quiz-op">🧩 Pensamiento Computacional</button><button class="quiz-op">🛡️ Ciudadanía Digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> Dar y seguir instrucciones ordenadas en un juego de movimiento es un algoritmo.</div>
+  <div class="feedback mal"><strong>✘ No es ese eje.</strong> Dar y seguir instrucciones ordenadas en un juego de movimiento es un algoritmo.</div></div><div class="quiz-caja reveal" data-corr="0">
+  <p class="pregunta">8 · «Explorar una cámara fotográfica para descubrir cómo funciona el botón y el lente.» <span class="mini">(Sala de 4 y 5)</span></p>
+  <div class="quiz-ops"><button class="quiz-op">💻 TIC</button><button class="quiz-op">🧩 Pensamiento Computacional</button><button class="quiz-op">🛡️ Ciudadanía Digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> Explorar dispositivos y sus funciones es contenido del eje TIC.</div>
+  <div class="feedback mal"><strong>✘ No es ese eje.</strong> Explorar dispositivos y sus funciones es contenido del eje TIC.</div></div><div class="quiz-caja reveal" data-corr="1">
+  <p class="pregunta">9 · «Resolver un problema en partes: ¿cómo hacemos para que todos los niños tengan un turno con la tablet?» <span class="mini">(Sala de 4 y 5)</span></p>
+  <div class="quiz-ops"><button class="quiz-op">💻 TIC</button><button class="quiz-op">🧩 Pensamiento Computacional</button><button class="quiz-op">🛡️ Ciudadanía Digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> Descomponer un problema en pasos manejables es Pensamiento Computacional.</div>
+  <div class="feedback mal"><strong>✘ No es ese eje.</strong> Descomponer un problema en pasos manejables es Pensamiento Computacional.</div></div><div class="quiz-caja reveal" data-corr="2">
+  <p class="pregunta">10 · «Reflexionar sobre el trato respetuoso al comentar los dibujos de los compañeros en una presentación compartida.» <span class="mini">(Sala de 4 y 5)</span></p>
+  <div class="quiz-ops"><button class="quiz-op">💻 TIC</button><button class="quiz-op">🧩 Pensamiento Computacional</button><button class="quiz-op">🛡️ Ciudadanía Digital</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> La interacción respetuosa en entornos digitales es Ciudadanía Digital.</div>
+  <div class="feedback mal"><strong>✘ No es ese eje.</strong> La interacción respetuosa en entornos digitales es Ciudadanía Digital.</div></div>
+</section>
+<!-- 3 · SENTIDO O ADORNO -->
+<section class="bloque" id="sentido">
+  <div class="sec-head reveal"><span class="sec-num" style="background:var(--dorado)">3</span><h2>¿TIC con sentido o adorno?</h2></div>
+  <p class="sec-intro reveal">La regla de oro: hay integración con sentido cuando hay <strong>propósito pedagógico, producción y mediación</strong>. Sin eso, la pantalla reemplaza, no enriquece. Clasificá cada uso:</p>
+  <div class="quiz-caja reveal" data-corr="1">
+  <p class="pregunta">1 · La docente entrega una tablet a cada niño para «que jueguen un rato» mientras ella prepara el material de la actividad.</p>
+  <div class="quiz-ops"><button class="quiz-op">✅ Con sentido</button><button class="quiz-op">❌ Adorno</button></div>
+  <div class="feedback ok"><strong>✔ Con sentido.</strong> Sin propósito pedagógico ni mediación: la tecnología reemplaza la propuesta y se vuelve entretenimiento.</div>
+  <div class="feedback mal"><strong>✘ Ojo: es adorno.</strong> Sin propósito pedagógico ni mediación: la tecnología reemplaza la propuesta y se vuelve entretenimiento.</div>
+  </div><div class="quiz-caja reveal" data-corr="0">
+  <p class="pregunta">2 · Los niños usan una app de dibujo para representar el personaje del cuento y después cuentan su dibujo al grupo.</p>
+  <div class="quiz-ops"><button class="quiz-op">✅ Con sentido</button><button class="quiz-op">❌ Adorno</button></div>
+  <div class="feedback ok"><strong>✔ Con sentido.</strong> Hay propósito (representar lo leído), producción propia y comunicación: integración con sentido.</div>
+  <div class="feedback mal"><strong>✘ Ojo: es adorno.</strong> Hay propósito (representar lo leído), producción propia y comunicación: integración con sentido.</div>
+  </div><div class="quiz-caja reveal" data-corr="1">
+  <p class="pregunta">3 · La docente proyecta un video sobre las estaciones en lugar de salir al patio a observar el árbol del jardín, porque «así es más fácil».</p>
+  <div class="quiz-ops"><button class="quiz-op">✅ Con sentido</button><button class="quiz-op">❌ Adorno</button></div>
+  <div class="feedback ok"><strong>✔ Con sentido.</strong> Reemplaza la experiencia directa y el contacto con el entorno: la pantalla sustituye, no enriquece.</div>
+  <div class="feedback mal"><strong>✘ Ojo: es adorno.</strong> Reemplaza la experiencia directa y el contacto con el entorno: la pantalla sustituye, no enriquece.</div>
+  </div><div class="quiz-caja reveal" data-corr="0">
+  <p class="pregunta">4 · El grupo graba en video cómo creció la planta del proyecto de ciencias y compara los registros de cada semana.</p>
+  <div class="quiz-ops"><button class="quiz-op">✅ Con sentido</button><button class="quiz-op">❌ Adorno</button></div>
+  <div class="feedback ok"><strong>✔ Con sentido.</strong> La cámara documenta un proceso real y permite comparar: amplía la observación, no la reemplaza.</div>
+  <div class="feedback mal"><strong>✘ Ojo: es adorno.</strong> La cámara documenta un proceso real y permite comparar: amplía la observación, no la reemplaza.</div>
+  </div><div class="quiz-caja reveal" data-corr="1">
+  <p class="pregunta">5 · La tablet se usa todos los días a la misma hora como «premio» para los que terminan la actividad de matemática.</p>
+  <div class="quiz-ops"><button class="quiz-op">✅ Con sentido</button><button class="quiz-op">❌ Adorno</button></div>
+  <div class="feedback ok"><strong>✔ Con sentido.</strong> La tecnología como premio se asocia a recompensa, no a aprendizaje: pierde sentido pedagógico.</div>
+  <div class="feedback mal"><strong>✘ Ojo: es adorno.</strong> La tecnología como premio se asocia a recompensa, no a aprendizaje: pierde sentido pedagógico.</div>
+  </div><div class="quiz-caja reveal" data-corr="0">
+  <p class="pregunta">6 · En el rincón de música, los niños exploran una app de instrumentos para imitar sonidos de la naturaleza y componer su propia secuencia.</p>
+  <div class="quiz-ops"><button class="quiz-op">✅ Con sentido</button><button class="quiz-op">❌ Adorno</button></div>
+  <div class="feedback ok"><strong>✔ Con sentido.</strong> Amplía el lenguaje musical y habilita la creación: la tecnología como herramienta expresiva.</div>
+  <div class="feedback mal"><strong>✘ Ojo: es adorno.</strong> Amplía el lenguaje musical y habilita la creación: la tecnología como herramienta expresiva.</div>
+  </div><div class="quiz-caja reveal" data-corr="1">
+  <p class="pregunta">7 · Los niños ven dibujos animados en la sala mientras los padres llegan a retirarlos, para mantenerlos tranquilos.</p>
+  <div class="quiz-ops"><button class="quiz-op">✅ Con sentido</button><button class="quiz-op">❌ Adorno</button></div>
+  <div class="feedback ok"><strong>✔ Con sentido.</strong> Uso como pacificador o relleno de tiempo: no hay propuesta de aprendizaje ni mediación.</div>
+  <div class="feedback mal"><strong>✘ Ojo: es adorno.</strong> Uso como pacificador o relleno de tiempo: no hay propuesta de aprendizaje ni mediación.</div>
+  </div><div class="quiz-caja reveal" data-corr="0">
+  <p class="pregunta">8 · Antes de una salida al museo, el grupo ve en pantalla algunas obras y prepara las preguntas que quiere hacer.</p>
+  <div class="quiz-ops"><button class="quiz-op">✅ Con sentido</button><button class="quiz-op">❌ Adorno</button></div>
+  <div class="feedback ok"><strong>✔ Con sentido.</strong> La anticipación digital enriquece la salida y organiza el propósito: la tecnología prepara la experiencia real.</div>
+  <div class="feedback mal"><strong>✘ Ojo: es adorno.</strong> La anticipación digital enriquece la salida y organiza el propósito: la tecnología prepara la experiencia real.</div>
+  </div>
+  <p class="destacado reveal">Uso con sentido = propósito pedagógico + mediación docente.</p>
+</section>
+<!-- 4 · ESCENARIOS -->
+<section class="bloque" id="escenarios">
+  <div class="sec-head reveal"><span class="sec-num" style="background:var(--oliva)">4</span><h2>Escenarios educativos mediados por TIC</h2></div>
+  <p class="sec-intro reveal">¿Cómo se ve la integración en la práctica cotidiana del jardín? Seis escenarios posibles — el puente entre el marco teórico y la planificación concreta:</p>
+  <div class="grid3 reveal"><div class="tarjeta"><h3>🔍 Exploración libre</h3><p>Los niños interactúan con dispositivos en el rincón de tecnología, con propósito abierto y mediación.</p></div><div class="tarjeta"><h3>🎬 Producción grupal</h3><p>Pequeños grupos crean una presentación, graban un cuento o fotografían el patio para un proyecto.</p></div><div class="tarjeta"><h3>🧭 Búsqueda guiada</h3><p>Con la docente, el grupo busca información sobre el proyecto en imágenes, videos o páginas seleccionadas.</p></div><div class="tarjeta"><h3>🎮 Juego didáctico digital</h3><p>Apps o juegos con propósito pedagógico para matemática, lengua, ciencias o expresión artística.</p></div><div class="tarjeta"><h3>📷 Documentación</h3><p>La cámara registra procesos de aprendizaje para compartir con familias o retomar en clase.</p></div><div class="tarjeta"><h3>📣 Comunicación</h3><p>El grupo graba un video o prepara una presentación para compartir lo aprendido con otras salas o familias.</p></div></div>
+  <p class="mini reveal" style="text-align:center;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:var(--gris);margin-top:28px">Los propósitos de la Educación Digital en el Nivel Inicial (DC)</p>
+  <div class="grid3 reveal" style="margin-top:14px"><div class="tarjeta"><h3>🌍 Explorar el mundo</h3><p>Ampliar los modos de exploración y descubrimiento del mundo mediante tecnologías.</p></div><div class="tarjeta"><h3>🎨 Comunicar y expresar</h3><p>Enriquecer la comunicación y la expresión infantil con nuevos lenguajes digitales.</p></div><div class="tarjeta"><h3>🧸 Jugar y crear</h3><p>Favorecer el juego, la imaginación y la creatividad en contextos mediados por tecnología.</p></div><div class="tarjeta"><h3>🫂 Acercar a la cultura actual</h3><p>Acercar a los niños a las prácticas culturales actuales vinculadas con lo digital.</p></div><div class="tarjeta"><h3>🔎 Curiosidad y pensamiento crítico</h3><p>Desarrollar actitudes de curiosidad, exploración y pensamiento crítico ante la tecnología.</p></div><div class="tarjeta"><h3>🛡️ Uso seguro y ético</h3><p>Promover el uso seguro, responsable y ético de dispositivos y entornos digitales.</p></div></div>
+  <div class="tarjeta marino reveal" style="margin-top:24px">
+    <h3>Consigna del foro · Reflexión individual (antes del 27/08)</h3>
+    <p style="font-size:17.5px">La actividad asincrónica de la Clase 2, paso a paso (tiempo estimado: 30–40 minutos):</p>
+    <ul class="lista" style="margin-top:10px">
+      <li><strong>1 · Leé el apartado de Educación Digital del DC actualizado.</strong> Prestá atención a los propósitos generales y a los contenidos para tu sección (4 o 5 años).</li>
+      <li><strong>2 · Elegí UN escenario educativo que te resulte factible.</strong> De los seis presentados, ¿cuál te parece más realizable en el jardín donde vas a practicar?</li>
+      <li><strong>3 · Escribí una reflexión breve (15–20 líneas).</strong> Vinculá ese escenario con al menos un propósito del DC: ¿qué aprendizajes habilitaría? ¿qué rol tomarías vos como docente?</li>
+    </ul>
+    <p class="mini" style="color:#C9D2E0;margin-top:10px">Subí tu reflexión al foro de Classroom antes del <strong>27/08</strong>. La próxima clase la retomamos.</p>
+  </div>
+</section>
+<!-- AUTOEVALUACIÓN · CLASE 2 -->
+<section class="bloque" id="autoevaluacion">
+  <div class="sec-head reveal"><span class="sec-num" style="background:var(--dorado)">5</span><h2>Autoevaluación · Clase 2</h2></div>
+  <p class="sec-intro reveal">Cinco preguntas para chequear lo estudiado en la Clase 2. Elegí una opción por pregunta y recibí el feedback al instante.</p>
+  <div class="quiz-caja reveal" data-corr="0">
+  <p class="pregunta">1 · Según el Marco Pedagógico para la Educación Digital (GCBA), las TIC en el jardín…</p>
+  <div class="quiz-ops"><button class="quiz-op">Atraviesan todas las áreas y no son una disciplina aislada</button><button class="quiz-op">Son una materia aparte, una hora por semana</button><button class="quiz-op">Se usan solo como premio</button><button class="quiz-op">Reemplazan el juego simbólico</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> Ese es el pilar de la <strong>integración curricular</strong>: las TIC enriquecen explorar, producir y comunicar en todas las áreas.</div>
+  <div class="feedback mal"><strong>✘ No exactamente.</strong> La integración curricular dice que las TIC <strong>atraviesan todas las áreas</strong>: no compiten con el juego ni lo reemplazan.</div>
+  </div><div class="quiz-caja reveal" data-corr="2">
+  <p class="pregunta">2 · ¿Cuál de estos usos de la tablet es un ejemplo de tecnología «con sentido»?</p>
+  <div class="quiz-ops"><button class="quiz-op">Como premio para los que terminan primero</button><button class="quiz-op">Para que jueguen un rato mientras la docente prepara material</button><button class="quiz-op">Para grabar y compartir las versiones del cuento del proyecto de biblioteca</button><button class="quiz-op">Para ver dibujos mientras llegan los padres</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> Hay propósito (representar lo leído), producción propia y comunicación: la tecnología amplía la propuesta, no la reemplaza.</div>
+  <div class="feedback mal"><strong>✘ Fijate.</strong> Sin propósito pedagógico ni mediación, la tecnología se vuelve <strong>adorno o relleno</strong>: la «regla de oro» se rompe.</div>
+  </div><div class="quiz-caja reveal" data-corr="2">
+  <p class="pregunta">3 · Los contenidos del DC para 4 y 5 años se organizan en tres ejes de Educación Digital. ¿Cuáles son?</p>
+  <div class="quiz-ops"><button class="quiz-op">Exploración, juego y expresión</button><button class="quiz-op">Artefactos, conocimientos y prácticas</button><button class="quiz-op">TIC, Pensamiento Computacional y Ciudadanía Digital</button><button class="quiz-op">Apps, videos y robots</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> TIC, Pensamiento Computacional y Ciudadanía Digital: los contenidos de cada sección se organizan en esos tres ejes.</div>
+  <div class="feedback mal"><strong>✘ Ojo.</strong> Los tres ejes son <strong>TIC, Pensamiento Computacional y Ciudadanía Digital</strong>. (Artefacto/conocimiento/práctica social son las dimensiones del concepto de tecnología.)</div>
+  </div><div class="quiz-caja reveal" data-corr="0">
+  <p class="pregunta">4 · Según el enfoque culturalista del Marco, enseñar con tecnología es también…</p>
+  <div class="quiz-ops"><button class="quiz-op">Enseñar sobre ella: usos, efectos y límites en la vida social</button><button class="quiz-op">Limitar todo el tiempo de pantalla</button><button class="quiz-op">Usar las apps que los chicos ya conocen en casa</button><button class="quiz-op">Dejarlos explorar solos sin intervenir</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> El enfoque culturalista entiende la tecnología como práctica social y cultural: enseñar con tecnología es también enseñar <strong>sobre</strong> ella.</div>
+  <div class="feedback mal"><strong>✘ Ojo.</strong> El enfoque culturalista no prohíbe ni replica el uso doméstico: es enseñar con tecnología <strong>y</strong> sobre ella — usos, efectos, límites.</div>
+  </div><div class="quiz-caja reveal" data-corr="1">
+  <p class="pregunta">5 · ¿Qué situación del jardín ejemplifica la ciudadanía digital?</p>
+  <div class="quiz-ops"><button class="quiz-op">Los niños comparten fotos de la sala sin permiso</button><button class="quiz-op">Docente y niños conversan sobre cuidar los datos y no compartir información personal en las apps</button><button class="quiz-op">La seño pone un video para que los chicos se queden callados</button><button class="quiz-op">Los niños juegan un juego de memoria en la tablet</button></div>
+  <div class="feedback ok"><strong>✔ Correcto.</strong> La ciudadanía digital forma usuarios críticos, creativos y responsables: cuidar datos y privacidad es contenido del eje Ciudadanía Digital.</div>
+  <div class="feedback mal"><strong>✘ No es eso.</strong> La ciudadanía digital es formación en privacidad, uso seguro y producción ética — no un uso «de relleno» ni exposición sin criterio.</div>
+  </div>
+  <div id="scoreFinal">
+    <p style="letter-spacing:.2em;text-transform:uppercase;font-size:14px;color:var(--dorado);font-weight:700">Tu resultado</p>
+    <div class="puntaje"><span id="scoreNum">0</span> / 5</div>
+    <p id="scoreMsg" style="font-size:18.5px;max-width:52ch;margin:8px auto 0"></p>
+  </div>
+</section>
+<!-- GLOSARIO · CLASE 2 -->
+<section class="bloque" id="glosario">
+  <div class="sec-head reveal"><span class="sec-num" style="background:var(--oliva)">6</span><h2>Glosario · Clase 2</h2></div>
+  <p class="sec-intro reveal">Conceptos clave de la Clase 2. Usá el buscador para encontrar un término.</p>
+  <input type="search" id="glosarioBusca" placeholder="🔎 Buscar término…" aria-label="Buscar en el glosario">
+  <div id="glosLista"><dl class="glos-item reveal"><dt>Marco Pedagógico para la Educación Digital</dt><dd>Documento del GCBA que orienta la integración de tecnologías digitales en todos los niveles: con sentido pedagógico, no como adorno. Tres pilares: enfoque culturalista, integración curricular y ciudadanía digital.</dd></dl><dl class="glos-item reveal"><dt>Enfoque culturalista</dt><dd>Pilar del Marco: la tecnología es práctica social y cultural; enseñar con tecnología es también enseñar sobre ella (usos, efectos, límites).</dd></dl><dl class="glos-item reveal"><dt>Integración curricular</dt><dd>Pilar del Marco: las TIC no son un área aparte; atraviesan todas las áreas y enriquecen explorar, producir y comunicar.</dd></dl><dl class="glos-item reveal"><dt>Ciudadanía digital</dt><dd>Pilar del Marco: formar usuarios críticos, creativos y responsables — privacidad, uso seguro, evaluación de la información y producción ética.</dd></dl><dl class="glos-item reveal"><dt>Pensamiento Computacional</dt><dd>Eje del DC: algoritmos (secuencias de instrucciones), descomposición de problemas en pasos y patrones en juegos y actividades.</dd></dl><dl class="glos-item reveal"><dt>Escenarios educativos mediados por TIC</dt><dd>Seis formas de ver la integración en la práctica: exploración libre, producción grupal, búsqueda guiada, juego didáctico digital, documentación y comunicación.</dd></dl><dl class="glos-item reveal"><dt>TIC con sentido</dt><dd>Regla de oro de la integración: propósito pedagógico + producción + mediación docente. Sin eso, la pantalla reemplaza la propuesta y se vuelve adorno.</dd></dl></div>
+</section>
+<!-- CIERRE -->
+<section class="bloque" id="referencias">
+  <div class="cierre-band reveal">
+    <p style="letter-spacing:.2em;text-transform:uppercase;font-size:14.5px;color:var(--dorado);font-weight:700">Para cerrar</p>
+    <h3>Consigna puente a la Clase 3 · Competencias docentes</h3>
+    <p class="consigna">«Si todavía no subiste tu reflexión al foro (antes del 27/08), es el momento. Y pensá: para diseñar propuestas con tecnología en el jardín, ¿qué competencias te faltan desarrollar como docente?»</p>
+    <p style="font-size:17px;color:#C9D2E0;margin-top:10px">La Clase 3 (presencial, 26/08) trabaja competencias docentes y criterios para la gestión de entornos tecnológicos educativos.</p>
+    <hr style="border:none;border-top:1px solid rgba(247,241,229,.2);margin:22px 0">
+    <p class="refs"><strong style="color:var(--crema)">Referencias:</strong> GCBA, Ministerio de Educación. <em>Marco Pedagógico para la Educación Digital: Nivel Inicial.</em> · GCBA. <em>Diseño Curricular para la Educación Inicial 4 y 5 años – Actualización.</em> · GCBA. <em>Actualización del Diseño Curricular – Educación Digital.</em> · GCBA. <em>Lineamientos Pedagógicos PIED.</em></p>
+  </div>
+</section>
+
+
+</main>
+
+<footer>
+  <b>Didáctica y TIC en la Educación Inicial · Profesorado de Educación Inicial · 3° Año</b><br>
+  Material de estudio interactivo · Clase 2 — El Marco Pedagógico y el Diseño Curricular<br>
+  Instituto Superior Terciario Fátima Soldati
+</footer>
+
+<button id="arriba" title="Volver arriba">↑</button>
+
+<script>
+/* barra de lectura + botón arriba */
+const lectura=document.getElementById('lectura');
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  lectura.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  document.getElementById('arriba').classList.toggle('ver',h.scrollTop>600);
+},{passive:true});
+document.getElementById('arriba').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+
+/* reveal on-scroll */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* scroll-spy (solo enlaces de sección, el botón "volver" queda fuera) */
+const links=[...document.querySelectorAll('#navSecs a')].filter(a=>a.getAttribute('href').startsWith('#'));
+const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+const spy=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>l.classList.toggle('activa',l.getAttribute('href')==='#'+e.target.id)); }});
+},{rootMargin:'-25% 0px -65% 0px'});
+secs.forEach(s=>s&&spy.observe(s));
+
+/* helper quiz de opciones (solo cuenta para el score si está en #autoevaluacion) */
+function armarQuiz(caja){
+  const ops=[...caja.querySelectorAll('.quiz-op')];
+  const corr=parseInt(caja.dataset.corr);
+  const fbOk=caja.querySelector('.feedback.ok'),fbMal=caja.querySelector('.feedback.mal');
+  let resuelta=false;
+  ops.forEach((op,i)=>op.addEventListener('click',()=>{
+    if(resuelta)return; resuelta=true;
+    const bien=i===corr;
+    op.classList.add(bien?'elegida-bien':'elegida-mal');
+    ops[corr].classList.add('revelada');
+    ops.forEach(o=>o.disabled=true);
+    (bien?fbOk:fbMal).classList.add('ver');
+    registrarRespuesta(bien,caja);
+  }));
+}
+
+/* mito/realidad */
+document.querySelectorAll('.quiz-caja[data-mr]').forEach(caja=>{
+  const esMito=caja.dataset.mr==='mito';
+  const btns=caja.querySelectorAll('.mr-btn');
+  const btnRealidad=btns[0],btnMito=btns[1];
+  const fbOk=caja.querySelector('.feedback.ok'),fbMal=caja.querySelector('.feedback.mal');
+  let resuelta=false;
+  [btnRealidad,btnMito].forEach(b=>b.addEventListener('click',()=>{
+    if(resuelta)return; resuelta=true;
+    const dijoRealidad=b===btnRealidad;
+    const bien=(esMito&&!dijoRealidad)||(!esMito&&dijoRealidad);
+    if(dijoRealidad){btnRealidad.classList.add(bien?'si-bien':'si-mal-elec');}
+    else{btnMito.classList.add(bien?'si-bien':'si-mal-elec');}
+    btnRealidad.disabled=btnMito.disabled=true;
+    (bien?fbOk:fbMal).classList.add('ver');
+    registrarRespuesta(bien,caja);
+  }));
+});
+
+/* perfil docente: la lógica del Likert vive en el script inline de la sección #perfil
+   (no redeclarar PERFIL_AXES/PERFIL_EJES aquí: rompe el scope global ES6) */
+
+/* autoevaluación final con puntaje (solo cuenta la sección #autoevaluacion) */
+let respondidas=0,aciertos=0;
+function registrarRespuesta(bien,caja){
+  if(caja && caja.closest('#autoevaluacion')){
+    respondidas++; if(bien)aciertos++;
+    if(respondidas===5){
+      document.getElementById('scoreNum').textContent=aciertos;
+      const msg=aciertos===5?'¡Excelente! Dominás la Clase 2: marco pedagógico, ejes del DC y usos con sentido. Listo para la Clase 3.':aciertos>=3?'¡Muy bien! Repasá las preguntas donde fallaste usando el glosario y las justificaciones.':'Volvé a las secciones 1, 2, 3 y 4 y volvé a intentar. Con leer con atención, sale.';
+      document.getElementById('scoreMsg').textContent=msg;
+      const sf=document.getElementById('scoreFinal');
+      sf.classList.remove('ver');void sf.offsetWidth;sf.classList.add('ver');
+      sf.scrollIntoView({behavior:'smooth',block:'center'});
+    }
+  }
+}
+document.querySelectorAll('.quiz-caja[data-corr]').forEach(armarQuiz);
+
+/* buscador de glosario */
+document.getElementById('glosarioBusca').addEventListener('input',e=>{
+  const q=e.target.value.toLowerCase().trim();
+  document.querySelectorAll('.glos-item').forEach(it=>{
+    it.classList.toggle('oculto', q && !it.textContent.toLowerCase().includes(q));
+  });
+});
+</script>
+</body>
+</html>
