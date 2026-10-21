@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 10 · Aplicaciones de IA: la que mejor se sostiene — Material de estudio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+    --papel:#FFFFFF; --marfil:#EFF3F9; --tinta:#1F3A5F; --tinta-osc:#142A47; --hueso:#E8EEF6;
+    --ambar:#C77D2E; --ambar-suave:#FBEEDD; --verde:#2E6E52; --verde-suave:#DFEEE6;
+    --rojo:#A33A2A; --rojo-suave:#F8E4DF; --texto:#2A3547; --gris:#5C6B7A; --linea:#D3DEEA;
+    --ambar-osc:#9C5F1E; --ambar-clr:#E39B4E; --ambar-hr:#F0B46B;
+    --display:'Space Grotesk','Trebuchet MS',Verdana,sans-serif;
+    --sans:'Nunito Sans','Segoe UI',system-ui,-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--texto);background:var(--marfil);line-height:1.65;font-size:16.5px}
+#barra{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--tinta),var(--ambar));z-index:2000}
+
+header.top{position:sticky;top:0;z-index:1000;background:rgba(20,42,71,.97);backdrop-filter:blur(8px)}
+.top-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 22px;flex-wrap:wrap}
+.marca{display:flex;align-items:center;gap:11px;color:#fff}
+.logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--tinta),var(--ambar-osc));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;color:#fff;font-size:17px;flex:none}
+.marca b{font-family:var(--display);font-size:15.5px;font-weight:700;line-height:1.15;display:block;color:#fff}
+.marca small{display:block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ambar-clr);font-weight:800}
+nav.secciones{display:flex;gap:2px;flex-wrap:wrap}
+nav.secciones a{color:#C9D8EA;text-decoration:none;font-size:13.5px;font-weight:700;padding:5px 11px;border-radius:999px;transition:.2s}
+nav.secciones a:hover{background:rgba(239,243,249,.14);color:#fff}
+nav.secciones a.activo{background:var(--ambar-osc);color:#fff}
+main{max-width:880px;margin:0 auto;padding:0 20px}
+
+.hero{margin:34px 0 8px;padding:34px 30px;border-radius:20px;background:linear-gradient(160deg,var(--tinta) 0%,var(--tinta-osc) 100%);color:#EAF0F7;box-shadow:0 12px 28px rgba(20,42,71,.18)}
+.hero h1{font-family:var(--display);font-size:clamp(26px,5vw,38px);line-height:1.12;margin:16px 0 12px;color:#fff}
+.hero h1 em{color:var(--ambar);font-style:normal}
+.hero .bajada{font-size:17.5px;color:#D6E0EC;max-width:66ch}
+.hero b,.hero strong{color:#fff}
+
+section{padding-top:40px;scroll-margin-top:96px}
+.kicker{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+.kicker .num{width:34px;height:34px;border-radius:50%;background:var(--tinta);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:16px;flex:none}
+.kicker span.etq{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ambar-osc);font-weight:800}
+h2{font-family:var(--display);font-size:clamp(22px,3.6vw,29px);color:var(--tinta-osc);margin-bottom:14px;line-height:1.2}
+h3{font-family:var(--display);font-size:19px;color:var(--tinta-osc);margin:18px 0 8px}
+p+p{margin-top:10px}
+b,strong{color:var(--tinta-osc)}
+
+.card{background:var(--papel);border:1px solid var(--linea);border-radius:16px;padding:20px 22px;margin:14px 0;box-shadow:0 1px 3px rgba(42,53,71,.05)}
+.card.destacada{border-left:5px solid var(--ambar);background:linear-gradient(180deg,#FFFFFF,var(--ambar-suave))}
+.callout{background:var(--hueso);border-left:5px solid var(--tinta);border-radius:12px;padding:15px 18px;margin:14px 0}
+.callout.ambar{background:var(--ambar-suave);border-left-color:var(--ambar)}
+.callout.alerta{background:var(--rojo-suave);border-left-color:var(--rojo)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:14px 0}
+ul.lista{padding-left:20px;margin:10px 0}
+ul.lista li{margin-bottom:7px}
+ol.pasos{padding-left:22px;margin:10px 0}
+ol.pasos li{margin-bottom:8px}
+
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.pill{background:var(--papel);border:1px solid var(--linea);border-radius:999px;padding:8px 15px;font-size:14.5px;font-weight:700;color:var(--tinta);cursor:pointer;transition:.18s;font-family:var(--sans)}
+.pill:hover{border-color:var(--ambar);background:var(--ambar-suave)}
+.pill.activo{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+
+.escenario{background:var(--marfil);border:1px solid var(--linea);border-radius:14px;padding:18px 20px;margin:12px 0}
+.escenario h4{font-family:var(--display);font-size:17.5px;color:var(--tinta-osc);margin-bottom:6px}
+.escenario .cifra{font-family:var(--display);font-size:26px;color:var(--ambar-osc);font-weight:700;line-height:1.1}
+
+.check12{display:grid;gap:8px;margin:14px 0}
+.chk{display:flex;gap:11px;align-items:flex-start;background:var(--papel);border:1px solid var(--linea);border-radius:11px;padding:11px 14px;cursor:pointer;font-size:15.2px;transition:.15s}
+.chk input{margin-top:4px;accent-color:var(--verde);width:17px;height:17px;flex:none}
+.chk .n{font-family:var(--display);font-weight:700;color:var(--ambar-osc);flex:none}
+.chk.marca{background:var(--verde-suave);border-color:var(--verde);color:#1B3A2C}
+.chk.marca .n{color:var(--verde)}
+.contador{background:var(--tinta);color:#fff;border-radius:14px;padding:13px 18px;font-size:15.5px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.contador b{color:var(--ambar-hr);font-family:var(--display);font-size:19px}
+
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 20px}
+.chip{display:inline-flex;align-items:center;gap:7px;background:var(--papel);border:1px solid var(--linea);border-radius:999px;padding:8px 16px;font-size:14.5px;font-weight:700;color:var(--tinta-osc);box-shadow:0 1px 2px rgba(42,53,71,.06)}
+.chip.ambar{background:var(--ambar-suave);border-color:var(--ambar);color:#8a5620}
+.chip.verde{background:var(--verde-suave);border-color:var(--verde);color:#1B3A2C}
+
+.entrega{display:grid;gap:10px;margin:12px 0}
+.item-entrega{display:flex;gap:12px;align-items:flex-start;background:var(--papel);border:1px solid var(--linea);border-left:4px solid var(--ambar);border-radius:12px;padding:13px 16px;font-size:15.4px}
+.item-entrega .ok{font-weight:800;color:var(--verde);flex:none}
+
+.q-block{background:var(--papel);border:1px solid var(--linea);border-radius:14px;padding:16px 18px;margin:12px 0}
+.q-block h4{font-family:var(--sans);font-size:16.2px;font-weight:800;margin-bottom:10px;color:var(--tinta-osc)}
+.opciones{display:flex;flex-direction:column;gap:8px}
+.opcion{display:flex;gap:10px;align-items:flex-start;background:var(--marfil);border:1px solid var(--linea);border-radius:10px;padding:10px 12px;cursor:pointer;font-size:15px;transition:.15s}
+.opcion:hover{border-color:var(--tinta)}
+.opcion input{margin-top:3px;accent-color:var(--tinta)}
+.q-feedback{display:none;margin-top:10px;border-radius:10px;padding:11px 14px;font-size:15px}
+.q-feedback.bien{display:block;background:var(--verde-suave)}
+.q-feedback.mal{display:block;background:var(--rojo-suave)}
+.btn-tinta{display:inline-block;border:none;background:var(--tinta);color:#fff;font-family:var(--display);font-weight:700;font-size:17px;border-radius:999px;padding:13px 30px;cursor:pointer;margin:16px 0;transition:.2s}
+.btn-tinta:hover{background:var(--tinta-osc)}
+#resultadoQuiz{display:none;background:var(--papel);border:2px solid var(--tinta);border-radius:16px;padding:20px 22px;text-align:center}
+#resultadoTitulo{font-family:var(--display);font-size:24px;color:var(--tinta-osc);margin-bottom:8px}
+#resultadoTexto{color:var(--gris)}
+
+.tabla{width:100%;border-collapse:collapse;background:var(--papel);border:1px solid var(--linea);border-radius:12px;overflow:hidden;margin:12px 0}
+.tabla th{background:var(--tinta);color:#fff;text-align:left;padding:10px 13px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:800}
+.tabla td{padding:11px 13px;border-top:1px solid var(--linea);vertical-align:top}
+.tabla tbody tr:nth-child(even){background:var(--marfil)}
+
+footer.fin{margin:46px 0 60px;background:var(--tinta-osc);color:#C9D8EA;border-radius:18px;padding:26px 28px}
+footer.fin h3{color:#fff;margin-top:0}
+footer.fin b{color:var(--ambar-clr)}
+footer.fin p{font-size:15px}
+
+@media(max-width:640px){body{font-size:15.5px}}
+@media print{
+    header.top,#barra,#resultadoQuiz,.btn-tinta{display:none!important}
+    body{background:#fff}.hero{background:#fff;color:#000;box-shadow:none;border:2px solid var(--tinta)}
+    .hero h1{color:var(--tinta-osc)}.hero .bajada{color:#000}.chip{color:#000;border-color:#666;background:#fff}
+    .tabla{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div id="barra"></div>
+
+<header class="top"><div class="top-inner">
+  <div class="marca"><div class="logo">10</div><div><small>Clase 10 · Virtual asincrónica · última del ciclo</small><b>Criterios, no catálogo:<br>evaluar apps de IA</b></div></div>
+  <nav class="secciones">
+    <a href="#s1">Inicio</a><a href="#s2">6 criterios</a><a href="#s3">Explorar</a><a href="#s4">Matriz</a><a href="#s5">Riesgos</a><a href="#s6">Conclusión</a><a href="#s7">Checklist</a><a href="#s8">Entrega</a><a href="#s9">Autoevaluación</a>
+  </nav>
+</div></header>
+
+<main>
+
+<div class="hero">
+  <div class="chips">
+    <span class="chip">60–90 min de trabajo</span>
+    <span class="chip ambar">Del mié 21/10 al mar 27/10</span>
+    <span class="chip verde">Entrega: martes 27/10, 23:59 h</span>
+    <span class="chip">Unidad 2 · cierre</span>
+  </div>
+  <h1>No la más linda: <em>la que mejor se sostiene</em></h1>
+  <p class="bajada">En las clases anteriores evaluaron una secuencia propia. Ahora el objeto es ajeno: herramientas de IA que ya
+  existen y que otra persona decidió hacer. Vas a elegir dos, <b>evaluar una</b> con seis criterios escritos y
+  sostener una decisión de aula con evidencia. Al final tenés <b>la matriz completa y tu conclusión</b> — una sola
+  entrega que venís a discutir en la clase del miércoles.</p>
+</div>
+
+<section id="s1">
+  <div class="kicker"><div class="num">1</div><span class="etq">Por dónde empezar</span></div>
+  <h2>El problema que vamos a trabajar</h2>
+  <p>Con la IA disponible, la pregunta dejó de ser «¿puedo usarla?» y pasó a ser «¿cuál de todas estas uso, y con
+  qué salvedad?». Con treinta herramientas a mano, la respuesta por defecto es elegir la que se ve más nueva, y eso
+  es exactamente lo que hay que evitar.</p>
+  <div class="grid2">
+    <div class="escenario"><div class="cifra">Novedad</div><h4>El criterio por defecto</h4><p>Elige la última versión, la que más se comparte en redes, la que promete resultados en dos minutos. <b>Es el criterio que no sostiene nada</b>: cambia cada seis meses y no se puede justificar ante una familia.</p></div>
+    <div class="escenario"><div class="cifra">Evidencia</div><h4>El criterio de esta clase</h4><p>Probarla con una consigna escrita por vos, anotar qué te pidió y qué tuviste que cambiar, y decidir con eso. <b>La misma app puede ser excelente en 4° grado y quedar inútil en inicial</b>.</p></div>
+  </div>
+  <div class="callout ambar"><b>La pregunta que ordena toda la clase:</b> ¿qué le hace al estudiante? Si la respuesta
+  no tiene nada que ver con lo que el grupo tiene que aprender, la aplicación está fuera de la sala, por buena que sea.</div>
+  <h3>Lo que hacés en esta clase, paso a paso</h3>
+  <ol class="pasos">
+    <li>Recorré este material y leé la <b>Ficha de lectura N°10</b>: los seis criterios, con la evidencia que cada uno pide.</li>
+    <li>Elegí <b>dos</b> aplicaciones (una de lenguaje y otra de matemática o lectoescritura) y <b>evaluá la que abra</b> con la red que tengas.</li>
+    <li>Probá esa una con <b>una consigna tuya</b>, escrita antes de abrirla.</li>
+    <li>Completá la matriz de <b>seis criterios</b> con evidencia observada, y escribí tu <b>conclusión</b>.</li>
+    <li>Enviame <b>la matriz</b> por mail. Una sola entrega. La traés a la clase del miércoles.</li>
+  </ol>
+
+</section>
+
+<section id="s2">
+  <div class="kicker"><div class="num">2</div><span class="etq">Los seis criterios</span></div>
+  <h2>Tocá un criterio y leé la evidencia que pide</h2>
+  <div class="pill-row" id="pills">    <button class="pill" data-f="pertinencia">🎯 Pertinencia curricular</button>    <button class="pill" data-f="acceso">♿ Accesibilidad</button>    <button class="pill" data-f="riesgo">⚠️ Riesgo pedagógico</button>    <button class="pill" data-f="social">💬 Interacción social</button>    <button class="pill" data-f="transparencia">🔍 Transparencia</button>    <button class="pill" data-f="responsable">⚖️ Uso responsable</button>  </div>
+  <div class="card destacada" id="detalleCriterio"></div>
+  <div class="callout"><b>El orden importa:</b> el primero es el que se puede pasar por alto. Una herramienta que
+  no se puede usar con un objetivo concreto del área no entra, por buena que sea su tecnología.</div>
+
+</section>
+
+<section id="s3">
+  <div class="kicker"><div class="num">3</div><span class="etq">Actividad · Explorar</span></div>
+  <h2>Probá con una consigna tuya, no con la de la aplicación</h2>
+  <p>La diferencia entre las dos es el primer dato de la evaluación. Cuando la app propone la tarea, uno ya sabe que
+  la app fue diseñada para esa tarea y no para la tuya.</p>
+  <ol class="pasos">
+    <li><b>Elegí dos aplicaciones</b>: una de lenguaje y otra de matemática o lectoescritura. Si una no abre con tu red, <b>quedate con la que sí</b> y evaluá esa.</li>
+    <li><b>Escribí la consigna primero</b>, en un párrafo, como si la dieras el lunes en el aula.</li>
+    <li>Abrí la aplicación y hacé lo mismo con su consigna propia.</li>
+    <li>Anotá las tres diferencias: qué te pidió, qué tuviste que cambiar vos, qué no pudiste cambiar.</li>
+  </ol>
+  <div class="escenario">
+    <h4>Ejemplo de consigna escrita antes de abrir</h4>
+    <p>«Generar tres frases con las palabras <i>puerta</i>, <i>sueño</i> y <i>llave</i> para que el grupo las use como
+    pistas de un juego de adivinanzas.» Con esa consigna se puede decir algo de la herramienta. Con la consigna de la
+    app, no.</p>
+  </div>
+  <div class="callout alerta"><b>Si ninguna de las dos se abre</b> (no funciona con tu red, pide una cuenta que no
+  tenés, no la instalás): <b>no la evalúes de oídas</b>. <b>Escribime por mail</b> y te paso una tercera
+  aplicación para que pruebes. No hace falta que justifiques el descarte en ningún foro.</div>
+</section>
+
+<section id="s4">
+  <div class="kicker"><div class="num">4</div><span class="etq">Actividad · Matriz</span></div>
+  <h2>Una fila, seis columnas: la evidencia que la sostiene</h2>
+  <p>Completás la matriz con <b>evidencia observada</b>, no con opiniones. Tres reglas la hacen útil: un «No
+  alcanzado» dice por qué; el texto de la celda es un <b>hecho</b> y no un adjetivo; y si dos criterios quedan en
+  rojo, la conclusión es que la herramienta se descarta para esta unidad.</p>
+  <div class="contador"><span>Ejemplos de evidencia para cada criterio — copiá el que se parezca a tu caso y adaptalo</span><b>6 criterios</b></div>
+  <div id="tablaEvidencia"></div>
+  <div class="callout ambar"><b>La conclusión puede ser negativa.</b> Descartar una aplicación por fundamento es un
+  resultado correcto de la evaluación, y es más útil que una lista de herramientas que nadie discutió. La
+  <b>matriz descargable</b> que acompaña esta clase tiene el mismo formato, en blanco.</div>
+  <div class="callout"><b>Descargá la matriz en blanco</b> (archivo aparte: <i>Matriz_Evaluacion_Apps_IA.html</i>) para
+  completarla en la pantalla o imprimirla. Es la misma que vas a enviar.</div>
+</section>
+
+<section id="s5">
+  <div class="kicker"><div class="num">5</div><span class="etq">Riesgos que hay que nombrar</span></div>
+  <h2>Cuatro riesgos que aparecen siempre</h2>
+  <div class="grid2">
+    <div class="escenario"><div class="cifra">1</div><h4>La respuesta viene hecha</h4><p>La app resuelve en tres segundos lo que la docente tarda en preguntar. Si el objetivo es aprender el proceso, eso no ayuda: el estudiante copia y no puede discutir lo que no escribió.</p></div>
+    <div class="escenario"><div class="cifra">2</div><h4>El dato del menor</h4><p>Nombre, imagen, escritura y voz son información de menores. Una app que no declara qué guarda ni quién la diseñó no puede pasar por la sala, por buena que sea la actividad.</p></div>
+    <div class="escenario"><div class="cifra">3</div><h4>La pantalla se lleva todo</h4><p>Cuando la actividad ocupa la hora entera, la clase se queda sin hablar. En inicial, buena parte del aprendizaje pasa en el intercambio oral, y una pantalla no lo reemplaza.</p></div>
+    <div class="escenario"><div class="cifra">4</div><h4>El sesgo sale barato</h4><p>La app no discrimina a propósito, pero repite los datos con los que se entrenó. Preguntar «¿qué pasa si busco algo que casi no aparece en los libros?» es parte de la prueba.</p></div>
+  </div>
+  <div class="callout alerta"><b>Mini-chequeo antes de recomendar una app en la sala:</b> ¿puedo escribir mi propia
+  consigna? ¿funciona sin audio, sin conexión y sin cuenta? ¿dice qué datos guarda y quién la hizo? ¿cuántos
+  minutos de la clase quedan sin hablar? Con las cuatro respuestas escritas, la app entra en la conversación.</div>
+</section>
+
+<section id="s6">
+  <div class="kicker"><div class="num">6</div><span class="etq">Tu decisión</span></div>
+  <h2>Conclusión: una posición, una razón y un ejemplo de aula</h2>
+  <p>Terminás la matriz con una conclusión de tres renglones. No es un juicio de gusto: es la decisión que vas a
+  defender el miércoles en la clase, con tu matriz abierta en la mano.</p>
+  <div class="grid2">
+    <div class="escenario"><h4>No es una conclusión</h4><p>«Me gustó mucho y a los niños les enchantó.» No hay posición,
+    no hay razón y no hay ejemplo. La docente no puede usarla para decidir nada.</p></div>
+    <div class="escenario"><h4>Sí es una conclusión</h4><p>«La usaría para generar vocabulario y no para que el grupo
+    escriba: me devuelve el texto hecho y ahí copian. Para el juego de adivinanzas sirve, porque el disparador lo
+    pienso yo.» Hay posición, razón y ejemplo.</p></div>
+  </div>
+  <div class="card">
+    <h3>Tu conclusión tiene que responder</h3>
+    <ol class="pasos">
+      <li><b>¿La uso o la descarto</b> para inicial, en tu área? Una de las dos, sostenida.</li>
+      <li><b>¿Por qué?</b> Con la razón apoyada en al menos uno de los seis criterios.</li>
+      <li><b>¿En qué situación de aula</b> la usarías? Un ejemplo concreto, no «en general».</li>
+    </ol>
+  </div>
+  <div class="callout ambar"><b>El miércoles en clase vamos a discutir esto.</b> La discusión es el mismo trabajo
+  que antes se hacía en el foro, pero cara a cara: es más rápido, más ordenado y se aprovecha mejor. No tenés que
+  preparar nada extra.</div>
+
+</section>
+
+<section id="s7">
+  <div class="kicker"><div class="num">7</div><span class="etq">Antes de enviar la matriz</span></div>
+  <h2>Doce preguntas de control</h2>
+  <p>Es la misma lógica de la checklist de las clases anteriores, aplicada a una herramienta. Sirve para revisarte antes de enviar:
+  lo que está en rojo no es un error, es el punto de trabajo que se escribe.</p>
+  <div class="contador"><span>Marcá lo que tu evaluación efectivamente cubre</span><b><span id="c12">0</span>/12</b></div>
+  <div class="check12" id="lista12"></div>
+  <div class="callout" id="resto"></div>
+</section>
+
+<section id="s8">
+  <div class="kicker"><div class="num">8</div><span class="etq">Qué hay que entregar</span></div>
+  <h2>Una sola entrega: la matriz con tu conclusión</h2>
+  <div class="entrega">
+    <div class="item-entrega"><span class="ok">✓</span><div><b>La matriz por mail — un solo archivo</b><br>
+    Enviámela a <b>jjgarcia@terciariofatimasoldati.edu.ar</b>; el archivo de la matriz ya trae el asunto escrito.
+    Una fila, seis celdas justificadas con evidencia observada. Si un criterio queda en «No alcanzado», con su razón.
+    Al pie, tu conclusión de tres renglones: ¿la usás o la descartás, por qué, y en qué situación de aula.</div></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h3>Fecha límite</h3>
+    <p><b>Martes 27 de octubre de 2026, 23:59 h.</b> Si necesitás más tiempo, escribime antes del
+    <b>jueves 22</b>: es más fácil coordinar que perseguir entregas.</p></div>
+    <div class="card"><h3>Cómo se evalúa</h3>
+    <p>Con la <b>rúbrica de 3 criterios × 2 niveles</b> de 100 puntos: <b>pertinencia curricular</b> (30),
+    <b>evidencia</b> (40) y <b>riesgo y accesibilidad</b> (30). La misma disciplina de las clases anteriores —la evidencia es la
+    nota— aplicada a otro objeto.</p></div>
+  </div>
+  <div class="callout ambar"><b>Para la Clase 11 (presencial, miércoles 28):</b> traé tu aplicación <b>evaluada</b> —
+  la matriz, en papel o en el celu. No hace falta que la tengas impresa. La propuesta se discute en grupo con la
+  matriz abierta en la mano.</div>
+</section>
+
+<section id="s9">
+  <div class="kicker"><div class="num">9</div><span class="etq">Autoevaluación</span></div>
+  <h2>Cinco preguntas para chequear antes de enviar</h2>
+  <p>No califica: sirve para que no descubras en la devolución que te faltaba una columna. Podés repetirla las
+  veces que quieras.</p>
+  <div id="quizContainer"></div>
+  <button class="btn-tinta" onclick="corregirQuiz()">Corregir autoevaluación</button>
+  <div id="resultadoQuiz"><div id="resultadoTitulo"></div><div id="resultadoTexto"></div></div>
+</section></main>
+
+<footer class="fin">
+  <h3>Clase 10 · Cierre de la Unidad 2</h3>
+  <p><b>Materiales de la clase:</b> Material de estudio interactivo (este) · Ficha de lectura N°10 · Matriz de seis
+  criterios (descargable, en blanco) · Rúbrica de evaluación de aplicaciones de IA (3 criterios).</p>
+  <p><b>Ventana:</b> del 21/10 al 27/10/2026 · <b>Entrega:</b> martes 27/10, 23:59 h · <b>Clase 11 (presencial):</b>
+  miércoles 28/10/2026.</p>
+  <p>Didáctica y TIC en la Educación Inicial · 3° A · Prof. Lic. Juan José García · 21/10/2026</p>
+</footer>
+<script>
+/* ══ barra de progreso + sección activa ══ */
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('barra').style.width=pct+'%';
+  const links=[...document.querySelectorAll('nav.secciones a')];
+  const secciones=links.map(a=>document.querySelector(a.getAttribute('href')));
+  let idx=0;
+  secciones.forEach((s,i)=>{ if(s && s.getBoundingClientRect().top<=120) idx=i; });
+  links.forEach((a,i)=>a.classList.toggle('activo',i===idx));
+});
+
+/* ══ 2 · los seis criterios ══ */
+const CRIT=[["pertinencia","🎯","Pertinencia curricular","¿Resuelve un objetivo real de un área del currículum de inicial, con la consigna que uno se animaría a dar?","Escribir la consigna <b>antes</b> de abrir la aplicación. Si la app impone la suya, no está diseñada para tu aula aunque sea excelente.","«Genera las tres consignas que le pido», «hice una actividad de conteo con los tres cerdos de mi consigna»"],["acceso","♿","Accesibilidad","¿Se puede usar con la asistencia técnica y las estrategias de acceso de tu grupo?","Modo sin audio, lectura en voz alta, letra ajustable, funcionamiento sin conexión y acceso sin cuenta personal. En inicial, una app que exige leer seis líneas deja afuera a parte del grupo antes de empezar.","«Sin audio no sirve porque la actividad es escuchar», «funciona sin cuenta ni con el perfil del aula»"],["riesgo","⚠️","Riesgo pedagógico","¿Qué le hace al estudiante? ¿Qué le quita?","Anotá si lo que devuelve es un producto terminado o un borrador que se puede discutir. El segundo sirve; el primero, si el objetivo es aprender, no.","«Me devuelve la historieta ya escrita y el grupo copia», «Me devuelve un borrador para completar en el cuaderno»"],["social","💬","Interacción social","¿Genera conversación, juego o acuerdos, o se usa en soledad frente a la pantalla?","Preguntate cuántos minutos de la clase quedan sin hablar. Una app que ocupa toda la jornada deja sin lugar el intercambio oral, que es donde en inicial se sostiene buena parte del aprendizaje.","«En 20 minutos de la actividad hablamos 3», «La discusión de las variantes lleva 8 minutos»"],["transparencia","🔍","Transparencia","¿Se sabe qué hace con los datos del niño? ¿Declara quién la hizo?","Una app educativa que no declara qué recopila, quién la desarrolla ni con qué criterio fue entrenada no puede entrar en una sala. Lo que recopila en inicial incluye nombre, imagen y escritura.","«El aviso de privacidad dice que guarda lo que el niño escribe», «No dice quién la diseñó»"],["responsable","⚖️","Uso responsable","¿Quién decide: la estudiante, la docente o la aplicación?","Si la herramienta propone el contenido, la secuencia o el orden de las actividades, la decisión didáctica se corrió de lugar. La docente y el grupo tienen que decidir; la app asiste.","«La app me armó las tres etapas y yo las acepté», «Las etapas las armé yo y la app me ayuda a corregir»"]];
+function verCriterio(k){
+  const c=CRIT.find(x=>x[0]===k), d=document.getElementById('detalleCriterio');
+  d.innerHTML=`<h3>${c[1]} ${c[2]}</h3>
+    <p><b>La pregunta:</b> ${c[3]}</p>
+    <p><b>Cómo se responde:</b> ${c[4]}</p>
+    <p><b>Ejemplo de evidencia:</b> ${c[5]}</p>`;
+  document.querySelectorAll('#pills .pill').forEach(b=>b.classList.toggle('activo',b.dataset.f===k));
+}
+document.querySelectorAll('#pills .pill').forEach(b=>b.onclick=()=>verCriterio(b.dataset.f));
+verCriterio('pertinencia');
+
+/* ══ 4 · tabla de evidencia ══ */
+const EV=[["1 · Pertinencia","El objetivo está escrito y la app lo sirve con mi consigna","Mi consigna, escrita antes de abrir la app"],["2 · Accesibilidad","Funciona con el acceso y la asistencia técnica de mi grupo","La probé sin audio / sin conexión / sin cuenta"],["3 · Riesgo pedagógico","Devuelve borrador, o el riesgo se corrige con la consigna","Ejemplo de consigna donde el grupo corrige la respuesta"],["4 · Interacción social","La clase conserva tiempo de hablar entre estudiantes","Minutos de trabajo en grupo efectivamente usados"],["5 · Transparencia","Declara qué datos recoge y quién la desarrolla","El texto de privacidad, leído y anotado"],["6 · Uso responsable","La docente y el grupo deciden; la herramienta asiste","Decisión que la app propone y que cambié"]];
+document.getElementById('tablaEvidencia').innerHTML=
+  '<table class="tabla"><thead><tr><th>Criterio</th><th>Alcanzado cuando…</th><th>Evidencia que lo demuestra</th></tr></thead><tbody>'
+  + EV.map(e=>'<tr><td>'+e[0]+'</td><td>'+e[1]+'</td><td>'+e[2]+'</td></tr>').join('')
+  + '</tbody></table>';
+
+/* ══ 7 · checklist de 12 ══ */
+const CHECK=["Escribí mi consigna antes de elegir la aplicación, no al revés","La aplicación se evaluó con una consigna propia, no con la suya","Las seis celdas dicen algo observado al probar, no adjetivos","Cada «No alcanzado» viene con su razón escrita","Contemplé el acceso: sin audio, sin conexión, sin cuenta personal","Identifiqué al menos un riesgo concreto con su mitigación","Sé qué datos de los niños recoge la herramienta y qué dice de ellos","Sé quién la diseñó y si declara criterios de funcionamiento","Verifiqué cuánto tiempo de la clase queda sin hablar","La herramienta no resuelve por el estudiante lo que tiene que aprender","La conclusión puede ser «la descarto» y eso está decidido por escrito","La evaluación se puede defender con un ejemplo concreto de aula"];
+const cont=document.getElementById('lista12');
+cont.innerHTML=CHECK.map((c,i)=>
+  '<label class="chk"><input type="checkbox" data-i="'+i+'"><span class="n">'+(i+1)+'.</span><span>'+c+'</span></label>').join('');
+function actualizar12(){
+  const t=[...cont.querySelectorAll('input')];
+  const ok=t.filter(x=>x.checked).length;
+  document.getElementById('c12').textContent=ok;
+  t.forEach(x=>x.parentElement.classList.toggle('marca',x.checked));
+  const r=document.getElementById('resto');
+  if(ok===12) r.innerHTML='<b>12/12:</b> tu evaluación cubre todo. Revisá que la evidencia sea tuya y no una descripción de la app.';
+  else if(ok>=9) r.innerHTML='<b>'+ok+'/12:</b> bien. Las que faltan son las que más se olvidan en las entregas.';
+  else r.innerHTML='Te faltan '+(12-ok)+' por cubrir: son las preguntas donde se te va a caer la evaluación.';
+}
+cont.addEventListener('change',actualizar12);
+actualizar12();
+
+/* ══ 9 · autoevaluación ══ */
+const QUIZ=[["¿Cuál de estas es la <b>evidencia</b> correcta para la celda «riesgo pedagógico»?",["«Es muy divertida»","«Me devuelve la historieta ya escrita y el grupo copia, así que la uso solo para generar el disparador inicial»","«Es la mejor aplicación que encontré»"],1,"La evidencia dice qué pasó al probar la herramienta. Las otras dos son adjetivos u opiniones: pueden ser verdaderas, pero no se pueden verificar ni discutir."],["Una aplicación de IA para inicial genera el texto completo que pide el niño. La clase va bien. ¿Qué criterio falla?",["El de accesibilidad, porque hay que leer en voz alta","El de riesgo pedagógico, porque devuelve producto terminado en lugar de borrador","Ninguno, si la docente lo explica antes"],1,"Si el objetivo es aprender el proceso, la respuesta hecha no sirve: el estudiante no puede discutir lo que no escribió. Se puede usar, pero para un objetivo distinto y dicho así."],["¿Por qué se escribe primero la consigna y después se elige la aplicación?",["Porque es más rápido buscar la app y después corregir la consigna","Porque si la consigna viene de la aplicación, la clase termina haciendo lo que la app sabe hacer","Porque la consigna es un requisito administrativo"],1,"El orden protege la decisión didáctica: si la app elige la tarea, la herramienta eligió por la docente. Con la consigna escrita primero, la app se evalúa contra lo que el grupo necesita aprender."],["Dos criterios en «No alcanzado». ¿Cuál es la conclusión correcta?",["«La aplicación es muy buena pero hay que tener cuidado»","«La descarto para esta unidad», y eso puntúa igual que una recomendación","«Le doy 15 de 25 y sigue adelante»"],1,"La matriz no mide qué tanto le gustó la herramienta: mide si se sostiene. Descartar por fundamento es un resultado correcto, y la rúbrica lo trata igual que recomendar."],["Una aplicación permite crear cuentas con nombre y correo del niño. ¿Qué criterio se discute?",["Pertinencia curricular","Transparencia y uso responsable","Ninguno: es normal pedir cuenta"],1,"Nombre, imagen, escritura y voz del niño son datos de menores. Una app que no declara qué guarda ni quién la diseñó no puede pasar por la sala, por buena que sea la actividad."]];
+const qc=document.getElementById('quizContainer');
+QUIZ.forEach((item,qi)=>{
+  const b=document.createElement('div'); b.className='q-block';
+  b.innerHTML='<h4>'+(qi+1)+'. '+item[0]+'</h4><div class="opciones">'+
+    item[1].map((op,oi)=>'<label class="opcion"><input type="radio" name="q'+qi+'" value="'+oi+'"><span>'+op+'</span></label>').join('')+
+    '</div><div class="q-feedback" id="fb'+qi+'"></div>';
+  qc.appendChild(b);
+});
+function corregirQuiz(){
+  let ok=0;
+  QUIZ.forEach((item,qi)=>{
+    const fb=document.getElementById('fb'+qi);
+    const e=document.querySelector('input[name="q'+qi+'"]:checked');
+    fb.className='q-feedback';
+    if(!e){fb.classList.add('mal');fb.textContent='⚠ Falta responder esta pregunta.';return;}
+    if(parseInt(e.value)===item[2]){ok++;fb.classList.add('bien');fb.innerHTML='✔ ¡Correcto! '+item[3];}
+    else{fb.classList.add('mal');fb.innerHTML='✘ Todavía no. '+item[3];}
+  });
+  const res=document.getElementById('resultadoQuiz'), TOT=QUIZ.length;
+  document.getElementById('resultadoTitulo').textContent=ok+'/'+TOT+' · '+
+    (ok===TOT?'Listo para entregar':ok>=TOT-2?'Casi, casi':'Volvé a releer');
+  document.getElementById('resultadoTexto').textContent=
+    ok===TOT?'Tenés claros los criterios. Completá la matriz y enviala por mail antes del martes 27.'
+    :ok>=TOT-2?'Buena base: revisitá las secciones donde fallaste y reintentá cuando quieras.'
+    :'Tranquilo: es material nuevo. Volvé a las secciones 2, 4 y 5 con calma y reintentá.';
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+</body>
+</html>

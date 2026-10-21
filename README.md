@@ -27,9 +27,12 @@ didactica-tic/
 │   └── Material_Estudios_Clase5.html
 └── clase-6/                            # Pensamiento computacional (23–29/09 · virtual)
     └── Material_Estudio_Clase6.html
+└── clase-10/                           # Aplicaciones de IA (21/10 · virtual asincrónica)
+    ├── Material_Estudio_Clase10.html
+    └── Matriz_Evaluacion_Apps_IA.html
 ```
 
-Cada material incluye un botón **← Volver al menú** en el header (apunta a `../index.html`), igual en todas las clases.
+Cada material de las clases 1 a 6 incluye un botón **← Volver al menú** en el header (apunta a `../index.html`), igual en todas. Los de la Clase 10 no lo traen: se vuelve al menú con el botón de atrás del navegador.
 
 ## 📝 Contenido por clase
 
@@ -41,6 +44,7 @@ Cada material incluye un botón **← Volver al menú** en el header (apunta a `
 | 4 | Recursos digitales e Inteligencia Artificial | Virtual asincrónica | 09/09 → 15/09 | Recursos del nivel, IA, mitos, los 8 criterios |
 | 5 | Secuencias didácticas mediadas por TIC | Presencial | miércoles 16/09 | Tres momentos, coherencia, caso insectos |
 | 6 | Pensamiento computacional con y sin pantallas | Virtual asincrónica | 23/09 → 29/09 | Qué es PC, pilares, herramientas del nivel, misión semanal |
+| 10 | Aplicaciones de IA: la que mejor se sostiene | Virtual asincrónica | miércoles 21/10 | Comparación crítica de apps de IA, criterios, autoevaluación + matriz complementario |
 
 ## 🔧 Cómo agregar material de una clase nueva
 
