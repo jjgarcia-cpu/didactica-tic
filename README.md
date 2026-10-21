@@ -32,7 +32,7 @@ didactica-tic/
     └── Matriz_Evaluacion_Apps_IA.html
 ```
 
-Cada material de las clases 1 a 6 incluye un botón **← Volver al menú** en el header (apunta a `../index.html`), igual en todas. Los de la Clase 10 no lo traen: se vuelve al menú con el botón de atrás del navegador.
+Cada material incluye un botón **← Volver al menú** en el header (apunta a `../index.html`), igual en todas las clases.
 
 ## 📝 Contenido por clase
 

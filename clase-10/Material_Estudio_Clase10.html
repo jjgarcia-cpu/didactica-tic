@@ -31,6 +31,8 @@ nav.secciones{display:flex;gap:2px;flex-wrap:wrap}
 nav.secciones a{color:#C9D8EA;text-decoration:none;font-size:13.5px;font-weight:700;padding:5px 11px;border-radius:999px;transition:.2s}
 nav.secciones a:hover{background:rgba(239,243,249,.14);color:#fff}
 nav.secciones a.activo{background:var(--ambar-osc);color:#fff}
+nav.secciones a.volver{background:var(--ambar);color:#fff;font-weight:800;margin-left:6px}
+nav.secciones a.volver:hover{background:var(--ambar-osc);color:#fff}
 main{max-width:880px;margin:0 auto;padding:0 20px}
 
 .hero{margin:34px 0 8px;padding:34px 30px;border-radius:20px;background:linear-gradient(160deg,var(--tinta) 0%,var(--tinta-osc) 100%);color:#EAF0F7;box-shadow:0 12px 28px rgba(20,42,71,.18)}
@@ -127,6 +129,7 @@ footer.fin p{font-size:15px}
   <div class="marca"><div class="logo">10</div><div><small>Clase 10 · Virtual asincrónica · última del ciclo</small><b>Criterios, no catálogo:<br>evaluar apps de IA</b></div></div>
   <nav class="secciones">
     <a href="#s1">Inicio</a><a href="#s2">6 criterios</a><a href="#s3">Explorar</a><a href="#s4">Matriz</a><a href="#s5">Riesgos</a><a href="#s6">Conclusión</a><a href="#s7">Checklist</a><a href="#s8">Entrega</a><a href="#s9">Autoevaluación</a>
+    <a href="../index.html" class="volver">← Volver al menú</a>
   </nav>
 </div></header>
 
@@ -313,7 +316,7 @@ window.addEventListener('scroll',()=>{
   const h=document.documentElement;
   const pct=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
   document.getElementById('barra').style.width=pct+'%';
-  const links=[...document.querySelectorAll('nav.secciones a')];
+  const links=[...document.querySelectorAll('nav.secciones a')].filter(a=>a.getAttribute('href').startsWith('#'));
   const secciones=links.map(a=>document.querySelector(a.getAttribute('href')));
   let idx=0;
   secciones.forEach((s,i)=>{ if(s && s.getBoundingClientRect().top<=120) idx=i; });

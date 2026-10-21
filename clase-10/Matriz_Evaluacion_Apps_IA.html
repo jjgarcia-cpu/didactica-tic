@@ -30,6 +30,9 @@ header.top{background:rgba(20,42,71,.97);color:#fff;padding:16px 0;margin-bottom
 .btn.principal{background:var(--ambar);border-color:var(--ambar);box-shadow:0 4px 14px rgba(199,125,46,.3)}
 .btn.principal:hover{background:#b06f26}
 .btn.principal[disabled]{opacity:.6;cursor:progress}
+a.btn{text-decoration:none;display:inline-flex;align-items:center}
+a.btn.volver{background:var(--ambar);border-color:var(--ambar);color:#fff}
+a.btn.volver:hover{background:#b06f26}
 
 h1{font-family:var(--display);font-size:clamp(24px,4.5vw,34px);color:var(--tinta-osc);margin:18px 0 8px;line-height:1.15}
 .sub{color:var(--gris);font-size:16px;margin-bottom:14px}
@@ -499,6 +502,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 <header class="top"><div class="top-in">
   <div class="marca"><div class="logo">10</div><div><small>Clase 10 · Unidad 2</small><b>Matriz de evaluación de apps de IA</b></div></div>
   <div class="acciones">
+    <a href="../index.html" class="btn volver">← Volver al menú</a>
     <button class="btn" onclick="limpiar()">Borrar todo</button>
     <button class="btn principal" id="btnPdf">Descargar PDF</button>
   </div>
